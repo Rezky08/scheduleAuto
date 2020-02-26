@@ -190,8 +190,43 @@ class MatakuliahController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($kode_matkul)
     {
-        //
+        $data = [
+            'kode_matkul' => $kode_matkul
+        ];
+        $rules = [
+            'kode_matkul' => ['required', 'exists:mata_kuliah,kode_matkul']
+        ];
+        $message = [
+            'kode_matkul.exists' => 'sorry, we cannot find what are you looking for.'
+        ];
+        $validator = Validator::make($data, $rules, $message);
+        if ($validator->fails()) {
+            $response = [
+                'status' => 400,
+                'message' => $validator->errors()
+            ];
+            return response()->json($response, 400);
+        }
+
+        try {
+            $where = [
+                'kode_matkul' => $kode_matkul
+            ];
+            $mata_kuliah = mata_kuliah::where($where);
+            $mata_kuliah->delete();
+            $response = [
+                'status' => 200,
+                'message' => 'Mata kuliah dengan Kode ' . $kode_matkul . ' berhasil dihapus.'
+            ];
+            return response()->json($response, 200);
+        } catch (\Throwable $e) {
+            $response = [
+                'status' => 500,
+                'message' => $e
+            ];
+            return response()->json($response, 500);
+        }
     }
 }
