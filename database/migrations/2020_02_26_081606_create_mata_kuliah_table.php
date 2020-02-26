@@ -16,8 +16,9 @@ class CreateMataKuliahTable extends Migration
         Schema::create('mata_kuliah', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('kode_matkul', 10);
-            $table->integer('matkul_sks')->unsigned()->nullable()->default(5);
-            $table->boolean('matkul_status')->nullable()->default(true);
+            $table->string('nama_matkul', 100);
+            $table->integer('sks_matkul')->unsigned()->nullable()->default(5);
+            $table->boolean('status_matkul')->nullable()->default(true);
             $table->string('kode_prodi', 10);
             $table->timestamps();
             $table->softDeletes();
