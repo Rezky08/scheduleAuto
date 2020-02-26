@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Matakuliah as mata_kuliah;
 
 class MatakuliahController extends Controller
 {
@@ -28,19 +29,42 @@ class MatakuliahController extends Controller
     {
         $rules = [
             'kode_matkul' => ['required', 'unique:mata_kuliah,kode_matkul', 'max:10'],
-            'matkul_sks' => ['required', 'numeric'],
-            'matkul_status' => ['boolean'],
+            'sks_matkul' => ['required', 'numeric'],
+            'nama_matkul' => ['required'],
+            'status_matkul' => ['boolean'],
             'kode_prodi' => ['required', 'exists:program_studi,kode_prodi'],
         ];
 
-        $validator = Validator::make(
-            $request->all(),
-            $rules
-        );
-
+        $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
-            dd($validator->errors());
+            $response = [
+                'status' => 400,
+                'message' => $validator->errors()
+            ];
+            return response()->json($response, 400);
         }
+        $insertToDB = [
+            'kode_matkul' => $request->kode_matkul,
+            'sks_matkul' => $request->sks_matkul,
+            'nama_matkul' => $request->nama_matkul,
+            'status_matkul' => $request->status_matkul,
+            'kode_prodi' => $request->kode_prodi
+        ];
+        try {
+            mata_kuliah::insert($insertToDB);
+        } catch (\Throwable $e) {
+            $response = [
+                'status' => 500,
+                'message' => $e
+            ];
+            return response()->json($response, 500);
+        }
+
+        $response = [
+            'status' => 200,
+            'message' => 'Mata Kuliah ' . $request->nama_matkul . '(' . $request->kode_matkul . ') Berhasil ditambahkan'
+        ];
+        return response()->json($response, 200);
     }
 
     /**
