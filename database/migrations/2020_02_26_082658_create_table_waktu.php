@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRuangTable extends Migration
+class CreateTableWaktu extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateRuangTable extends Migration
      */
     public function up()
     {
-        Schema::create('ruang', function (Blueprint $table) {
+        Schema::create('waktu', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama_ruang', 100);
-            $table->text('keterangan')->nullable();
+            $table->integer('kode_hari')->unsigned()->nullable()->default(12);
+            $table->integer('kode_jam')->unsigned()->nullable()->default(12);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -29,6 +29,6 @@ class CreateRuangTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ruang');
+        Schema::dropIfExists('waktu');
     }
 }
