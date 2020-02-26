@@ -169,7 +169,14 @@ class MatakuliahController extends Controller
 
         try {
             $mata_kuliah = mata_kuliah::where($where);
-            $mata_kuliah->update($updated);
+            $res = $mata_kuliah->update($updated);
+            if (!$res) {
+                $response = [
+                    'status' => 200,
+                    'message' => 'Tidak ada perubahan'
+                ];
+                return response()->json($response, 200);
+            }
             $response = [
                 'status' => 200,
                 'message' => 'Mata kuliah dengan kode ' . $kode_matkul . ' berhasil diubah'
@@ -215,7 +222,17 @@ class MatakuliahController extends Controller
                 'kode_matkul' => $kode_matkul
             ];
             $mata_kuliah = mata_kuliah::where($where);
+            $count = $mata_kuliah->count();
+            if ($count < 1) {
+                $response = [
+                    'status' => 400,
+                    'message' => 'Sorry, we cannot find what are you looking for.'
+                ];
+                return response()->json($response, 200);
+            }
+
             $mata_kuliah->delete();
+
             $response = [
                 'status' => 200,
                 'message' => 'Mata kuliah dengan Kode ' . $kode_matkul . ' berhasil dihapus.'
