@@ -18,7 +18,7 @@ class CreateMataKuliahTable extends Migration
             $table->string('kode_matkul', 10);
             $table->integer('matkul_sks')->unsigned()->nullable()->default(5);
             $table->boolean('matkul_status')->nullable()->default(true);
-            $table->string('kode_prodi', 10)->nullable();
+            $table->string('kode_prodi', 10);
             $table->timestamps();
             $table->softDeletes();
         });
