@@ -98,7 +98,7 @@ class MatakuliahController extends Controller
             'kode_matkul' => ['required', 'exists:mata_kuliah,kode_matkul']
         ];
         $message = [
-            'kode_matkul.exists' => 'Maaf, kode mata kuliah yang kamu cari tidak ditemukan.'
+            'kode_matkul.exists' => 'sorry, we cannot find what are you looking for.'
         ];
         $validator = Validator::make($data, $rules, $message);
         if ($validator->fails()) {
