@@ -124,9 +124,64 @@ class MatakuliahController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $kode_matkul)
     {
-        //
+        $data = [
+            'kode_matkul' => $kode_matkul,
+        ];
+        if ($kode_matkul != $request->kode_matkul) {
+            $data['kode_matkul_new'] = $request->kode_matkul;
+        }
+        $data += $request->except(['kode_matkul']);
+
+        $rules = [
+            'kode_matkul' => ['required', 'exists:mata_kuliah,kode_matkul'],
+            'kode_matkul_new' => ['sometimes', 'required', 'unique:mata_kuliah,kode_matkul', 'max:10'],
+            'sks_matkul' => ['required', 'numeric'],
+            'nama_matkul' => ['required'],
+            'status_matkul' => ['boolean'],
+            'kode_prodi' => ['required', 'exists:program_studi,kode_prodi'],
+        ];
+        $message = [
+            'id.exists' => 'sorry, we cannot find what are you looking for.'
+        ];
+        $validator = Validator::make($data, $rules, $message);
+        if ($validator->fails()) {
+            $response = [
+                'status' => 400,
+                'message' => $validator->errors()
+            ];
+            return response()->json($response, 400);
+        }
+
+
+        $updated = [
+            'kode_matkul' => $request->kode_matkul,
+            'sks_matkul' => $request->sks_matkul,
+            'nama_matkul' => $request->nama_matkul,
+            'status_matkul' => $request->status_matkul,
+            'kode_prodi' => $request->kode_prodi,
+            'updated_at' => now()
+        ];
+        $where = [
+            'kode_matkul' => $kode_matkul
+        ];
+
+        try {
+            $mata_kuliah = mata_kuliah::where($where);
+            $mata_kuliah->update($updated);
+            $response = [
+                'status' => 200,
+                'message' => 'Mata kuliah dengan kode ' . $kode_matkul . ' berhasil diubah'
+            ];
+            return response()->json($response, 200);
+        } catch (\Throwable $e) {
+            $response = [
+                'status' => 500,
+                'message' => $e
+            ];
+            return response()->json($response, 500);
+        }
     }
 
     /**

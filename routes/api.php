@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/matkul', 'MatakuliahController@store');
 Route::get('/matkul', 'MatakuliahController@index');
 Route::get('/matkul/{kode_matkul}', 'MatakuliahController@show');
+Route::put('/matkul/{kode_matkul}', 'MatakuliahController@update');
