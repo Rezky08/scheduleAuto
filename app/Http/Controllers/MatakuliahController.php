@@ -13,9 +13,23 @@ class MatakuliahController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // menampilkan semua yang ada dalam table mata kuliah
     public function index()
     {
-        //
+        try {
+            $mata_kuliah = mata_kuliah::all();
+            $response = [
+                'status' => 200,
+                'data' => $mata_kuliah
+            ];
+            return response()->json($response, 200);
+        } catch (\Throwable $e) {
+            $response = [
+                'status' => 500,
+                'message' => $e
+            ];
+            return response()->json($response, 500);
+        }
     }
 
     /**
