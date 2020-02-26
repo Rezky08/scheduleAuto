@@ -86,12 +86,35 @@ class MatakuliahController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($kode_matkul)
     {
-        //
+        $data = [
+            'kode_matkul' => $kode_matkul
+        ];
+        $rules = [
+            'kode_matkul' => ['required', 'exists:mata_kuliah,kode_matkul']
+        ];
+        $message = [
+            'kode_matkul.exists' => 'Maaf, kode mata kuliah yang kamu cari tidak ditemukan.'
+        ];
+        $validator = Validator::make($data, $rules, $message);
+        if ($validator->fails()) {
+            $response = [
+                'status' => 400,
+                'message' => $validator->errors()
+            ];
+            return response()->json($response, 400);
+        }
+
+        $mata_kuliah = mata_kuliah::where('kode_matkul', $kode_matkul)->first();
+        $response = [
+            'status' => 200,
+            'data' => $mata_kuliah
+        ];
+        return response()->json($response, 200);
     }
 
     /**
