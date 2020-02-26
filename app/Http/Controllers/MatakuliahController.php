@@ -62,7 +62,7 @@ class MatakuliahController extends Controller
 
         $response = [
             'status' => 200,
-            'message' => 'Mata Kuliah ' . $request->nama_matkul . '(' . $request->kode_matkul . ') Berhasil ditambahkan'
+            'message' => 'Mata Kuliah ' . $request->nama_matkul . ' (' . $request->kode_matkul . ') Berhasil ditambahkan'
         ];
         return response()->json($response, 200);
     }
