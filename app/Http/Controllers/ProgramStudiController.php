@@ -41,7 +41,9 @@ class ProgramStudiController extends Controller
         }
         $insertToDB = [
             'kode_prodi' => $request->kode_prodi,
-            'nama_prodi' => $request->nama_prodi
+            'nama_prodi' => $request->nama_prodi,
+            'created_at' => now(),
+            'updated_at' => now()
         ];
         try {
             program_studi::insert($insertToDB);
@@ -55,7 +57,7 @@ class ProgramStudiController extends Controller
 
         $response = [
             'status' => 200,
-            'message' => 'Program Studi ' . $request->nama_prodi . '(' . $request->kode_prodi . ') Berhasil ditambahkan'
+            'message' => 'Program Studi ' . $request->nama_prodi . ' (' . $request->kode_prodi . ') Berhasil ditambahkan'
         ];
         return response()->json($response, 200);
     }
