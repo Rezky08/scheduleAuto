@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class MatakuliahController extends Controller
 {
@@ -25,7 +26,21 @@ class MatakuliahController extends Controller
     // menambahkan mata kuliah ke database
     public function store(Request $request)
     {
-        $request->all();
+        $rules = [
+            'kode_matkul' => ['required', 'unique:mata_kuliah,kode_matkul', 'max:10'],
+            'matkul_sks' => ['required', 'numeric'],
+            'matkul_status' => ['boolean'],
+            'kode_prodi' => ['required', 'exists:program_studi,kode_prodi'],
+        ];
+
+        $validator = Validator::make(
+            $request->all(),
+            $rules
+        );
+
+        if ($validator->fails()) {
+            dd($validator->errors());
+        }
     }
 
     /**
