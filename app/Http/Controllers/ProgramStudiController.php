@@ -15,7 +15,20 @@ class ProgramStudiController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $program_studi = program_studi::all();
+            $response = [
+                'status' => 200,
+                'data' => $program_studi
+            ];
+            return response()->json($response, 200);
+        } catch (\Throwable $e) {
+            $response = [
+                'status' => 500,
+                'message' => $e
+            ];
+            return response()->json($response, 500);
+        }
     }
 
     /**

@@ -17,3 +17,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('/program_studi', 'ProgramStudiController@store');
+Route::get('/program_studi', 'ProgramStudiController@index');
