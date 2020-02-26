@@ -48,7 +48,9 @@ class MatakuliahController extends Controller
             'sks_matkul' => $request->sks_matkul,
             'nama_matkul' => $request->nama_matkul,
             'status_matkul' => $request->status_matkul,
-            'kode_prodi' => $request->kode_prodi
+            'kode_prodi' => $request->kode_prodi,
+            'created_at' => now(),
+            'updated_at' => now()
         ];
         try {
             mata_kuliah::insert($insertToDB);
