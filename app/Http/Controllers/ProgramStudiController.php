@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\ProgramStudi;
+use App\ProgramStudi as program_studi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -33,8 +33,31 @@ class ProgramStudiController extends Controller
         ];
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
-            dd($validator->errors());
+            $response = [
+                'status' => 400,
+                'message' => $validator->errors()
+            ];
+            return response()->json($response, 400);
         }
+        $insertToDB = [
+            'kode_prodi' => $request->kode_prodi,
+            'nama_prodi' => $request->nama_prodi
+        ];
+        try {
+            program_studi::insert($insertToDB);
+        } catch (\Throwable $e) {
+            $response = [
+                'status' => 500,
+                'message' => $e
+            ];
+            return response()->json($response, 500);
+        }
+
+        $response = [
+            'status' => 200,
+            'message' => 'Program Studi ' . $request->nama_prodi . '(' . $request->kode_prodi . ') Berhasil ditambahkan'
+        ];
+        return response()->json($response, 200);
     }
 
     /**
