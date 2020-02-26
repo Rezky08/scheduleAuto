@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ProgramStudi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProgramStudiController extends Controller
 {
@@ -23,9 +24,17 @@ class ProgramStudiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    // menambahkan program studi ke database
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'kode_prodi' => ['required', 'unique:program_studi,kode_prodi', 'max:10'],
+            'nama_prodi' => ['required']
+        ];
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            dd($validator->errors());
+        }
     }
 
     /**
