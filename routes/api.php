@@ -22,8 +22,8 @@ Route::post('/program_studi', 'ProgramStudiController@store');
 // buat ngambil semua data nya
 Route::get('/program_studi', 'ProgramStudiController@index');
 // buat ngambil satu matkul
-Route::get('/matkul/{kode_matkul}', 'MatakuliahController@show');
+Route::get('/program_studi/{kode_prodi}', 'ProgramStudiController@show');
 // buat ngedit satu matkul
-Route::put('/matkul/{kode_matkul}', 'MatakuliahController@update');
+Route::put('/program_studi/{kode_prodi}', 'ProgramStudiController@update');
 // buat ngapus satu matkul
-Route::delete('/matkul/{kode_matkul}', 'MatakuliahController@destroy');
+Route::delete('/program_studi/{kode_prodi}', 'ProgramStudiController@destroy');
