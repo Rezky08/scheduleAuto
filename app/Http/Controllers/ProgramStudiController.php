@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+// masukin yang diperluin buat file ini
 use App\ProgramStudi as program_studi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -40,12 +41,18 @@ class ProgramStudiController extends Controller
     // menambahkan program studi ke database
     public function store(Request $request)
     {
+        // validasi inputan
+        // ngecek ada inputan yang nama nya kode_prodi sama nama_prodi dengan rules begitu
         $rules = [
             'kode_prodi' => ['required', 'unique:program_studi,kode_prodi', 'max:10'],
             'nama_prodi' => ['required']
         ];
+        // rules nya cek di web laravel aja
+
+        // Validator itu semacam package harus di 'use' di awal
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
+            // kalo inputanya ga sesuai rules, dia bakal balikin error
             $response = [
                 'status' => 400,
                 'message' => $validator->errors()
