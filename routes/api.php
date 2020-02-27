@@ -16,5 +16,14 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// buat insert
 Route::post('/program_studi', 'ProgramStudiController@store');
+// buat ngambil semua data nya
 Route::get('/program_studi', 'ProgramStudiController@index');
+// buat ngambil satu matkul
+Route::get('/matkul/{kode_matkul}', 'MatakuliahController@show');
+// buat ngedit satu matkul
+Route::put('/matkul/{kode_matkul}', 'MatakuliahController@update');
+// buat ngapus satu matkul
+Route::delete('/matkul/{kode_matkul}', 'MatakuliahController@destroy');
