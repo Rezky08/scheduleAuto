@@ -123,9 +123,72 @@ class ProgramStudiController extends Controller
      * @param  \App\ProgramStudi  $programStudi
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProgramStudi $programStudi)
+    public function update(Request $request, $kode_prodi)
     {
-        //
+        $data = [
+            'kode_prodi' => $kode_prodi,
+        ];
+        if ($kode_prodi != $request->kode_prodi) {
+            $data['kode_prodi_new'] = $request->kode_prodi;
+        }
+        $data += $request->except(['kode_prodi']);
+        // ini paham 
+        $rules = [
+            'kode_prodi' => ['required', 'exists:program_studi,kode_prodi'],
+            'kode_prodi_new' => ['sometimes', 'required', 'unique:program_studi,kode_prodi', 'max:10'],
+            'nama_prodi' => ['required'],
+            'keterangan_prodi' => ['required'],
+            'kode_prodi' => ['required', 'exists:program_studi,kode_prodi'], // ini itu nagmbil dari tabel lain kan?
+        ];
+        $message = [
+            'id.exists' => 'sorry, we cannot find what are you looking for.'
+        ];
+        // yg ini yg tadi lu bilang ngecek itu kan . iya
+        $validator = Validator::make($data, $rules, $message);
+        if ($validator->fails()) {
+            $response = [
+                'status' => 400,
+                'message' => $validator->errors()
+            ];
+            return response()->json($response, 400);
+        }
+
+        //ini seharusnya proses updatenya ya soalnya ada wherenya kek semacam query di laravel 
+        // ini cuma persiapan nya, yang kiri nama kolom nya yang kanan isinya
+        $updated = [
+            'kode_prodi' => $request->kode_prodi,
+            'nama_prodi' => $request->nama_prodi,
+            'keterangan_prodi' => $request->keterangan_prodi,
+            'updated_at' => now()
+        ];
+        // update dimana matkul yang di iinput
+        $where = [
+            'kode_prodi' => $kode_prodi
+        ];
+// apa inih?
+// querynya dijalanin disini
+        try {
+            $program_studi = program_studi::where($where);
+            $res = $program_studi->update($updated);
+            if (!$res) {
+                $response = [
+                    'status' => 200,
+                    'message' => 'Tidak ada perubahan'
+                ];
+                return response()->json($response, 200);
+            }
+            $response = [
+                'status' => 200,
+                'message' => 'Program Studi dengan kode ' . $kode_prodi . ' berhasil diubah'
+            ];
+            return response()->json($response, 200);
+        } catch (\Throwable $e) {
+            $response = [
+                'status' => 500,
+                'message' => $e
+            ];
+            return response()->json($response, 500);
+        }
     }
 
     /**
@@ -134,8 +197,53 @@ class ProgramStudiController extends Controller
      * @param  \App\ProgramStudi  $programStudi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProgramStudi $programStudi)
+    public function destroy($kode_prodi)
     {
-        //
+        $data = [
+            'kode_prodi' => $kode_prodi
+        ];
+        $rules = [
+            'kode_prodi' => ['required', 'exists:program_studi,kode_prodi']
+        ];
+        $message = [
+            'kode_prodi.exists' => 'sorry, we cannot find what are you looking for.'
+        ];
+        $validator = Validator::make($data, $rules, $message);
+        if ($validator->fails()) {
+            $response = [
+                'status' => 400,
+                'message' => $validator->errors()
+            ];
+            return response()->json($response, 400);
+        }
+
+        try {
+            $where = [
+                'kode_prodi' => $kode_prodi
+            ];
+            $program_studi = program_studi::where($where);
+            $count = $program_studi->count();
+            if ($count < 1) {
+                $response = [
+                    'status' => 400,
+                    'message' => 'Sorry, we cannot find what are you looking for.'
+                ];
+                return response()->json($response, 200);
+            }
+
+            $program_studi->delete();
+
+            $response = [
+                'status' => 200,
+                'message' => 'Program Studi dengan Kode ' . $kode_prodi . ' berhasil dihapus.'
+            ];
+            return response()->json($response, 200);
+        } catch (\Throwable $e) {
+            $response = [
+                'status' => 500,
+                'message' => $e
+            ];
+            return response()->json($response, 500);
+        }
     }
-}
+    }
