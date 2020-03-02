@@ -88,9 +88,32 @@ class ProgramStudiController extends Controller
      * @param  \App\ProgramStudi  $programStudi
      * @return \Illuminate\Http\Response
      */
-    public function show(ProgramStudi $programStudi)
+    public function show($kode_prodi)
     {
-        //
+        $data = [
+            'kode_prodi' => $kode_prodi
+        ];
+        $rules = [
+            'kode_prodi' => ['required', 'exists:program_studi,kode_prodi']
+        ];
+        $message = [
+            'kode_prodi.exists' => 'sorry, we cannot find what are you looking for.'
+        ];
+        $validator = Validator::make($data, $rules, $message);
+        if ($validator->fails()) {
+            $response = [
+                'status' => 400,
+                'message' => $validator->errors()
+            ];
+            return response()->json($response, 400);
+        }
+
+        $program_studi = program_studi::where('kode_prodi', $kode_prodi)->first();
+        $response = [
+            'status' => 200,
+            'data' => $program_studi
+        ];
+        return response()->json($response, 200);
     }
 
     /**
