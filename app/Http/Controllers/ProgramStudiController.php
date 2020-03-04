@@ -112,8 +112,7 @@ class ProgramStudiController extends Controller
             return response()->json($response, 400);
         }
 
-        $kode_prodi = $request->kode_prodi;
-        $program_studi = program_studi::where('kode_prodi', $kode_prodi)->first();
+        $program_studi = program_studi::where('kode_prodi', $request->kode_prodi)->first();
         $response = [
             'status' => 200,
             'data' => $program_studi
