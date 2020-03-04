@@ -15,8 +15,8 @@ class CreateJamTable extends Migration
     {
         Schema::create('jam', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamp('jam_mulai')->nullable();
-            $table->timestamp('jam_selesai')->nullable();
+            $table->time('jam_mulai');
+            $table->time('jam_selesai');
             $table->timestamps();
             $table->softDeletes();
         });
