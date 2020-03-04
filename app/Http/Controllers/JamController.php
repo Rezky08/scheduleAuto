@@ -20,7 +20,7 @@ class JamController extends Controller
             $jam = jam::all();
             $response = [
                 'status' => 200,
-                'data' => $mata_kuliah
+                'data' => $jam
             ];
             return response()->json($response, 200);
         } catch (\Throwable $e) {
@@ -82,9 +82,33 @@ class JamController extends Controller
      * @param  \App\Jam  $jam
      * @return \Illuminate\Http\Response
      */
-    public function show(Jam $jam)
+    public function show(Request $request)
     {
-        //
+        $id = $request->id;
+        $data = [
+            'id ' => $id
+        ];
+        $rules = [
+            'id' => ['required', 'exists:jam,id']
+        ];
+        $message = [
+            'id.exists' => 'sorry, we cannot find what are you looking for.'
+        ];
+        $validator = Validator::make($data, $rules, $message);
+        if ($validator->fails()) {
+            $response = [
+                'status' => 400,
+                'message' => $validator->errors()
+            ];
+            return response()->json($response, 400);
+        }
+
+        $jam = jam::where('id', $id)->first();
+        $response = [
+            'status' => 200,
+            'data' => $jam
+        ];
+        return response()->json($response, 200);
     }
 
     /**
@@ -94,9 +118,63 @@ class JamController extends Controller
      * @param  \App\Jam  $jam
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Jam $jam)
+    public function update(Request $request, $id)
     {
-        //
+
+        $data = [
+            'id' => $id,
+        ];
+        $data += $request->except(['id']);
+
+        $rules = [
+            'jam_mulai' => ['required', 'date_format:H:i:s'],
+            'jam_selesai' => ['required', 'date_format:H:i:s'],
+        ];
+        $message = [
+            'id.exists' => 'sorry, we cannot find what are you looking for.'
+        ];
+        $validator = Validator::make($data, $rules, $message);
+        if ($validator->fails()) {
+            $response = [
+                'status' => 400,
+                'message' => $validator->errors()
+            ];
+            return response()->json($response, 400);
+        }
+
+
+        $updated = [
+            'jam_mulai' => $request->jam_mulai,
+            'jam_selesai' => $request->jam_selesai,
+            'updated_at' => now()
+        ];
+        $where = [
+            'id' => $id
+        ];
+
+        try {
+            $jam = jam::where($where);
+            $res = $jam->update($updated);
+            if (!$res) {
+                $response = [
+                    'status' => 200,
+                    'message' => 'Tidak ada perubahan'
+                ];
+                return response()->json($response, 200);
+            }
+            $response = [
+                'status' => 200,
+                'message' => 'Jam dengan kode ' . $id . ' berhasil diubah'
+            ];
+            return response()->json($response, 200);
+        } catch (\Throwable $e) {
+            $response = [
+                'status' => 500,
+                'message' => $e
+            ];
+            return response()->json($response, 500);
+        }
+
     }
 
     /**
@@ -105,8 +183,53 @@ class JamController extends Controller
      * @param  \App\Jam  $jam
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Jam $jam)
+    public function destroy($id)
     {
-        //
+        $data = [
+            'id' => $id
+        ];
+        $rules = [
+            'id' => ['required', 'exists:jam,id']
+        ];
+        $message = [
+            'id.exists' => 'sorry, we cannot find what are you looking for.'
+        ];
+        $validator = Validator::make($data, $rules, $message);
+        if ($validator->fails()) {
+            $response = [
+                'status' => 400,
+                'message' => $validator->errors()
+            ];
+            return response()->json($response, 400);
+        }
+
+        try {
+            $where = [
+                'id' => $id
+            ];
+            $jam = jam::where($where);
+            $count = $jam->count();
+            if ($count < 1) {
+                $response = [
+                    'status' => 400,
+                    'message' => 'Sorry, we cannot find what are you looking for.'
+                ];
+                return response()->json($response, 200);
+            }
+
+            $jam->delete();
+
+            $response = [
+                'status' => 200,
+                'message' => 'Jam dengan Kode ' . $id . ' berhasil dihapus.'
+            ];
+            return response()->json($response, 200);
+        } catch (\Throwable $e) {
+            $response = [
+                'status' => 500,
+                'message' => $e
+            ];
+            return response()->json($response, 500);
+        }
     }
 }
