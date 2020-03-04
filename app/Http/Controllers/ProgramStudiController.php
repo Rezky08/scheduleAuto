@@ -14,8 +14,14 @@ class ProgramStudiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+
+        // check apa ada parameter id
+        if ($request->kode_prodi) {
+            return $this->show($request);
+        }
+
         try {
             $program_studi = program_studi::all();
             $response = [
@@ -88,18 +94,16 @@ class ProgramStudiController extends Controller
      * @param  \App\ProgramStudi  $programStudi
      * @return \Illuminate\Http\Response
      */
-    public function show($kode_prodi)
+    public function show(Request $request)
     {
-        $data = [
-            'kode_prodi' => $kode_prodi
-        ];
+        // Validasi apakah ada inputan bernama kode_prodi atau tidak
         $rules = [
             'kode_prodi' => ['required', 'exists:program_studi,kode_prodi']
         ];
         $message = [
             'kode_prodi.exists' => 'sorry, we cannot find what are you looking for.'
         ];
-        $validator = Validator::make($data, $rules, $message);
+        $validator = Validator::make($request->all(), $rules, $message);
         if ($validator->fails()) {
             $response = [
                 'status' => 400,
@@ -108,6 +112,7 @@ class ProgramStudiController extends Controller
             return response()->json($response, 400);
         }
 
+        $kode_prodi = $request->kode_prodi;
         $program_studi = program_studi::where('kode_prodi', $kode_prodi)->first();
         $response = [
             'status' => 200,
@@ -123,28 +128,21 @@ class ProgramStudiController extends Controller
      * @param  \App\ProgramStudi  $programStudi
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $kode_prodi)
+    public function update(Request $request)
     {
-        $data = [
-            'kode_prodi' => $kode_prodi,
-        ];
-        if ($kode_prodi != $request->kode_prodi) {
-            $data['kode_prodi_new'] = $request->kode_prodi;
-        }
-        $data += $request->except(['kode_prodi']);
-        // ini paham 
+        // ini paham
         $rules = [
             'kode_prodi' => ['required', 'exists:program_studi,kode_prodi'],
             'kode_prodi_new' => ['sometimes', 'required', 'unique:program_studi,kode_prodi', 'max:10'],
             'nama_prodi' => ['required'],
-            'keterangan_prodi' => ['required'],
+            'keterangan_prodi' => ['sometimes', 'required'],
             'kode_prodi' => ['required', 'exists:program_studi,kode_prodi'], // ini itu nagmbil dari tabel lain kan?
         ];
         $message = [
             'id.exists' => 'sorry, we cannot find what are you looking for.'
         ];
         // yg ini yg tadi lu bilang ngecek itu kan . iya
-        $validator = Validator::make($data, $rules, $message);
+        $validator = Validator::make($request->all(), $rules, $message);
         if ($validator->fails()) {
             $response = [
                 'status' => 400,
@@ -153,7 +151,7 @@ class ProgramStudiController extends Controller
             return response()->json($response, 400);
         }
 
-        //ini seharusnya proses updatenya ya soalnya ada wherenya kek semacam query di laravel 
+        //ini seharusnya proses updatenya ya soalnya ada wherenya kek semacam query di laravel
         // ini cuma persiapan nya, yang kiri nama kolom nya yang kanan isinya
         $updated = [
             'kode_prodi' => $request->kode_prodi,
@@ -163,10 +161,10 @@ class ProgramStudiController extends Controller
         ];
         // update dimana matkul yang di iinput
         $where = [
-            'kode_prodi' => $kode_prodi
+            'kode_prodi' => $request->kode_prodi
         ];
-// apa inih?
-// querynya dijalanin disini
+        // apa inih?
+        // querynya dijalanin disini
         try {
             $program_studi = program_studi::where($where);
             $res = $program_studi->update($updated);
@@ -179,7 +177,7 @@ class ProgramStudiController extends Controller
             }
             $response = [
                 'status' => 200,
-                'message' => 'Program Studi dengan kode ' . $kode_prodi . ' berhasil diubah'
+                'message' => 'Program Studi dengan kode ' . $request->kode_prodi . ' berhasil diubah'
             ];
             return response()->json($response, 200);
         } catch (\Throwable $e) {
@@ -197,18 +195,15 @@ class ProgramStudiController extends Controller
      * @param  \App\ProgramStudi  $programStudi
      * @return \Illuminate\Http\Response
      */
-    public function destroy($kode_prodi)
+    public function destroy(Request $request)
     {
-        $data = [
-            'kode_prodi' => $kode_prodi
-        ];
         $rules = [
             'kode_prodi' => ['required', 'exists:program_studi,kode_prodi']
         ];
         $message = [
             'kode_prodi.exists' => 'sorry, we cannot find what are you looking for.'
         ];
-        $validator = Validator::make($data, $rules, $message);
+        $validator = Validator::make($request->all(), $rules, $message);
         if ($validator->fails()) {
             $response = [
                 'status' => 400,
@@ -219,7 +214,7 @@ class ProgramStudiController extends Controller
 
         try {
             $where = [
-                'kode_prodi' => $kode_prodi
+                'kode_prodi' => $request->kode_prodi
             ];
             $program_studi = program_studi::where($where);
             $count = $program_studi->count();
@@ -235,7 +230,7 @@ class ProgramStudiController extends Controller
 
             $response = [
                 'status' => 200,
-                'message' => 'Program Studi dengan Kode ' . $kode_prodi . ' berhasil dihapus.'
+                'message' => 'Program Studi dengan Kode ' . $request->kode_prodi . ' berhasil dihapus.'
             ];
             return response()->json($response, 200);
         } catch (\Throwable $e) {
@@ -246,4 +241,4 @@ class ProgramStudiController extends Controller
             return response()->json($response, 500);
         }
     }
-    }
+}

@@ -21,9 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/program_studi', 'ProgramStudiController@store');
 // buat ngambil semua data nya
 Route::get('/program_studi', 'ProgramStudiController@index');
-// buat ngambil satu matkul
-Route::get('/program_studi/{kode_prodi}', 'ProgramStudiController@show');
 // buat ngedit satu matkul
-Route::put('/program_studi/{kode_prodi}', 'ProgramStudiController@update');
+Route::put('/program_studi', 'ProgramStudiController@update');
 // buat ngapus satu matkul
-Route::delete('/program_studi/{kode_prodi}', 'ProgramStudiController@destroy');
+Route::delete('/program_studi', 'ProgramStudiController@destroy');
