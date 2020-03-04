@@ -76,7 +76,7 @@ class JamController extends Controller
 
         $response = [
             'status' => 200,
-            'message' => 'Mata Kuliah ' . $request->jam_mulai . ' (' . $request->jam_selesai . ') Berhasil ditambahkan'
+            'message' => 'Jam kuliah ' . $request->jam_mulai . ' s/d ' . $request->jam_selesai . 'Berhasil ditambahkan'
         ];
         return response()->json($response, 200);
     }
