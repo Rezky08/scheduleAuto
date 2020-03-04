@@ -18,6 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::post('/jam', 'JamController@store');
 Route::get('/jam', 'JamController@index');
-Route::get('/jam/{kode_jam}', 'JamController@show');
-Route::put('/jam/{kode_jam}', 'JamController@update');
-Route::delete('/jam/{kode_jam}', 'JamController@destroy');
+Route::put('/jam', 'JamController@update');
+Route::delete('/jam', 'JamController@destroy');

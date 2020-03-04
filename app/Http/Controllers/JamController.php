@@ -118,13 +118,12 @@ class JamController extends Controller
      * @param  \App\Jam  $jam
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
 
         $data = [
-            'id' => $id,
+            'id' => $request->id,
         ];
-        $data += $request->except(['id']);
 
         $rules = [
             'jam_mulai' => ['required', 'date_format:H:i:s'],
@@ -149,7 +148,7 @@ class JamController extends Controller
             'updated_at' => now()
         ];
         $where = [
-            'id' => $id
+            'id' => $request->id
         ];
 
         try {
@@ -164,7 +163,7 @@ class JamController extends Controller
             }
             $response = [
                 'status' => 200,
-                'message' => 'Jam dengan kode ' . $id . ' berhasil diubah'
+                'message' => 'Jam dengan kode ' . $request->id . ' berhasil diubah'
             ];
             return response()->json($response, 200);
         } catch (\Throwable $e) {
@@ -183,10 +182,10 @@ class JamController extends Controller
      * @param  \App\Jam  $jam
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         $data = [
-            'id' => $id
+            'id' => $request->id
         ];
         $rules = [
             'id' => ['required', 'exists:jam,id']
@@ -205,7 +204,7 @@ class JamController extends Controller
 
         try {
             $where = [
-                'id' => $id
+                'id' => $request->id
             ];
             $jam = jam::where($where);
             $count = $jam->count();
@@ -221,7 +220,7 @@ class JamController extends Controller
 
             $response = [
                 'status' => 200,
-                'message' => 'Jam dengan Kode ' . $id . ' berhasil dihapus.'
+                'message' => 'Jam dengan Kode ' . $request->id . ' berhasil dihapus.'
             ];
             return response()->json($response, 200);
         } catch (\Throwable $e) {
