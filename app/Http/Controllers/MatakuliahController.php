@@ -14,8 +14,13 @@ class MatakuliahController extends Controller
      * @return \Illuminate\Http\Response
      */
     // menampilkan semua yang ada dalam table mata kuliah
-    public function index()
+    public function index(Request $request)
     {
+        // check apakah ada request kode_matkul
+        if ($request->kode_matkul) {
+            return $this->show($request);
+        }
+
         try {
             $mata_kuliah = mata_kuliah::all();
             $response = [
@@ -89,7 +94,7 @@ class MatakuliahController extends Controller
      * @param  string
      * @return \Illuminate\Http\Response
      */
-    public function show($kode_matkul)
+    public function show(Request $request)
     {
         $data = [
             'kode_matkul' => $kode_matkul
