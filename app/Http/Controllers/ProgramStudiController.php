@@ -132,7 +132,7 @@ class ProgramStudiController extends Controller
         // ini paham
         $rules = [
             'kode_prodi' => ['required', 'exists:program_studi,kode_prodi'],
-            'kode_prodi_new' => ['sometimes', 'required', 'unique:program_studi,kode_prodi', 'max:10'],
+            'kode_prodi_new' => ['sometimes', 'required', 'different:kode_prodi', 'max:10'],
             'nama_prodi' => ['required'],
             'keterangan_prodi' => ['sometimes', 'required'],
             'kode_prodi' => ['required', 'exists:program_studi,kode_prodi'], // ini itu nagmbil dari tabel lain kan?
