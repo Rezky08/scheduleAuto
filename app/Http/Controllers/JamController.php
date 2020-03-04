@@ -14,8 +14,14 @@ class JamController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        // check apa ada parameter id
+        if ($request->id) {
+            return $this->show($request);
+        }
+
+
         try {
             $jam = jam::all();
             $response = [
@@ -40,6 +46,7 @@ class JamController extends Controller
      */
     public function store(Request $request)
     {
+
         $rules = [
             'jam_mulai' => ['required', 'date_format:H:i:s'],
             'jam_selesai' => ['required', 'date_format:H:i:s'],
@@ -71,7 +78,7 @@ class JamController extends Controller
 
         $response = [
             'status' => 200,
-            'message' => 'Jam kuliah ' . $request->jam_mulai . ' s/d ' . $request->jam_selesai . 'Berhasil ditambahkan'
+            'message' => 'Jam kuliah ' . $request->jam_mulai . ' s/d ' . $request->jam_selesai . ' Berhasil ditambahkan'
         ];
         return response()->json($response, 200);
     }
@@ -84,17 +91,14 @@ class JamController extends Controller
      */
     public function show(Request $request)
     {
-        $id = $request->id;
-        $data = [
-            'id ' => $id
-        ];
+
         $rules = [
             'id' => ['required', 'exists:jam,id']
         ];
         $message = [
             'id.exists' => 'sorry, we cannot find what are you looking for.'
         ];
-        $validator = Validator::make($data, $rules, $message);
+        $validator = Validator::make($request->all(), $rules, $message);
         if ($validator->fails()) {
             $response = [
                 'status' => 400,
@@ -103,7 +107,7 @@ class JamController extends Controller
             return response()->json($response, 400);
         }
 
-        $jam = jam::where('id', $id)->first();
+        $jam = jam::where('id', $request->id)->first();
         $response = [
             'status' => 200,
             'data' => $jam
@@ -120,19 +124,15 @@ class JamController extends Controller
      */
     public function update(Request $request)
     {
-
-        $data = [
-            'id' => $request->id,
-        ];
-
         $rules = [
+            'id' => ['required', 'exists:jam,id'],
             'jam_mulai' => ['required', 'date_format:H:i:s'],
             'jam_selesai' => ['required', 'date_format:H:i:s'],
         ];
         $message = [
             'id.exists' => 'sorry, we cannot find what are you looking for.'
         ];
-        $validator = Validator::make($data, $rules, $message);
+        $validator = Validator::make($request->all(), $rules, $message);
         if ($validator->fails()) {
             $response = [
                 'status' => 400,
@@ -140,7 +140,6 @@ class JamController extends Controller
             ];
             return response()->json($response, 400);
         }
-
 
         $updated = [
             'jam_mulai' => $request->jam_mulai,
@@ -173,7 +172,6 @@ class JamController extends Controller
             ];
             return response()->json($response, 500);
         }
-
     }
 
     /**
