@@ -42,13 +42,8 @@ class JamController extends Controller
     {
         $rules = [
             'jam_mulai' => ['required', 'date_format:H:i:s'],
-            'jam_selesai' => ['required','date_format:H:i:s'],
+            'jam_selesai' => ['required', 'date_format:H:i:s'],
         ];
-        $request->jam_mulai = strtotime($request->jam_mulai);
-        $request->jam_mulai = date('H:i:s',$request->jam_mulai);
-        $request->jam_selesai = strtotime( $request->jam_selesai);
-        $request->jam_selesai = date('H:i:s',$request->jam_selesai);
-
 
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
