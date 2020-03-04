@@ -96,16 +96,13 @@ class MatakuliahController extends Controller
      */
     public function show(Request $request)
     {
-        $data = [
-            'kode_matkul' => $kode_matkul
-        ];
         $rules = [
             'kode_matkul' => ['required', 'exists:mata_kuliah,kode_matkul']
         ];
         $message = [
             'kode_matkul.exists' => 'sorry, we cannot find what are you looking for.'
         ];
-        $validator = Validator::make($data, $rules, $message);
+        $validator = Validator::make($request->all(), $rules, $message);
         if ($validator->fails()) {
             $response = [
                 'status' => 400,
@@ -114,7 +111,7 @@ class MatakuliahController extends Controller
             return response()->json($response, 400);
         }
 
-        $mata_kuliah = mata_kuliah::where('kode_matkul', $kode_matkul)->first();
+        $mata_kuliah = mata_kuliah::where('kode_matkul', $request->kode_matkul)->first();
         $response = [
             'status' => 200,
             'data' => $mata_kuliah
@@ -129,19 +126,12 @@ class MatakuliahController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $kode_matkul)
+    public function update(Request $request)
     {
-        $data = [
-            'kode_matkul' => $kode_matkul,
-        ];
-        if ($kode_matkul != $request->kode_matkul) {
-            $data['kode_matkul_new'] = $request->kode_matkul;
-        }
-        $data += $request->except(['kode_matkul']);
 
         $rules = [
             'kode_matkul' => ['required', 'exists:mata_kuliah,kode_matkul'],
-            'kode_matkul_new' => ['sometimes', 'required', 'unique:mata_kuliah,kode_matkul', 'max:10'],
+            'kode_matkul_new' => ['sometimes', 'required', 'different:kode_matkul', 'unique:mata_kuliah,kode_matkul', 'max:10'],
             'sks_matkul' => ['required', 'numeric'],
             'nama_matkul' => ['required'],
             'status_matkul' => ['boolean'],
@@ -150,7 +140,7 @@ class MatakuliahController extends Controller
         $message = [
             'id.exists' => 'sorry, we cannot find what are you looking for.'
         ];
-        $validator = Validator::make($data, $rules, $message);
+        $validator = Validator::make($request->all(), $rules, $message);
         if ($validator->fails()) {
             $response = [
                 'status' => 400,
@@ -161,15 +151,17 @@ class MatakuliahController extends Controller
 
 
         $updated = [
-            'kode_matkul' => $request->kode_matkul,
             'sks_matkul' => $request->sks_matkul,
             'nama_matkul' => $request->nama_matkul,
             'status_matkul' => $request->status_matkul,
             'kode_prodi' => $request->kode_prodi,
             'updated_at' => now()
         ];
+        if ($request->kode_matkul_new) {
+            $updated['kode_matkul'] = $request->kode_matkul_new;
+        }
         $where = [
-            'kode_matkul' => $kode_matkul
+            'kode_matkul' => $request->kode_matkul
         ];
 
         try {
@@ -184,7 +176,7 @@ class MatakuliahController extends Controller
             }
             $response = [
                 'status' => 200,
-                'message' => 'Mata kuliah dengan kode ' . $kode_matkul . ' berhasil diubah'
+                'message' => 'Mata kuliah dengan kode ' . $request->kode_matkul . ' berhasil diubah'
             ];
             return response()->json($response, 200);
         } catch (\Throwable $e) {
@@ -202,18 +194,15 @@ class MatakuliahController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($kode_matkul)
+    public function destroy(Request $request)
     {
-        $data = [
-            'kode_matkul' => $kode_matkul
-        ];
         $rules = [
             'kode_matkul' => ['required', 'exists:mata_kuliah,kode_matkul']
         ];
         $message = [
             'kode_matkul.exists' => 'sorry, we cannot find what are you looking for.'
         ];
-        $validator = Validator::make($data, $rules, $message);
+        $validator = Validator::make($request->all(), $rules, $message);
         if ($validator->fails()) {
             $response = [
                 'status' => 400,
@@ -224,23 +213,14 @@ class MatakuliahController extends Controller
 
         try {
             $where = [
-                'kode_matkul' => $kode_matkul
+                'kode_matkul' => $request->kode_matkul
             ];
             $mata_kuliah = mata_kuliah::where($where);
-            $count = $mata_kuliah->count();
-            if ($count < 1) {
-                $response = [
-                    'status' => 400,
-                    'message' => 'Sorry, we cannot find what are you looking for.'
-                ];
-                return response()->json($response, 200);
-            }
-
             $mata_kuliah->delete();
 
             $response = [
                 'status' => 200,
-                'message' => 'Mata kuliah dengan Kode ' . $kode_matkul . ' berhasil dihapus.'
+                'message' => 'Mata kuliah dengan Kode ' . $request->kode_matkul . ' berhasil dihapus.'
             ];
             return response()->json($response, 200);
         } catch (\Throwable $e) {
