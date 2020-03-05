@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Validator;
-use App\Hari;
+use App\Hari as hari;
 use Illuminate\Http\Request;
 
 class HariController extends Controller
