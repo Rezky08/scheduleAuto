@@ -117,9 +117,54 @@ class HariController extends Controller
      * @param  \App\Hari  $hari
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Hari $hari)
+    public function update(Request $request)
     {
-        //
+        $rules = [
+            'id' => ['required', 'exists:hari,id'],
+            'nama_hari' => ['required'],
+        ];
+        $message = [
+            'id.exists' => 'sorry, we cannot find what are you looking for.'
+        ];
+        $validator = Validator::make($request->all(), $rules, $message);
+        if ($validator->fails()) {
+            $response = [
+                'status' => 400,
+                'message' => $validator->errors()
+            ];
+            return response()->json($response, 400);
+        }
+
+        $updated = [
+            'nama_hari' => $request->nama_hari,
+            'updated_at' => now()
+        ];
+        $where = [
+            'id' => $request->id
+        ];
+
+        try {
+            $hari = hari::where($where);
+            $res = $hari->update($updated);
+            if (!$res) {
+                $response = [
+                    'status' => 200,
+                    'message' => 'Tidak ada perubahan'
+                ];
+                return response()->json($response, 200);
+            }
+            $response = [
+                'status' => 200,
+                'message' => 'hari dengan kode ' . $request->id . ' berhasil diubah'
+            ];
+            return response()->json($response, 200);
+        } catch (\Throwable $e) {
+            $response = [
+                'status' => 500,
+                'message' => $e
+            ];
+            return response()->json($response, 500);
+        }
     }
 
     /**
@@ -128,8 +173,53 @@ class HariController extends Controller
      * @param  \App\Hari  $hari
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Hari $hari)
+    public function destroy(Request $request)
     {
-        //
+        $data = [
+            'id' => $request->id
+        ];
+        $rules = [
+            'id' => ['required', 'exists:hari,id']
+        ];
+        $message = [
+            'id.exists' => 'sorry, we cannot find what are you looking for.'
+        ];
+        $validator = Validator::make($data, $rules, $message);
+        if ($validator->fails()) {
+            $response = [
+                'status' => 400,
+                'message' => $validator->errors()
+            ];
+            return response()->json($response, 400);
+        }
+
+        try {
+            $where = [
+                'id' => $request->id
+            ];
+            $hari = hari::where($where);
+            $count = $hari->count();
+            if ($count < 1) {
+                $response = [
+                    'status' => 400,
+                    'message' => 'Sorry, we cannot find what are you looking for.'
+                ];
+                return response()->json($response, 200);
+            }
+
+            $hari->delete();
+
+            $response = [
+                'status' => 200,
+                'message' => 'hari dengan Kode ' . $request->id . ' berhasil dihapus.'
+            ];
+            return response()->json($response, 200);
+        } catch (\Throwable $e) {
+            $response = [
+                'status' => 500,
+                'message' => $e
+            ];
+            return response()->json($response, 500);
+        }
     }
 }
