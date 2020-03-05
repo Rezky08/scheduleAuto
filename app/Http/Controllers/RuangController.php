@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Ruang;
+use Illuminate\Support\Facades\Validator;
+use App\Ruang as ruang;
 use Illuminate\Http\Request;
 
 class RuangController extends Controller
