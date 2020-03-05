@@ -16,3 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('/jam', 'JamController@store');
+Route::get('/jam', 'JamController@index');
+Route::put('/jam', 'JamController@update');
+Route::delete('/jam', 'JamController@destroy');
