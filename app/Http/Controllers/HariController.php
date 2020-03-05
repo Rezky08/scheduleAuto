@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Validator;
 use App\Hari;
 use Illuminate\Http\Request;
 
-class Hari extends Controller
+class HariController extends Controller
 {
     /**
      * Display a listing of the resource.
