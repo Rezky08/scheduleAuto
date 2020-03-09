@@ -46,7 +46,6 @@ class JamController extends Controller
      */
     public function store(Request $request)
     {
-
         $rules = [
             'jam_mulai' => ['required', 'date_format:H:i:s'],
             'jam_selesai' => ['required', 'date_format:H:i:s'],
