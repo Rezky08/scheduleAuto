@@ -78,7 +78,7 @@
                     <th>Hari</th>
                     <th>Opsi</th>
                 </tr>
-                @foreach ($jam as $j)
+                @foreach ($hari ?? '' as $j)
                 <tr>
                     <td> {{$j['nama_hari'] }}</td>
                     <td>
@@ -107,7 +107,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form method="POST" action="/jam/add">
+                        <form method="POST" action="/hari/add">
 
                             {{ csrf_field() }}
 
@@ -148,7 +148,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form method="POST" action="/jam/add">
+                        <form method="POST" action="/hari/add">
 
                             {{ csrf_field() }}
 
