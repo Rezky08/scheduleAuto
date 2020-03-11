@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/hari', 'hariViewController@index');
+Route::post('/hari/add', 'hariViewController@tambah');
