@@ -60,11 +60,15 @@
         <!-- Page Content  -->
         <div id="content" class="p-4 p-md-5 pt-5">
             <br />
-            <h3>Data Hari
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Tambah
-                </button>
-            </h3>
+            <div class="card">
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">Data Hari
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            Tambah+
+                        </button>
+                    </blockquote>
+                </div>
+            </div>
             <!-- Button trigger modal -->
 
             <br />
