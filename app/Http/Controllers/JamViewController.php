@@ -2,28 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Hari;
+use App\Jam;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\URL;
 
-class HariViewController extends Controller
+class JamViewController extends Controller
 {
     public function index()
     {
-        $Hari = Hari::all();
+        $jam = Jam::all();
         $data = [
-            'hari' => $Hari->toArray()
+            'jam' => $jam->toArray()
         ];
-        return view('hari', $data);
+        return view('jam', $data);
     }
 
     public function tambah(Request $request)
     {
+        dd('test');
         $rules = [
-            'nama_hari' => ['required'],
+            'jam_mulai' => ['required', 'date_format:H:i:s'],
+            'jam_selesai' => ['required', 'date_format:H:i:s'],
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -31,7 +33,7 @@ class HariViewController extends Controller
             return redirect()->back()->withErrors($validator->errors())->withInput();
         }
 
-        $url = URL::to('api/hari');
+        $url = URL::to('api/jam');
         $client = new Client();
         $client = $client->post($url, ['form_params' => $request->all()]);
         if ($client->getStatusCode() == 200) {

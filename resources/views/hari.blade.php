@@ -59,19 +59,14 @@
 
         <!-- Page Content  -->
         <div id="content" class="p-4 p-md-5 pt-5">
-            <h3>Data Pegawai</h3>
-            <p>Cari Data Pegawai :</p>
-            <form action="/pegawai/cari" method="GET" class="form-inline">
-                <input class="form-control" type="text" name="cari" placeholder="Cari Pegawai .." value="">
-                <input class="btn btn-primary ml-3" type="submit" value="CARI">
-
-            </form>
+            <br />
+            <h3>Data Hari
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Tambah
+                </button>
+            </h3>
             <!-- Button trigger modal -->
-            <br />
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Tambah
-            </button>
-            <br />
+
             <br />
             <table class="table table-bordered">
                 <tr>
