@@ -17,6 +17,3 @@ Route::get('/', function () {
 
 Route::get('/jam', 'JamViewController@index');
 Route::post('/jam/add', 'JamViewController@tambah');
-Route::get('/contoh', function () {
-    return view('contoh');
-});
