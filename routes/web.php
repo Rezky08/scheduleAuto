@@ -15,3 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 // Route::post('/matkul', 'MatakuliahController@store');
+
+Route::get('/matkul', 'MatkulViewController@index');
+Route::post('/matkul/add', 'MatkulViewController@tambah');
