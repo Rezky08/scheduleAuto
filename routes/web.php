@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/program_studi', 'ProgramStudiViewController@index');
+Route::post('/program_studi/add', 'ProgramStudiViewController@tambah');
