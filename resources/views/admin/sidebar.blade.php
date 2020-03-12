@@ -1,5 +1,4 @@
-@section('samping')
-<!-- Sidebar -->
+@section('sidebar')
 <nav id="sidebar" class="active">
     <div class="custom-menu">
         <button type="button" id="sidebarCollapse" class="btn btn-primary">
@@ -8,7 +7,7 @@
         </button>
     </div>
     <div class="p-4">
-        <h1><a href="index.html" class="logo">Flash</a></h1>
+        <h1><a href="index.html" class="logo">KKP</a></h1>
         <ul class="list-unstyled components mb-5">
             <li class="active">
                 <a href="#"><span class="fa fa-home mr-3"></span> Home</a>
@@ -44,4 +43,4 @@
 
     </div>
 </nav>
-@show
+@endsection
