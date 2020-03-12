@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/ruang', 'RuangViewController@index');
+Route::post('/ruang/add', 'RuangViewController@tambah');
