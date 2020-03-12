@@ -22,6 +22,7 @@ class HariViewController extends Controller
 
     public function tambah(Request $request)
     {
+        dd("test");
         $rules = [
             'nama_hari' => ['required'],
         ];
