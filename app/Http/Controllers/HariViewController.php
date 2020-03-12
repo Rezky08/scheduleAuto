@@ -2,30 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Ruang;
+use App\Hari;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\URL;
 
-class ruangViewController extends Controller
+class HariViewController extends Controller
 {
     public function index()
     {
-        $ruang = Ruang::all();
+        $Hari = Hari::all();
         $data = [
-            'ruang' => $ruang->toArray()
+            'hari' => $Hari->toArray()
         ];
-        return view('ruang', $data);
+        return view('hari', $data);
     }
 
     public function tambah(Request $request)
     {
-        dd('test');
+        dd("test");
         $rules = [
-            'nama_ruang' => ['required'],
-            'keterangan' => ['required'],
+            'nama_hari' => ['required'],
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -33,7 +32,7 @@ class ruangViewController extends Controller
             return redirect()->back()->withErrors($validator->errors())->withInput();
         }
 
-        $url = URL::to('api/ruang');
+        $url = URL::to('api/hari');
         $client = new Client();
         $client = $client->post($url, ['form_params' => $request->all()]);
         if ($client->getStatusCode() == 200) {

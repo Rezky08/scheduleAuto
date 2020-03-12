@@ -15,7 +15,7 @@
 
         <div id="content" class="p-4 p-md-5 pt-5">
             <br />
-            <form action="/pegawai/cari" method="GET" class="form-inline">Cari Data Ruang :
+            <form action="/pegawai/cari" method="GET" class="form-inline">Cari Data Sesi :
                 <input class="form-control" type="text" name="cari" placeholder="Cari Pegawai .." value="">
                 <input class="btn btn-primary ml-3" type="submit" value="CARI">
             </form>
@@ -23,7 +23,7 @@
             <div class="card">
                 <div class="card-body">
 
-                    <blockquote class="blockquote mb-0">Data Ruang
+                    <blockquote class="blockquote mb-0">Data Sesi
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                             Tambah+
                         </button>
@@ -33,14 +33,14 @@
             <br />
             <table class="table table-bordered">
                 <tr>
-                    <th>Nama Ruang</th>
-                    <th>Keterangan</th>
+                    <th>Sesi Mulai</th>
+                    <th>Sesi Selesai</th>
                     <th>Opsi</th>
                 </tr>
-                @foreach ($ruang as $j)
+                @foreach ($jam as $j)
                 <tr>
-                    <td> {{$j['nama_ruang'] }}</td>
-                    <td> {{$j['keterangan'] }}</td>
+                    <td> {{$j['jam_mulai'] }}</td>
+                    <td> {{$j['jam_selesai'] }}</td>
                     <td>
                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal1">
                             Edit
@@ -67,29 +67,29 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form method="POST" action="/ruang/add">
+                        <form method="POST" action="/jam/add">
 
                             {{ csrf_field() }}
 
                             <div class="form-group">
-                                <label>nama_ruang</label>
-                                <input type="text" name="nama_ruang" class="form-control" placeholder="nama_ruang">
+                                <label>jam_mulai</label>
+                                <input type="time" name="jam_mulai" class="form-control" placeholder="jam_mulai">
 
-                                @if($errors->has('nama_ruang'))
+                                @if($errors->has('jam_mulai'))
                                 <div class="text-danger">
-                                    {{ $errors->first('nama_ruang')}}
+                                    {{ $errors->first('jam_mulai')}}
                                 </div>
                                 @endif
 
                             </div>
 
                             <div class="form-group">
-                                <label>keterangan</label>
-                                <input type="text" name="keterangan" class="form-control" placeholder="keterangan">
+                                <label>jam_selesai</label>
+                                <input type="time" name="jam_selesai" class="form-control" placeholder="jam_selesai">
 
-                                @if($errors->has('keterangan'))
+                                @if($errors->has('jam_selesai'))
                                 <div class="text-danger">
-                                    {{ $errors->first('keterangan')}}
+                                    {{ $errors->first('jam_selesai')}}
                                 </div>
                                 @endif
 
@@ -120,29 +120,29 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form method="POST" action="/ruang/add">
+                        <form method="POST" action="/jam/add">
 
                             {{ csrf_field() }}
 
                             <div class="form-group">
-                                <label>nama_ruang</label>
-                                <input type="text" name="nama_ruang" class="form-control" placeholder="nama_ruang">
+                                <label>jam_mulai</label>
+                                <input type="time" name="jam_mulai" class="form-control" placeholder="jam_mulai">
 
-                                @if($errors->has('nama_ruang'))
+                                @if($errors->has('jam_mulai'))
                                 <div class="text-danger">
-                                    {{ $errors->first('nama_ruang')}}
+                                    {{ $errors->first('jam_mulai')}}
                                 </div>
                                 @endif
 
                             </div>
 
                             <div class="form-group">
-                                <label>keterangan</label>
-                                <input type="text" name="keterangan" class="form-control" placeholder="keterangan">
+                                <label>jam_selesai</label>
+                                <input type="time" name="jam_selesai" class="form-control" placeholder="jam_selesai">
 
-                                @if($errors->has('keterangan'))
+                                @if($errors->has('jam_selesai'))
                                 <div class="text-danger">
-                                    {{ $errors->first('keterangan')}}
+                                    {{ $errors->first('jam_selesai')}}
                                 </div>
                                 @endif
 
