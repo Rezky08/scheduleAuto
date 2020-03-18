@@ -23,7 +23,6 @@ class ruangViewController extends Controller
 
     public function tambah(Request $request)
     {
-        dd('test');
         $rules = [
             'nama_ruang' => ['required'],
             'keterangan' => ['required'],
