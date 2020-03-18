@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\views;
 
+use App\Helpers\Host;
 use App\Http\Controllers\Controller;
 use App\Matakuliah;
 use Illuminate\Http\Request;
@@ -23,13 +24,12 @@ class MatkulViewController extends Controller
 
     public function tambah(Request $request)
     {
-        dd('test');
         $rules = [
-            'kode_matkul' => ['required', 'unique:mata_kuliah,kode_matkul', 'max:10'],
+            'kode_matkul' => ['required', 'max:10'],
             'sks_matkul' => ['required', 'numeric'],
             'nama_matkul' => ['required'],
             'status_matkul' => ['boolean'],
-            'kode_prodi' => ['required', 'exists:program_studi,kode_prodi'],
+            'kode_prodi' => ['required'],
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -37,12 +37,30 @@ class MatkulViewController extends Controller
             return redirect()->back()->withErrors($validator->errors())->withInput();
         }
 
-        $url = URL::to('api/matakuliah');
+        $host = new Host();
+        $url = $host->host('api') . 'matkul';
         $client = new Client();
-        $client = $client->post($url, ['form_params' => $request->all()]);
-        if ($client->getStatusCode() == 200) {
-            dd("Berhasil");
+        try {
+            $client = $client->post($url, ['form_params' => $request->all()]);
+            if ($client->getStatusCode() == 200) {
+                $contents = $client->getBody()->getContents();
+                $contents = json_decode($contents);
+                $contents = collect($contents->message);
+                $success = $contents->map(function ($item, $index) {
+                    return $item;
+                });
+                $success = $success->toArray();
+                $message = [
+                    'success' => $success
+                ];
+                return redirect()->back()->with($message);
+            }
+        } catch (GuzzleException $e) {
+            $contents = $e->getResponse()->getBody()->getContents();
+            $contents = json_decode($contents);
+            $contents = collect($contents->message);
+            $message = $contents->toArray();
+            return redirect()->back()->withErrors($message)->withInput();
         }
-        dd("gagal");
     }
 }
