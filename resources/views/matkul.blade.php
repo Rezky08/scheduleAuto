@@ -17,7 +17,8 @@
         <div id="content" class="p-4 p-md-5 pt-5">
             <br />
             <form action="/pegawai/cari" method="GET" class="form-inline">Cari Data Mata Kuliah :
-                <input class="form-control" type="text" name="cari" placeholder="Cari Pegawai .." value="">
+                <input class="form-control border border-secondary" type="text" name="cari"
+                    placeholder="Cari Pegawai .." value="">
                 <input class="btn btn-primary ml-3" type="submit" value="CARI">
             </form>
             <!-- Button trigger modal -->
