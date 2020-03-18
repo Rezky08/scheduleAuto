@@ -21,3 +21,6 @@ Route::post('/matkul/add', 'MatkulViewController@tambah');
 
 Route::get('/program_studi', 'ProgramStudiViewController@index');
 Route::post('/program_studi/add', 'ProgramStudiViewController@tambah');
+
+Route::get('/ruang', 'RuangViewController@index');
+Route::post('/ruang/add', 'RuangViewController@tambah');
