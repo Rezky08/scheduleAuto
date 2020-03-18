@@ -10,17 +10,28 @@
         <h1><a href="index.html" class="logo">KKP</a></h1>
         <ul class="list-unstyled components mb-5">
             <li class="active">
-                <a href="#"><span class="fa fa-home mr-3"></span> Home</a>
+                <a href="#"> Home</a>
             </li>
             <li>
-                <a href="#"><span class="fa fa-user mr-3"></span> About</a>
+                <a href="#"> Ruang</a>
             </li>
             <li>
-                <a href="#"><span class="fa fa-briefcase mr-3"></span> Portfolio</a>
+                <a href="#"> Sesi</a>
             </li>
+            <li>
+                <a href="#"> Hari</a>
+            </li>
+
+            <li>
+                <a href="#"> Mata kuliah</a>
+            </li>
+            <li>
+                <a href="#"> Program Studi</a>
+            </li>
+
         </ul>
 
-        <div class="mb-5">
+        {{-- <div class="mb-5">
             <h3 class="h6 mb-3">Subscribe for newsletter</h3>
             <form action="#" class="subscribe-form">
                 <div class="form-group d-flex">
@@ -39,7 +50,7 @@
                 by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
             </p>
-        </div>
+        </div> --}}
 
     </div>
 </nav>
