@@ -166,6 +166,8 @@ return [
          * Package Service Providers...
          */
         App\Providers\HostServiceProvider::class,
+        App\Providers\RequestApiServiceProvider::class,
+
 
 
         /*
@@ -228,6 +230,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Host' => App\Helpers\Host::class,
+        'ReqApi' => App\Helpers\Request_api::class,
+
 
 
     ],
