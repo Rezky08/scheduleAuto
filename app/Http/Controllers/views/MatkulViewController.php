@@ -1,30 +1,35 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\views;
 
-use App\Hari;
+use App\Http\Controllers\Controller;
+use App\Matakuliah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\URL;
 
-class HariViewController extends Controller
+class MatkulViewController extends Controller
 {
     public function index()
     {
-        $Hari = Hari::all();
+        $matakuliah = Matakuliah::all();
         $data = [
-            'hari' => $Hari->toArray()
+            'matakuliah' => $matakuliah->toArray()
         ];
-        return view('hari', $data);
+        return view('matkul', $data);
     }
 
     public function tambah(Request $request)
     {
-        dd("test");
+        dd('test');
         $rules = [
-            'nama_hari' => ['required'],
+            'kode_matkul' => ['required', 'unique:mata_kuliah,kode_matkul', 'max:10'],
+            'sks_matkul' => ['required', 'numeric'],
+            'nama_matkul' => ['required'],
+            'status_matkul' => ['boolean'],
+            'kode_prodi' => ['required', 'exists:program_studi,kode_prodi'],
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -32,7 +37,7 @@ class HariViewController extends Controller
             return redirect()->back()->withErrors($validator->errors())->withInput();
         }
 
-        $url = URL::to('api/hari');
+        $url = URL::to('api/matakuliah');
         $client = new Client();
         $client = $client->post($url, ['form_params' => $request->all()]);
         if ($client->getStatusCode() == 200) {

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\views;
 
+use App\Http\Controllers\Controller;
 use App\Jam;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;

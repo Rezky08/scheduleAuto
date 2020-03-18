@@ -1,31 +1,32 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\views;
 
-use App\Ruang;
+use App\Http\Controllers\Controller;
+use App\ProgramStudi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\URL;
 
-class ruangViewController extends Controller
+class ProgramStudiViewController extends Controller
 {
     public function index()
     {
-        $ruang = Ruang::all();
+        $program_studi = ProgramStudi::all();
         $data = [
-            'ruang' => $ruang->toArray()
+            'program_studi' => $program_studi->toArray()
         ];
-        return view('ruang', $data);
+        return view('program_studi', $data);
     }
 
     public function tambah(Request $request)
     {
         dd('test');
         $rules = [
-            'nama_ruang' => ['required'],
-            'keterangan' => ['required'],
+            'program_studi_mulai' => ['required', 'date_format:H:i:s'],
+            'program_studi_selesai' => ['required', 'date_format:H:i:s'],
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -33,7 +34,7 @@ class ruangViewController extends Controller
             return redirect()->back()->withErrors($validator->errors())->withInput();
         }
 
-        $url = URL::to('api/ruang');
+        $url = URL::to('api/program_studi');
         $client = new Client();
         $client = $client->post($url, ['form_params' => $request->all()]);
         if ($client->getStatusCode() == 200) {

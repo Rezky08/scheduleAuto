@@ -1,34 +1,32 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\views;
 
-use App\Matakuliah;
+use App\Http\Controllers\Controller;
+use App\Ruang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\URL;
 
-class MatkulViewController extends Controller
+class ruangViewController extends Controller
 {
     public function index()
     {
-        $matakuliah = Matakuliah::all();
+        $ruang = Ruang::all();
         $data = [
-            'matakuliah' => $matakuliah->toArray()
+            'ruang' => $ruang->toArray()
         ];
-        return view('matkul', $data);
+        return view('ruang', $data);
     }
 
     public function tambah(Request $request)
     {
         dd('test');
         $rules = [
-            'kode_matkul' => ['required', 'unique:mata_kuliah,kode_matkul', 'max:10'],
-            'sks_matkul' => ['required', 'numeric'],
-            'nama_matkul' => ['required'],
-            'status_matkul' => ['boolean'],
-            'kode_prodi' => ['required', 'exists:program_studi,kode_prodi'],
+            'nama_ruang' => ['required'],
+            'keterangan' => ['required'],
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -36,7 +34,7 @@ class MatkulViewController extends Controller
             return redirect()->back()->withErrors($validator->errors())->withInput();
         }
 
-        $url = URL::to('api/matakuliah');
+        $url = URL::to('api/ruang');
         $client = new Client();
         $client = $client->post($url, ['form_params' => $request->all()]);
         if ($client->getStatusCode() == 200) {

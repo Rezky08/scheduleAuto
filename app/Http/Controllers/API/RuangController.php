@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
-use App\Jam as jam;
+use App\Ruang as ruang;
 use Illuminate\Http\Request;
 
-class JamController extends Controller
+class RuangController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,10 +22,10 @@ class JamController extends Controller
         }
 
         try {
-            $jam = jam::all();
+            $ruang = ruang::all();
             $response = [
                 'status' => 200,
-                'data' => $jam
+                'data' => $ruang
             ];
             return response()->json($response, 200);
         } catch (\Throwable $e) {
@@ -36,18 +36,12 @@ class JamController extends Controller
             return response()->json($response, 500);
         }
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
+
         $rules = [
-            'jam_mulai' => ['required', 'date_format:H:i:s'],
-            'jam_selesai' => ['required', 'date_format:H:i:s'],
+            'nama_ruang' => ['required'],
+            'keterangan' => ['required'],
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -59,13 +53,13 @@ class JamController extends Controller
             return response()->json($response, 400);
         }
         $insertToDB = [
-            'jam_mulai' => $request->jam_mulai,
-            'jam_selesai' => $request->jam_selesai,
+            'nama_ruang' => $request->nama_ruang,
+            'keterangan' => $request->keterangan,
             'created_at' => now(),
             'updated_at' => now()
         ];
         try {
-            jam::insert($insertToDB);
+            ruang::insert($insertToDB);
         } catch (\Throwable $e) {
             $response = [
                 'status' => 500,
@@ -76,7 +70,7 @@ class JamController extends Controller
 
         $response = [
             'status' => 200,
-            'message' => 'Jam kuliah ' . $request->jam_mulai . ' s/d ' . $request->jam_selesai . ' Berhasil ditambahkan'
+            'message' => 'ruang kuliah ' . $request->nama_ruang . ' Berhasil ditambahkan'
         ];
         return response()->json($response, 200);
     }
@@ -84,14 +78,14 @@ class JamController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Jam  $jam
+     * @param  \App\ruang  $ruang
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request)
     {
 
         $rules = [
-            'id' => ['required', 'exists:jam,id']
+            'id' => ['required', 'exists:ruang,id']
         ];
         $message = [
             'id.exists' => 'sorry, we cannot find what are you looking for.'
@@ -105,10 +99,10 @@ class JamController extends Controller
             return response()->json($response, 400);
         }
 
-        $jam = jam::where('id', $request->id)->first();
+        $ruang = ruang::where('id', $request->id)->first();
         $response = [
             'status' => 200,
-            'data' => $jam
+            'data' => $ruang
         ];
         return response()->json($response, 200);
     }
@@ -117,15 +111,15 @@ class JamController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Jam  $jam
+     * @param  \App\ruang  $ruang
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
     {
         $rules = [
-            'id' => ['required', 'exists:jam,id'],
-            'jam_mulai' => ['required', 'date_format:H:i:s'],
-            'jam_selesai' => ['required', 'date_format:H:i:s'],
+            'id' => ['required', 'exists:ruang,id'],
+            'nama_ruang' => ['required'],
+            'keterangan' => ['required'],
         ];
         $message = [
             'id.exists' => 'sorry, we cannot find what are you looking for.'
@@ -140,8 +134,8 @@ class JamController extends Controller
         }
 
         $updated = [
-            'jam_mulai' => $request->jam_mulai,
-            'jam_selesai' => $request->jam_selesai,
+            'nama_ruang' => $request->nama_ruang,
+            'keterangan' => $request->keterangan,
             'updated_at' => now()
         ];
         $where = [
@@ -149,8 +143,8 @@ class JamController extends Controller
         ];
 
         try {
-            $jam = jam::where($where);
-            $res = $jam->update($updated);
+            $ruang = ruang::where($where);
+            $res = $ruang->update($updated);
             if (!$res) {
                 $response = [
                     'status' => 200,
@@ -160,7 +154,7 @@ class JamController extends Controller
             }
             $response = [
                 'status' => 200,
-                'message' => 'Jam dengan kode ' . $request->id . ' berhasil diubah'
+                'message' => 'ruang dengan kode ' . $request->id . ' berhasil diubah'
             ];
             return response()->json($response, 200);
         } catch (\Throwable $e) {
@@ -175,7 +169,7 @@ class JamController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Jam  $jam
+     * @param  \App\ruang  $ruang
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request)
@@ -184,7 +178,7 @@ class JamController extends Controller
             'id' => $request->id
         ];
         $rules = [
-            'id' => ['required', 'exists:jam,id']
+            'id' => ['required', 'exists:ruang,id']
         ];
         $message = [
             'id.exists' => 'sorry, we cannot find what are you looking for.'
@@ -202,8 +196,8 @@ class JamController extends Controller
             $where = [
                 'id' => $request->id
             ];
-            $jam = jam::where($where);
-            $count = $jam->count();
+            $ruang = ruang::where($where);
+            $count = $ruang->count();
             if ($count < 1) {
                 $response = [
                     'status' => 400,
@@ -212,11 +206,11 @@ class JamController extends Controller
                 return response()->json($response, 200);
             }
 
-            $jam->delete();
+            $ruang->delete();
 
             $response = [
                 'status' => 200,
-                'message' => 'Jam dengan Kode ' . $request->id . ' berhasil dihapus.'
+                'message' => 'ruang dengan Kode ' . $request->id . ' berhasil dihapus.'
             ];
             return response()->json($response, 200);
         } catch (\Throwable $e) {

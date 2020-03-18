@@ -14,19 +14,19 @@
 Route::get('/', function () {
     return view('welcome');
 });
-// Route::post('/matkul', 'MatakuliahController@store');
+// Route::post('/matkul', 'views\MatakuliahController@store');
 
-Route::get('/matkul', 'MatkulViewController@index');
-Route::post('/matkul/add', 'MatkulViewController@tambah');
+Route::get('/matkul', 'views\MatkulViewController@index');
+Route::post('/matkul/add', 'views\MatkulViewController@tambah');
 
-Route::get('/program_studi', 'ProgramStudiViewController@index');
-Route::post('/program_studi/add', 'ProgramStudiViewController@tambah');
+Route::get('/program_studi', 'views\ProgramStudiViewController@index');
+Route::post('/program_studi/add', 'views\ProgramStudiViewController@tambah');
 
-Route::get('/ruang', 'RuangViewController@index');
-Route::post('/ruang/add', 'RuangViewController@tambah');
+Route::get('/ruang', 'views\RuangViewController@index');
+Route::post('/ruang/add', 'views\RuangViewController@tambah');
 
-Route::get('/hari', 'hariViewController@index');
-Route::post('/hari/add', 'hariViewController@tambah');
+Route::get('/hari', 'views\hariViewController@index');
+Route::post('/hari/add', 'views\hariViewController@tambah');
 
-Route::get('/jam', 'JamViewController@index');
-Route::post('/jam/add', 'JamViewController@tambah');
+Route::get('/jam', 'views\JamViewController@index');
+Route::post('/jam/add', 'views\JamViewController@tambah');

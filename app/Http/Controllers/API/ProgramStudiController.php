@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use Illuminate\Support\Facades\Validator;
-use App\Ruang as ruang;
+use App\Http\Controllers\Controller;
+// masukin yang diperluin buat file ini
+use App\ProgramStudi as program_studi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
-class RuangController extends Controller
+class ProgramStudiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,16 +17,17 @@ class RuangController extends Controller
      */
     public function index(Request $request)
     {
+
         // check apa ada parameter id
-        if ($request->id) {
+        if ($request->kode_prodi) {
             return $this->show($request);
         }
 
         try {
-            $ruang = ruang::all();
+            $program_studi = program_studi::all();
             $response = [
                 'status' => 200,
-                'data' => $ruang
+                'data' => $program_studi
             ];
             return response()->json($response, 200);
         } catch (\Throwable $e) {
@@ -35,16 +38,28 @@ class RuangController extends Controller
             return response()->json($response, 500);
         }
     }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    // menambahkan program studi ke database
     public function store(Request $request)
     {
-
+        // validasi inputan
+        // ngecek ada inputan yang nama nya kode_prodi sama nama_prodi dengan rules begitu
         $rules = [
-            'nama_ruang' => ['required'],
-            'keterangan' => ['required'],
+            'kode_prodi' => ['required', 'unique:program_studi,kode_prodi', 'max:10'],
+            'nama_prodi' => ['required']
         ];
+        // rules nya cek di web laravel aja
 
+        // Validator itu semacam package harus di 'use' di awal
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
+            // kalo inputanya ga sesuai rules, dia bakal balikin error
             $response = [
                 'status' => 400,
                 'message' => $validator->errors()
@@ -52,13 +67,13 @@ class RuangController extends Controller
             return response()->json($response, 400);
         }
         $insertToDB = [
-            'nama_ruang' => $request->nama_ruang,
-            'keterangan' => $request->keterangan,
+            'kode_prodi' => $request->kode_prodi,
+            'nama_prodi' => $request->nama_prodi,
             'created_at' => now(),
             'updated_at' => now()
         ];
         try {
-            ruang::insert($insertToDB);
+            program_studi::insert($insertToDB);
         } catch (\Throwable $e) {
             $response = [
                 'status' => 500,
@@ -69,7 +84,7 @@ class RuangController extends Controller
 
         $response = [
             'status' => 200,
-            'message' => 'ruang kuliah ' . $request->nama_ruang . ' Berhasil ditambahkan'
+            'message' => 'Program Studi ' . $request->nama_prodi . ' (' . $request->kode_prodi . ') Berhasil ditambahkan'
         ];
         return response()->json($response, 200);
     }
@@ -77,17 +92,17 @@ class RuangController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\ruang  $ruang
+     * @param  \App\ProgramStudi  $programStudi
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request)
     {
-
+        // Validasi apakah ada inputan bernama kode_prodi atau tidak
         $rules = [
-            'id' => ['required', 'exists:ruang,id']
+            'kode_prodi' => ['required', 'exists:program_studi,kode_prodi']
         ];
         $message = [
-            'id.exists' => 'sorry, we cannot find what are you looking for.'
+            'kode_prodi.exists' => 'sorry, we cannot find what are you looking for.'
         ];
         $validator = Validator::make($request->all(), $rules, $message);
         if ($validator->fails()) {
@@ -98,10 +113,10 @@ class RuangController extends Controller
             return response()->json($response, 400);
         }
 
-        $ruang = ruang::where('id', $request->id)->first();
+        $program_studi = program_studi::where('kode_prodi', $request->kode_prodi)->first();
         $response = [
             'status' => 200,
-            'data' => $ruang
+            'data' => $program_studi
         ];
         return response()->json($response, 200);
     }
@@ -110,19 +125,23 @@ class RuangController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ruang  $ruang
+     * @param  \App\ProgramStudi  $programStudi
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
     {
+        // ini paham
         $rules = [
-            'id' => ['required', 'exists:ruang,id'],
-            'nama_ruang' => ['required'],
-            'keterangan' => ['required'],
+            'kode_prodi' => ['required', 'exists:program_studi,kode_prodi'],
+            'kode_prodi_new' => ['sometimes', 'required', 'different:kode_prodi', 'unique:program_studi,kode_prodi', 'max:10'],
+            'nama_prodi' => ['required'],
+            'keterangan_prodi' => ['sometimes', 'required'],
+            'kode_prodi' => ['required', 'exists:program_studi,kode_prodi'], // ini itu nagmbil dari tabel lain kan?
         ];
         $message = [
             'id.exists' => 'sorry, we cannot find what are you looking for.'
         ];
+        // yg ini yg tadi lu bilang ngecek itu kan . iya
         $validator = Validator::make($request->all(), $rules, $message);
         if ($validator->fails()) {
             $response = [
@@ -132,18 +151,23 @@ class RuangController extends Controller
             return response()->json($response, 400);
         }
 
+        //ini seharusnya proses updatenya ya soalnya ada wherenya kek semacam query di laravel
+        // ini cuma persiapan nya, yang kiri nama kolom nya yang kanan isinya
         $updated = [
-            'nama_ruang' => $request->nama_ruang,
-            'keterangan' => $request->keterangan,
+            'kode_prodi' => $request->kode_prodi,
+            'nama_prodi' => $request->nama_prodi,
+            'keterangan_prodi' => $request->keterangan_prodi,
             'updated_at' => now()
         ];
+        // update dimana matkul yang di iinput
         $where = [
-            'id' => $request->id
+            'kode_prodi' => $request->kode_prodi
         ];
-
+        // apa inih?
+        // querynya dijalanin disini
         try {
-            $ruang = ruang::where($where);
-            $res = $ruang->update($updated);
+            $program_studi = program_studi::where($where);
+            $res = $program_studi->update($updated);
             if (!$res) {
                 $response = [
                     'status' => 200,
@@ -153,7 +177,7 @@ class RuangController extends Controller
             }
             $response = [
                 'status' => 200,
-                'message' => 'ruang dengan kode ' . $request->id . ' berhasil diubah'
+                'message' => 'Program Studi dengan kode ' . $request->kode_prodi . ' berhasil diubah'
             ];
             return response()->json($response, 200);
         } catch (\Throwable $e) {
@@ -168,21 +192,18 @@ class RuangController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ruang  $ruang
+     * @param  \App\ProgramStudi  $programStudi
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request)
     {
-        $data = [
-            'id' => $request->id
-        ];
         $rules = [
-            'id' => ['required', 'exists:ruang,id']
+            'kode_prodi' => ['required', 'exists:program_studi,kode_prodi']
         ];
         $message = [
-            'id.exists' => 'sorry, we cannot find what are you looking for.'
+            'kode_prodi.exists' => 'sorry, we cannot find what are you looking for.'
         ];
-        $validator = Validator::make($data, $rules, $message);
+        $validator = Validator::make($request->all(), $rules, $message);
         if ($validator->fails()) {
             $response = [
                 'status' => 400,
@@ -193,10 +214,10 @@ class RuangController extends Controller
 
         try {
             $where = [
-                'id' => $request->id
+                'kode_prodi' => $request->kode_prodi
             ];
-            $ruang = ruang::where($where);
-            $count = $ruang->count();
+            $program_studi = program_studi::where($where);
+            $count = $program_studi->count();
             if ($count < 1) {
                 $response = [
                     'status' => 400,
@@ -205,11 +226,11 @@ class RuangController extends Controller
                 return response()->json($response, 200);
             }
 
-            $ruang->delete();
+            $program_studi->delete();
 
             $response = [
                 'status' => 200,
-                'message' => 'ruang dengan Kode ' . $request->id . ' berhasil dihapus.'
+                'message' => 'Program Studi dengan Kode ' . $request->kode_prodi . ' berhasil dihapus.'
             ];
             return response()->json($response, 200);
         } catch (\Throwable $e) {
