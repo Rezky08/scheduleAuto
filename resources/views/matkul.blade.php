@@ -48,13 +48,13 @@
                     <th>Prodi</th>
                     <th>Opsi</th>
                 </tr>
-                @foreach ($matakuliah as $j)
+                @foreach ($mata_kuliah as $matkul)
                 <tr>
-                    <td> {{$j['kode_matkul'] }}</td>
-                    <td> {{$j['nama_matkul'] }}</td>
-                    <td> {{$j['sks_matkul'] }}</td>
-                    <td> {{$j['status_matkul'] }}</td>
-                    <td> {{$j['kode_prodi'] }}</td>
+                    <td> {{$matkul['kode_matkul'] }}</td>
+                    <td> {{$matkul['nama_matkul'] }}</td>
+                    <td> {{$matkul['sks_matkul'] }}</td>
+                    <td> {{$matkul['status_matkul'] }}</td>
+                    <td> {{$matkul['kode_prodi'] }}</td>
                     <td>
                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalumatkul">
                             Edit
