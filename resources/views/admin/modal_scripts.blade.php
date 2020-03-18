@@ -18,7 +18,7 @@
                     <div class="form-group">
                         <label>Nama hari</label>
                         <input type="text" name="nama_hari" class="form-control border border-secondary"
-                            placeholder="Nama hari">
+                        placeholder="Nama hari" value="{{old('nama_hari')}}">
 
                         @if($errors->has('nama_hari'))
                         <div class="text-danger">
@@ -221,7 +221,7 @@
                     <div class="form-group">
                         <label>Kode Matkul</label>
                         <input type="text" name="kode_matkul" class="form-control border border-secondary"
-                            placeholder="kode_matkul">
+                        placeholder="kode_matkul" value="{{old('kode_matkul')}}">
 
                         @if($errors->has('kode_matkul'))
                         <div class="text-danger">
@@ -234,7 +234,7 @@
                     <div class="form-group">
                         <label>Nama Matkul</label>
                         <input type="text" name="nama_matkul" class="form-control border border-secondary"
-                            placeholder="Kama Matkul">
+                            placeholder="Kama Matkul" value="{{old('nama_matkul')}}">
 
                         @if($errors->has('nama_matkul'))
                         <div class="text-danger">
@@ -246,7 +246,7 @@
 
                     <div class="form-group">
                         <label>Sks</label>
-                        <input type="number" name="sks" class="form-control border border-secondary" placeholder="Sks">
+                        <input type="number" name="sks_matkul" class="form-control border border-secondary" placeholder="Sks" value="{{old('sks_matkul')}}">
 
                         @if($errors->has('sks'))
                         <div class="text-danger">
@@ -259,7 +259,7 @@
                     <div class="form-group">
                         <label>Status</label>
                         <input type="text" name="status_matkul" class="form-control border border-secondary"
-                            placeholder="Status">
+                            placeholder="Status" value="{{old('status_matkul')}}">
 
                         @if($errors->has('status_matkul'))
                         <div class="text-danger">
@@ -273,7 +273,7 @@
                     <div class="form-group">
                         <label>Kode Prodi</label>
                         <input type="text" name="kode_prodi" class="form-control border border-secondary"
-                            placeholder="Kode Prodi">
+                            placeholder="Kode Prodi" value="{{old('kode_prodi')}}">
 
                         @if($errors->has('kode_prodi'))
                         <div class="text-danger">
