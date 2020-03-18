@@ -1,5 +1,6 @@
 @include('admin.head')
 @include('admin.sidebar')
+@include('admin.modal_scripts')
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -15,12 +16,14 @@
 
         <div id="content" class="p-4 p-md-5 pt-5">
             <br />
-            <form action="/pegawai/cari" method="GET" class="form-inline">Cari Data Prodi :
-                <input class="form-control" type="text" name="cari" placeholder="Cari Pegawai .." value="">
-                <input class="btn btn-primary ml-3" type="submit" value="CARI">
-            </form>
             <!-- Button trigger modal -->
             <div class="card">
+                <div class="card-header">
+                    <form action="/pegawai/cari" method="GET" class="form-inline">Cari Data Prodi : &nbsp;
+                        <input class="form-control border border-secondary" type="text" name="cari" value="">
+                        <input class="btn btn-primary ml-3" type="submit" value="CARI">
+                    </form>
+                </div>
                 <div class="card-body">
 
                     <blockquote class="blockquote mb-0">Data Prodi
@@ -57,134 +60,11 @@
             <br />
         </div>
 
-        {{-- Modal input  --}}
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form method="POST" action="/program_studi/add">
-
-                            {{ csrf_field() }}
-
-                            <div class="form-group">
-                                <label>Kode prodi</label>
-                                <input type="text" name="kode_prodi" class="form-control" placeholder="kode_prodi">
-
-                                @if($errors->has('kode_prodi'))
-                                <div class="text-danger">
-                                    {{ $errors->first('kode_prodi')}}
-                                </div>
-                                @endif
-
-                            </div>
-
-                            <div class="form-group">
-                                <label>Nama prodi</label>
-                                <input type="text" name="nama_prodi" class="form-control" placeholder="nama_prodi">
-
-                                @if($errors->has('nama_prodi'))
-                                <div class="text-danger">
-                                    {{ $errors->first('nama_prodi')}}
-                                </div>
-                                @endif
-
-                            </div>
-
-                            <div class="form-group">
-                                <label>Keterangan</label>
-                                <input type="text" name="nama_prodi" class="form-control" placeholder="nama_prodi">
-
-                                @if($errors->has('nama_prodi'))
-                                <div class="text-danger">
-                                    {{ $errors->first('nama_prodi')}}
-                                </div>
-                                @endif
-
-                            </div>
-                    </div>
-                    <div class="modal-footer">
-                        <center>
-                            <div class="form-group">
-                                <input type="submit" class="btn btn-success" value="Simpan">
-                            </div>
-                        </center>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {{-- modal input --}}
+        @yield('MIPRODI')
 
         {{-- modal edit --}}
-
-        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form method="POST" action="/program_studi/add">
-
-                            {{ csrf_field() }}
-
-                            <div class="form-group">
-                                <label>Kode prodi</label>
-                                <input type="text" name="kode_prodi" class="form-control" placeholder="kode_prodi">
-
-                                @if($errors->has('kode_prodi'))
-                                <div class="text-danger">
-                                    {{ $errors->first('kode_prodi')}}
-                                </div>
-                                @endif
-
-                            </div>
-
-                            <div class="form-group">
-                                <label>Nama prodi</label>
-                                <input type="text" name="nama_prodi" class="form-control" placeholder="nama_prodi">
-
-                                @if($errors->has('nama_prodi'))
-                                <div class="text-danger">
-                                    {{ $errors->first('nama_prodi')}}
-                                </div>
-                                @endif
-
-                            </div>
-
-                            <div class="form-group">
-                                <label>Keterangan</label>
-                                <input type="text" name="nama_prodi" class="form-control" placeholder="nama_prodi">
-
-                                @if($errors->has('nama_prodi'))
-                                <div class="text-danger">
-                                    {{ $errors->first('nama_prodi')}}
-                                </div>
-                                @endif
-
-                            </div>
-                    </div>
-                    <div class="modal-footer">
-                        <center>
-                            <div class="form-group">
-                                <input type="submit" class="btn btn-success" value="Edit">
-                            </div>
-                        </center>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @yield('MUPRODI')
     </div>
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
