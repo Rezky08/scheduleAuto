@@ -16,9 +16,38 @@
 
         <div id="content" class="p-4 p-md-5 pt-5">
             <br />
-            <form action="/pegawai/cari" method="GET" class="form-inline">Cari Data Mata Kuliah :
-                <input class="form-control" type="text" name="cari" placeholder="Cari Pegawai .." value="">
-                <input class="btn btn-primary ml-3" type="submit" value="CARI">
+
+            @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                    <div class="alert alert-danger alert-dissmisable fade show" role="alert">
+                        <strong>{{$error}}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                    </div>
+                @endforeach
+            @endif
+            @if (session('success'))
+                @foreach (session('success') as $success)
+                    <div class="alert alert-success alert-dissmisable fade show" role="alert">
+                        <strong>{{$success}}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+            @endforeach
+            @endif
+
+            <form action="/pegawai/cari" method="GET" class="form-inline my-3">
+                <span class="mr-3">Cari Data Mata Kuliah</span>
+                <div class="input-group">
+                    <input class="form-control" type="text" name="cari" placeholder="Cari Pegawai .." value="">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
             </form>
             <!-- Button trigger modal -->
             <div class="card">
@@ -81,7 +110,7 @@
 
                             <div class="form-group">
                                 <label>Kode Matkul</label>
-                                <input type="text" name="kode_matkul" class="form-control border border-light" placeholder="kode_matkul">
+                                <input type="text" name="kode_matkul" class="form-control border border-light" placeholder="kode_matkul" value="{{old('kode_matkul')}}">
 
                                 @if($errors->has('kode_matkul'))
                                 <div class="text-danger">
@@ -93,7 +122,7 @@
 
                             <div class="form-group">
                                 <label>Nama Matkul</label>
-                                <input type="text" name="nama_matkul" class="form-control border border-light" placeholder="Kama Matkul">
+                                <input type="text" name="nama_matkul" class="form-control border border-light" placeholder="Kama Matkul" value="{{old('nama_matkul')}}">
 
                                 @if($errors->has('nama_matkul'))
                                 <div class="text-danger">
@@ -105,11 +134,11 @@
 
                             <div class="form-group">
                                 <label>Sks</label>
-                                <input type="number" name="sks" class="form-control border border-light" placeholder="Sks">
+                                <input type="number" name="sks_matkul" class="form-control border border-light" placeholder="Sks" value="{{old('sks_matkul')}}">
 
-                                @if($errors->has('sks'))
+                                @if($errors->has('sks_matkul'))
                                 <div class="text-danger">
-                                    {{ $errors->first('sks')}}
+                                    {{ $errors->first('sks_matkul')}}
                                 </div>
                                 @endif
 
@@ -117,7 +146,7 @@
 
                             <div class="form-group">
                                 <label>Status</label>
-                                <input type="text" name="status_matkul" class="form-control border border-light" placeholder="Status">
+                                <input type="text" name="status_matkul" class="form-control border border-light" placeholder="Status" value="{{old('status_matkul')}}">
 
                                 @if($errors->has('status_matkul'))
                                 <div class="text-danger">
@@ -130,7 +159,7 @@
 
                             <div class="form-group">
                                 <label>Kode Prodi</label>
-                                <input type="text" name="kode_prodi" class="form-control border border-light" placeholder="Kode Prodi">
+                                <input type="text" name="kode_prodi" class="form-control border border-light" placeholder="Kode Prodi" value="{{old('kode_prodi')}}">
 
                                 @if($errors->has('kode_prodi'))
                                 <div class="text-danger">
