@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\views;
 
 use App\Helpers\Host;
+use App\Helpers\Request_api;
 use App\Http\Controllers\Controller;
 use App\Matakuliah;
 use Illuminate\Http\Request;
@@ -15,10 +16,19 @@ class MatkulViewController extends Controller
 {
     public function index()
     {
-        $matakuliah = Matakuliah::all();
-        $data = [
-            'matakuliah' => $matakuliah->toArray()
-        ];
+        // untuk ambil data mata kuliah dari API
+        $host = new Host();
+        $url = $host->host('api') . 'matkul';
+        $reqApi = new Request_api();
+        $response = $reqApi->request('GET', $url);
+
+        $data = [];
+        $data['mata_kuliah'] = [];
+        if ($response['status'] == 200) {
+            $matakuliah = $response['data'];
+            $data['mata_kuliah'] = $matakuliah;
+        }
+
         return view('matkul', $data);
     }
 
@@ -39,28 +49,16 @@ class MatkulViewController extends Controller
 
         $host = new Host();
         $url = $host->host('api') . 'matkul';
-        $client = new Client();
-        try {
-            $client = $client->post($url, ['form_params' => $request->all()]);
-            if ($client->getStatusCode() == 200) {
-                $contents = $client->getBody()->getContents();
-                $contents = json_decode($contents);
-                $contents = collect($contents->message);
-                $success = $contents->map(function ($item, $index) {
-                    return $item;
-                });
-                $success = $success->toArray();
-                $message = [
-                    'success' => $success
-                ];
-                return redirect()->back()->with($message);
-            }
-        } catch (GuzzleException $e) {
-            $contents = $e->getResponse()->getBody()->getContents();
-            $contents = json_decode($contents);
-            $contents = collect($contents->message);
-            $message = $contents->toArray();
-            return redirect()->back()->withErrors($message)->withInput();
+        $reqApi = new Request_api();
+        $response = $reqApi->request('POST', $url, ['form_params' => $request->all()]);
+        if ($response['status'] == 200) {
+            $success = [
+                'success' => $response['message']
+            ];
+            return redirect()->back()->with($success);
         }
+
+        $errors = $response['message'];
+        return redirect()->back()->withErrors($errors)->withInput();
     }
 }
