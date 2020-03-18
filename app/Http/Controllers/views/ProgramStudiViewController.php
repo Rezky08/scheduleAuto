@@ -25,7 +25,7 @@ class ProgramStudiViewController extends Controller
     public function tambah(Request $request)
     {
         $rules = [
-            'kode_prodi' => ['required', 'unique:program_studi,kode_prodi', 'max:10'],
+            'kode_prodi' => ['required', 'max:10'],
             'nama_prodi' => ['required'],
             'keterangan_prodi' => ['required'],
         ];
