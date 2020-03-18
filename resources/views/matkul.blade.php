@@ -39,17 +39,6 @@
             @endforeach
             @endif
 
-            <form action="/pegawai/cari" method="GET" class="form-inline my-3">
-                <span class="mr-3">Cari Data Mata Kuliah</span>
-                <div class="input-group">
-                    <input class="form-control" type="text" name="cari" placeholder="Cari Pegawai .." value="">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
             <!-- Button trigger modal -->
             <div class="card">
                 <div class="card-header">
