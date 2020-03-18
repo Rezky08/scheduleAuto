@@ -7,7 +7,7 @@ class Host
     public function host($host_name)
     {
         $hosts = [
-            'api' => 'http://localhost:8001/api/'
+            'api' => 'https://cryptic-retreat-61973.herokuapp.com/api/'
         ];
         try {
             return $hosts[$host_name];
