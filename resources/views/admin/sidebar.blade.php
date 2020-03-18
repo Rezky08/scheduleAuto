@@ -10,23 +10,23 @@
         <h1><a href="index.html" class="logo">KKP</a></h1>
         <ul class="list-unstyled components mb-5">
             <li class="active">
-                <a href="#"> Home</a>
+                <a href=""> Home</a>
             </li>
             <li>
-                <a href="#"> Ruang</a>
+                <a href="/ruang"> Ruang</a>
             </li>
             <li>
-                <a href="#"> Sesi</a>
+                <a href="/matkul"> Sesi</a>
             </li>
             <li>
-                <a href="#"> Hari</a>
+                <a href="/hari"> Hari</a>
             </li>
 
             <li>
-                <a href="#"> Mata kuliah</a>
+                <a href="/matkul"> Mata kuliah</a>
             </li>
             <li>
-                <a href="#"> Program Studi</a>
+                <a href="/program_studi"> Program Studi</a>
             </li>
 
         </ul>
