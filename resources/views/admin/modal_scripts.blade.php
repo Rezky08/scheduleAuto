@@ -556,12 +556,12 @@
 
                     <div class="form-group">
                         <label>Keterangan</label>
-                        <input type="text" name="keterangan" class="form-control border border-secondary"
-                            placeholder="keterangan" value="{{old('keterangan')}}">
+                        <input type="text" name="keterangan_prodi" class="form-control border border-secondary"
+                            placeholder="keterangan" value="{{old('keterangan_prodi')}}">
 
-                        @if($errors->has('keterangan'))
+                        @if($errors->has('keterangan_prodi'))
                         <div class="text-danger">
-                            {{ $errors->first('keterangan')}}
+                            {{ $errors->first('keterangan_prodi')}}
                         </div>
                         @endif
 
@@ -627,12 +627,12 @@
 
                     <div class="form-group">
                         <label>Keterangan</label>
-                        <input type="text" name="keterangan" class="form-control border border-secondary"
-                            placeholder="keterangan" value="{{old('keterangan')}}">
+                        <input type="text" name="keterangan_prodi" class="form-control border border-secondary"
+                            placeholder="keterangan" value="{{old('keterangan_prodi')}}">
 
-                        @if($errors->has('keterangan'))
+                        @if($errors->has('keterangan_prodi'))
                         <div class="text-danger">
-                            {{ $errors->first('keterangan')}}
+                            {{ $errors->first('keterangan_prodi')}}
                         </div>
                         @endif
 
