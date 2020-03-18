@@ -16,7 +16,8 @@
         <div id="content" class="p-4 p-md-5 pt-5">
             <br />
             <form action="/pegawai/cari" method="GET" class="form-inline">Cari Data Ruang :
-                <input class="form-control" type="text" name="cari" placeholder="Cari Pegawai .." value="">
+                <input class="form-control border border-secondary" type="text" name="cari"
+                    placeholder="Cari Pegawai .." value="">
                 <input class="btn btn-primary ml-3" type="submit" value="CARI">
             </form>
             <!-- Button trigger modal -->
@@ -73,7 +74,8 @@
 
                             <div class="form-group">
                                 <label>nama_ruang</label>
-                                <input type="text" name="nama_ruang" class="form-control" placeholder="nama_ruang">
+                                <input type="text" name="nama_ruang" class="form-control border border-secondary"
+                                    placeholder="nama_ruang">
 
                                 @if($errors->has('nama_ruang'))
                                 <div class="text-danger">
@@ -85,7 +87,8 @@
 
                             <div class="form-group">
                                 <label>keterangan</label>
-                                <input type="text" name="keterangan" class="form-control" placeholder="keterangan">
+                                <input type="text" name="keterangan" class="form-control border border-secondary"
+                                    placeholder="keterangan">
 
                                 @if($errors->has('keterangan'))
                                 <div class="text-danger">
@@ -126,7 +129,8 @@
 
                             <div class="form-group">
                                 <label>nama_ruang</label>
-                                <input type="text" name="nama_ruang" class="form-control" placeholder="nama_ruang">
+                                <input type="text" name="nama_ruang" class="form-control border border-secondary"
+                                    placeholder="nama_ruang">
 
                                 @if($errors->has('nama_ruang'))
                                 <div class="text-danger">
@@ -138,7 +142,8 @@
 
                             <div class="form-group">
                                 <label>keterangan</label>
-                                <input type="text" name="keterangan" class="form-control" placeholder="keterangan">
+                                <input type="text" name="keterangan" class="form-control border border-secondary"
+                                    placeholder="keterangan">
 
                                 @if($errors->has('keterangan'))
                                 <div class="text-danger">

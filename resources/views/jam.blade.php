@@ -16,7 +16,8 @@
         <div id="content" class="p-4 p-md-5 pt-5">
             <br />
             <form action="/pegawai/cari" method="GET" class="form-inline">Cari Data Sesi :
-                <input class="form-control" type="text" name="cari" placeholder="Cari Pegawai .." value="">
+                <input class="form-control border border-secondary" type="text" name="cari"
+                    placeholder="Cari Pegawai .." value="">
                 <input class="btn btn-primary ml-3" type="submit" value="CARI">
             </form>
             <!-- Button trigger modal -->
@@ -73,7 +74,8 @@
 
                             <div class="form-group">
                                 <label>jam_mulai</label>
-                                <input type="time" name="jam_mulai" class="form-control" placeholder="jam_mulai">
+                                <input type="time" name="jam_mulai" class="form-control border border-secondary"
+                                    placeholder="jam_mulai">
 
                                 @if($errors->has('jam_mulai'))
                                 <div class="text-danger">
@@ -85,7 +87,8 @@
 
                             <div class="form-group">
                                 <label>jam_selesai</label>
-                                <input type="time" name="jam_selesai" class="form-control" placeholder="jam_selesai">
+                                <input type="time" name="jam_selesai" class="form-control border border-secondary"
+                                    placeholder="jam_selesai">
 
                                 @if($errors->has('jam_selesai'))
                                 <div class="text-danger">
@@ -126,7 +129,8 @@
 
                             <div class="form-group">
                                 <label>jam_mulai</label>
-                                <input type="time" name="jam_mulai" class="form-control" placeholder="jam_mulai">
+                                <input type="time" name="jam_mulai" class="form-control border border-secondary"
+                                    placeholder="jam_mulai">
 
                                 @if($errors->has('jam_mulai'))
                                 <div class="text-danger">
@@ -138,7 +142,8 @@
 
                             <div class="form-group">
                                 <label>jam_selesai</label>
-                                <input type="time" name="jam_selesai" class="form-control" placeholder="jam_selesai">
+                                <input type="time" name="jam_selesai" class="form-control border border-secondary"
+                                    placeholder="jam_selesai">
 
                                 @if($errors->has('jam_selesai'))
                                 <div class="text-danger">

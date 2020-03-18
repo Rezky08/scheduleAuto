@@ -81,7 +81,8 @@
 
                             <div class="form-group">
                                 <label>Kode Matkul</label>
-                                <input type="text" name="kode_matkul" class="form-control border border-light" placeholder="kode_matkul">
+                                <input type="text" name="kode_matkul" class="form-control border border-secondary"
+                                    placeholder="kode_matkul">
 
                                 @if($errors->has('kode_matkul'))
                                 <div class="text-danger">
@@ -93,7 +94,8 @@
 
                             <div class="form-group">
                                 <label>Nama Matkul</label>
-                                <input type="text" name="nama_matkul" class="form-control border border-light" placeholder="Kama Matkul">
+                                <input type="text" name="nama_matkul" class="form-control border border-secondary"
+                                    placeholder="Kama Matkul">
 
                                 @if($errors->has('nama_matkul'))
                                 <div class="text-danger">
@@ -105,7 +107,8 @@
 
                             <div class="form-group">
                                 <label>Sks</label>
-                                <input type="number" name="sks" class="form-control border border-light" placeholder="Sks">
+                                <input type="number" name="sks" class="form-control border border-secondary"
+                                    placeholder="Sks">
 
                                 @if($errors->has('sks'))
                                 <div class="text-danger">
@@ -117,7 +120,8 @@
 
                             <div class="form-group">
                                 <label>Status</label>
-                                <input type="text" name="status_matkul" class="form-control border border-light" placeholder="Status">
+                                <input type="text" name="status_matkul" class="form-control border border-secondary"
+                                    placeholder="Status">
 
                                 @if($errors->has('status_matkul'))
                                 <div class="text-danger">
@@ -130,7 +134,8 @@
 
                             <div class="form-group">
                                 <label>Kode Prodi</label>
-                                <input type="text" name="kode_prodi" class="form-control border border-light" placeholder="Kode Prodi">
+                                <input type="text" name="kode_prodi" class="form-control border border-secondary"
+                                    placeholder="Kode Prodi">
 
                                 @if($errors->has('kode_prodi'))
                                 <div class="text-danger">
@@ -173,7 +178,8 @@
 
                             <div class="form-group">
                                 <label>Kode Matkul</label>
-                                <input type="text" name="kode_matkul" class="form-control border border-light" placeholder="kode_matkul">
+                                <input type="text" name="kode_matkul" class="form-control border border-secondary"
+                                    placeholder="kode_matkul">
 
                                 @if($errors->has('kode_matkul'))
                                 <div class="text-danger">
@@ -185,7 +191,8 @@
 
                             <div class="form-group">
                                 <label>Nama Matkul</label>
-                                <input type="text" name="nama_matkul" class="form-control border border-light" placeholder="Kama Matkul">
+                                <input type="text" name="nama_matkul" class="form-control border border-secondary"
+                                    placeholder="Kama Matkul">
 
                                 @if($errors->has('nama_matkul'))
                                 <div class="text-danger">
@@ -197,7 +204,8 @@
 
                             <div class="form-group">
                                 <label>Sks</label>
-                                <input type="number" name="sks" class="form-control border border-light" placeholder="Sks">
+                                <input type="number" name="sks" class="form-control border border-secondary"
+                                    placeholder="Sks">
 
                                 @if($errors->has('sks'))
                                 <div class="text-danger">
@@ -209,7 +217,8 @@
 
                             <div class="form-group">
                                 <label>Status</label>
-                                <input type="text" name="status_matkul" class="form-control border border-light" placeholder="Status">
+                                <input type="text" name="status_matkul" class="form-control border border-secondary"
+                                    placeholder="Status">
 
                                 @if($errors->has('status_matkul'))
                                 <div class="text-danger">
@@ -222,7 +231,8 @@
 
                             <div class="form-group">
                                 <label>Kode Prodi</label>
-                                <input type="text" name="kode_prodi" class="form-control border border-light" placeholder="Kode Prodi">
+                                <input type="text" name="kode_prodi" class="form-control border border-secondary"
+                                    placeholder="Kode Prodi">
 
                                 @if($errors->has('kode_prodi'))
                                 <div class="text-danger">
@@ -245,7 +255,7 @@
         </div>
     </div>
 
-@yield('footer_scripts')
+    @yield('footer_scripts')
 </body>
 
 </html>

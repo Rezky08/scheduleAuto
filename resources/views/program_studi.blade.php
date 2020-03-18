@@ -16,7 +16,8 @@
         <div id="content" class="p-4 p-md-5 pt-5">
             <br />
             <form action="/pegawai/cari" method="GET" class="form-inline">Cari Data Prodi :
-                <input class="form-control" type="text" name="cari" placeholder="Cari Pegawai .." value="">
+                <input class="form-control border border-secondary" type="text" name="cari"
+                    placeholder="Cari Pegawai .." value="">
                 <input class="btn btn-primary ml-3" type="submit" value="CARI">
             </form>
             <!-- Button trigger modal -->
@@ -75,7 +76,8 @@
 
                             <div class="form-group">
                                 <label>Kode prodi</label>
-                                <input type="text" name="kode_prodi" class="form-control" placeholder="kode_prodi">
+                                <input type="text" name="kode_prodi" class="form-control border border-secondary"
+                                    placeholder="kode_prodi">
 
                                 @if($errors->has('kode_prodi'))
                                 <div class="text-danger">
@@ -87,7 +89,8 @@
 
                             <div class="form-group">
                                 <label>Nama prodi</label>
-                                <input type="text" name="nama_prodi" class="form-control" placeholder="nama_prodi">
+                                <input type="text" name="nama_prodi" class="form-control border border-secondary"
+                                    placeholder="nama_prodi">
 
                                 @if($errors->has('nama_prodi'))
                                 <div class="text-danger">
@@ -99,7 +102,8 @@
 
                             <div class="form-group">
                                 <label>Keterangan</label>
-                                <input type="text" name="nama_prodi" class="form-control" placeholder="nama_prodi">
+                                <input type="text" name="nama_prodi" class="form-control border border-secondary"
+                                    placeholder="nama_prodi">
 
                                 @if($errors->has('nama_prodi'))
                                 <div class="text-danger">
@@ -140,7 +144,8 @@
 
                             <div class="form-group">
                                 <label>Kode prodi</label>
-                                <input type="text" name="kode_prodi" class="form-control" placeholder="kode_prodi">
+                                <input type="text" name="kode_prodi" class="form-control border border-secondary"
+                                    placeholder="kode_prodi">
 
                                 @if($errors->has('kode_prodi'))
                                 <div class="text-danger">
@@ -152,7 +157,8 @@
 
                             <div class="form-group">
                                 <label>Nama prodi</label>
-                                <input type="text" name="nama_prodi" class="form-control" placeholder="nama_prodi">
+                                <input type="text" name="nama_prodi" class="form-control border border-secondary"
+                                    placeholder="nama_prodi">
 
                                 @if($errors->has('nama_prodi'))
                                 <div class="text-danger">
@@ -164,7 +170,8 @@
 
                             <div class="form-group">
                                 <label>Keterangan</label>
-                                <input type="text" name="nama_prodi" class="form-control" placeholder="nama_prodi">
+                                <input type="text" name="nama_prodi" class="form-control border border-secondary"
+                                    placeholder="nama_prodi">
 
                                 @if($errors->has('nama_prodi'))
                                 <div class="text-danger">
