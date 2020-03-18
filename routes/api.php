@@ -35,3 +35,8 @@ Route::post('/hari', 'HariController@store');
 Route::get('/hari', 'HariController@index');
 Route::put('/hari', 'HariController@update');
 Route::delete('/hari', 'HariController@destroy');
+
+Route::post('/jam', 'JamController@store');
+Route::get('/jam', 'JamController@index');
+Route::put('/jam', 'JamController@update');
+Route::delete('/jam', 'JamController@destroy');

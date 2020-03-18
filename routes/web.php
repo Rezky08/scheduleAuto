@@ -27,3 +27,6 @@ Route::post('/ruang/add', 'RuangViewController@tambah');
 
 Route::get('/hari', 'hariViewController@index');
 Route::post('/hari/add', 'hariViewController@tambah');
+
+Route::get('/jam', 'JamViewController@index');
+Route::post('/jam/add', 'JamViewController@tambah');
