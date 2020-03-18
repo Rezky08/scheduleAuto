@@ -30,3 +30,8 @@ Route::post('/ruang', 'ruangController@store');
 Route::get('/ruang', 'ruangController@index');
 Route::put('/ruang', 'ruangController@update');
 Route::delete('/ruang', 'ruangController@destroy');
+
+Route::post('/hari', 'HariController@store');
+Route::get('/hari', 'HariController@index');
+Route::put('/hari', 'HariController@update');
+Route::delete('/hari', 'HariController@destroy');
