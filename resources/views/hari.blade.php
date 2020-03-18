@@ -48,7 +48,7 @@
 
                 <div class="card-body">
                     <blockquote class="blockquote mb-0">Data Hari
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalihari">
                             Tambah+
                         </button>
                     </blockquote>
@@ -66,7 +66,7 @@
                 <tr>
                     <td> {{$j['nama_hari'] }}</td>
                     <td>
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal1">
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modaluhari">
                             Edit
                         </button>
                         <button type="button" class="btn btn-danger" data-toggle="modal">

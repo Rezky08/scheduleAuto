@@ -49,7 +49,7 @@
                 <div class="card-body">
 
                     <blockquote class="blockquote mb-0">Data Sesi
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalijam">
                             Tambah+
                         </button>
                     </blockquote>
@@ -67,7 +67,7 @@
                     <td> {{$j['jam_mulai'] }}</td>
                     <td> {{$j['jam_selesai'] }}</td>
                     <td>
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal1">
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalujam">
                             Edit
                         </button>
                         <button type="button" class="btn btn-danger" data-toggle="modal">

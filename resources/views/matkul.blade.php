@@ -19,23 +19,23 @@
             <br />
 
             @if ($errors->any())
-                @foreach ($errors->all() as $error)
-                    <div class="alert alert-danger alert-dissmisable fade show" role="alert">
-                        <strong>{{$error}}</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                    </div>
-                @endforeach
+            @foreach ($errors->all() as $error)
+            <div class="alert alert-danger alert-dissmisable fade show" role="alert">
+                <strong>{{$error}}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endforeach
             @endif
             @if (session('success'))
-                @foreach (session('success') as $success)
-                    <div class="alert alert-success alert-dissmisable fade show" role="alert">
-                        <strong>{{$success}}</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+            @foreach (session('success') as $success)
+            <div class="alert alert-success alert-dissmisable fade show" role="alert">
+                <strong>{{$success}}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             @endforeach
             @endif
 
@@ -50,7 +50,7 @@
                 <div class="card-body">
 
                     <blockquote class="blockquote mb-0">Data Mata Kuliah
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalimatkul">
                             Tambah+
                         </button>
                     </blockquote>
@@ -74,7 +74,7 @@
                     <td> {{$j['status_matkul'] }}</td>
                     <td> {{$j['kode_prodi'] }}</td>
                     <td>
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal1">
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalumatkul">
                             Edit
                         </button>
                         <button type="button" class="btn btn-danger" data-toggle="modal">

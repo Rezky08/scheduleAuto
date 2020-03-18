@@ -50,7 +50,7 @@
                 <div class="card-body">
 
                     <blockquote class="blockquote mb-0">Data Ruang
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modaliruang">
                             Tambah+
                         </button>
                     </blockquote>
@@ -68,7 +68,7 @@
                     <td> {{$j['nama_ruang'] }}</td>
                     <td> {{$j['keterangan'] }}</td>
                     <td>
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal1">
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modaluruang">
                             Edit
                         </button>
                         <button type="button" class="btn btn-danger" data-toggle="modal">

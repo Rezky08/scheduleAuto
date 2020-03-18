@@ -1,6 +1,6 @@
 @section('MIHARI')
 {{-- Modal input  --}}
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="modalihari" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -18,7 +18,7 @@
                     <div class="form-group">
                         <label>Nama hari</label>
                         <input type="text" name="nama_hari" class="form-control border border-secondary"
-                        placeholder="Nama hari" value="{{old('nama_hari')}}">
+                            placeholder="Nama hari" value="{{old('nama_hari')}}">
 
                         @if($errors->has('nama_hari'))
                         <div class="text-danger">
@@ -45,7 +45,7 @@
 @section('MUHARI')
 {{-- modal edit --}}
 
-<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="modaluhari" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -63,7 +63,7 @@
                     <div class="form-group">
                         <label>Nama hari</label>
                         <input type="text" name="nama_hari" class="form-control border border-secondary"
-                            placeholder="Nama hari">
+                            placeholder="Nama hari" value="{{old('nama_hari')}}">
 
                         @if($errors->has('nama_hari'))
                         <div class="text-danger">
@@ -88,7 +88,7 @@
 
 @section('MIJAM')
 {{-- Modal input  --}}
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="modalijam" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -106,7 +106,7 @@
                     <div class="form-group">
                         <label>jam_mulai</label>
                         <input type="time" name="jam_mulai" class="form-control border border-secondary"
-                            placeholder="jam_mulai">
+                            placeholder="jam_mulai" value="{{old('jam_mulai')}}">
 
                         @if($errors->has('jam_mulai'))
                         <div class="text-danger">
@@ -119,7 +119,7 @@
                     <div class="form-group">
                         <label>jam_selesai</label>
                         <input type="time" name="jam_selesai" class="form-control border border-secondary"
-                            placeholder="jam_selesai">
+                            placeholder="jam_selesai" value="{{old('jam_selesai')}}">
 
                         @if($errors->has('jam_selesai'))
                         <div class="text-danger">
@@ -146,7 +146,7 @@
 @section('MUJAM')
 {{-- modal edit --}}
 
-<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="modalujam" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -164,7 +164,7 @@
                     <div class="form-group">
                         <label>jam_mulai</label>
                         <input type="time" name="jam_mulai" class="form-control border border-secondary"
-                            placeholder="jam_mulai">
+                            placeholder="jam_mulai" value="{{old('jam_mulai')}}">
 
                         @if($errors->has('jam_mulai'))
                         <div class="text-danger">
@@ -177,7 +177,7 @@
                     <div class="form-group">
                         <label>jam_selesai</label>
                         <input type="time" name="jam_selesai" class="form-control border border-secondary"
-                            placeholder="jam_selesai">
+                            placeholder="jam_selesai" value="{{old('jam_selesai')}}">
 
                         @if($errors->has('jam_selesai'))
                         <div class="text-danger">
@@ -202,7 +202,7 @@
 
 @section('MIMATKUL')
 {{-- Modal input  --}}
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="modalimatkul" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -221,7 +221,7 @@
                     <div class="form-group">
                         <label>Kode Matkul</label>
                         <input type="text" name="kode_matkul" class="form-control border border-secondary"
-                        placeholder="kode_matkul" value="{{old('kode_matkul')}}">
+                            placeholder="kode_matkul" value="{{old('kode_matkul')}}">
 
                         @if($errors->has('kode_matkul'))
                         <div class="text-danger">
@@ -234,7 +234,7 @@
                     <div class="form-group">
                         <label>Nama Matkul</label>
                         <input type="text" name="nama_matkul" class="form-control border border-secondary"
-                            placeholder="Kama Matkul" value="{{old('nama_matkul')}}">
+                            placeholder="Nama Matkul" value="{{old('nama_matkul')}}">
 
                         @if($errors->has('nama_matkul'))
                         <div class="text-danger">
@@ -246,7 +246,8 @@
 
                     <div class="form-group">
                         <label>Sks</label>
-                        <input type="number" name="sks_matkul" class="form-control border border-secondary" placeholder="Sks" value="{{old('sks_matkul')}}">
+                        <input type="number" name="sks_matkul" class="form-control border border-secondary"
+                            placeholder="Sks" value="{{old('sks_matkul')}}">
 
                         @if($errors->has('sks'))
                         <div class="text-danger">
@@ -298,7 +299,7 @@
 
 
 @section('MUMATKUL')
-<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="modalumatkul" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -318,7 +319,7 @@
                     <div class="form-group">
                         <label>Kode Matkul</label>
                         <input type="text" name="kode_matkul" class="form-control border border-secondary"
-                            placeholder="kode_matkul">
+                            placeholder="kode_matkul" value="{{old('kode_matkul')}}">
 
                         @if($errors->has('kode_matkul'))
                         <div class="text-danger">
@@ -331,7 +332,7 @@
                     <div class="form-group">
                         <label>Nama Matkul</label>
                         <input type="text" name="nama_matkul" class="form-control border border-secondary"
-                            placeholder="Kama Matkul">
+                            placeholder="Kama Matkul" value="{{old('nama_matkul')}}">
 
                         @if($errors->has('nama_matkul'))
                         <div class="text-danger">
@@ -343,7 +344,8 @@
 
                     <div class="form-group">
                         <label>Sks</label>
-                        <input type="number" name="sks" class="form-control border border-secondary" placeholder="Sks">
+                        <input type="number" name="sks" class="form-control border border-secondary" placeholder="Sks"
+                            value="{{old('sks_matkul')}}">
 
                         @if($errors->has('sks'))
                         <div class="text-danger">
@@ -356,7 +358,7 @@
                     <div class="form-group">
                         <label>Status</label>
                         <input type="text" name="status_matkul" class="form-control border border-secondary"
-                            placeholder="Status">
+                            placeholder="Status" value="{{old('status_matkul')}}">
 
                         @if($errors->has('status_matkul'))
                         <div class="text-danger">
@@ -370,7 +372,7 @@
                     <div class="form-group">
                         <label>Kode Prodi</label>
                         <input type="text" name="kode_prodi" class="form-control border border-secondary"
-                            placeholder="Kode Prodi">
+                            placeholder="Kode Prodi" value="{{old('kode_prodi')}}">
 
                         @if($errors->has('kode_prodi'))
                         <div class="text-danger">
@@ -395,7 +397,7 @@
 
 @section('MIRUANG')
 {{-- Modal input  --}}
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="modaliruang" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -413,7 +415,7 @@
                     <div class="form-group">
                         <label>nama_ruang</label>
                         <input type="text" name="nama_ruang" class="form-control border border-secondary"
-                            placeholder="nama_ruang">
+                            placeholder="nama_ruang" value="{{old('nama_ruang')}}">
 
                         @if($errors->has('nama_ruang'))
                         <div class="text-danger">
@@ -426,7 +428,7 @@
                     <div class="form-group">
                         <label>keterangan</label>
                         <input type="text" name="keterangan" class="form-control border border-secondary"
-                            placeholder="keterangan">
+                            placeholder="keterangan" value="{{old('keterangan')}}">
 
                         @if($errors->has('keterangan'))
                         <div class="text-danger">
@@ -455,7 +457,7 @@
 @section('MURUANG')
 {{-- modal edit --}}
 
-<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="modaluruang" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -473,7 +475,7 @@
                     <div class="form-group">
                         <label>nama_ruang</label>
                         <input type="text" name="nama_ruang" class="form-control border border-secondary"
-                            placeholder="nama_ruang">
+                            placeholder="nama_ruang" value="{{old('nama_ruang')}}">
 
                         @if($errors->has('nama_ruang'))
                         <div class="text-danger">
@@ -486,7 +488,7 @@
                     <div class="form-group">
                         <label>keterangan</label>
                         <input type="text" name="keterangan" class="form-control border border-secondary"
-                            placeholder="keterangan">
+                            placeholder="keterangan" value="{{old('keterangan')}}">
 
                         @if($errors->has('keterangan'))
                         <div class="text-danger">
@@ -511,7 +513,7 @@
 
 @section('MIPRODI')
 {{-- Modal input  --}}
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="modaliprodi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -529,7 +531,7 @@
                     <div class="form-group">
                         <label>Kode prodi</label>
                         <input type="text" name="kode_prodi" class="form-control border border-secondary"
-                            placeholder="kode_prodi">
+                            placeholder="kode_prodi" value="{{old('kode_prodi')}}">
 
                         @if($errors->has('kode_prodi'))
                         <div class="text-danger">
@@ -542,7 +544,7 @@
                     <div class="form-group">
                         <label>Nama prodi</label>
                         <input type="text" name="nama_prodi" class="form-control border border-secondary"
-                            placeholder="nama_prodi">
+                            placeholder="nama_prodi" value="{{old('nama_prodi')}}">
 
                         @if($errors->has('nama_prodi'))
                         <div class="text-danger">
@@ -554,12 +556,12 @@
 
                     <div class="form-group">
                         <label>Keterangan</label>
-                        <input type="text" name="nama_prodi" class="form-control border border-secondary"
-                            placeholder="nama_prodi">
+                        <input type="text" name="keterangan" class="form-control border border-secondary"
+                            placeholder="keterangan" value="{{old('keterangan')}}">
 
-                        @if($errors->has('nama_prodi'))
+                        @if($errors->has('keterangan'))
                         <div class="text-danger">
-                            {{ $errors->first('nama_prodi')}}
+                            {{ $errors->first('keterangan')}}
                         </div>
                         @endif
 
@@ -582,7 +584,7 @@
 @section('MUPRODI')
 {{-- modal edit --}}
 
-<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="modaluprodi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -600,7 +602,7 @@
                     <div class="form-group">
                         <label>Kode prodi</label>
                         <input type="text" name="kode_prodi" class="form-control border border-secondary"
-                            placeholder="kode_prodi">
+                            placeholder="kode_prodi" value="{{old('kode_prodi')}}">
 
                         @if($errors->has('kode_prodi'))
                         <div class="text-danger">
@@ -613,7 +615,7 @@
                     <div class="form-group">
                         <label>Nama prodi</label>
                         <input type="text" name="nama_prodi" class="form-control border border-secondary"
-                            placeholder="nama_prodi">
+                            placeholder="nama_prodi" value="{{old('nama_prodi')}}">
 
                         @if($errors->has('nama_prodi'))
                         <div class="text-danger">
@@ -625,12 +627,12 @@
 
                     <div class="form-group">
                         <label>Keterangan</label>
-                        <input type="text" name="nama_prodi" class="form-control border border-secondary"
-                            placeholder="nama_prodi">
+                        <input type="text" name="keterangan" class="form-control border border-secondary"
+                            placeholder="keterangan" value="{{old('keterangan')}}">
 
-                        @if($errors->has('nama_prodi'))
+                        @if($errors->has('keterangan'))
                         <div class="text-danger">
-                            {{ $errors->first('nama_prodi')}}
+                            {{ $errors->first('keterangan')}}
                         </div>
                         @endif
 
