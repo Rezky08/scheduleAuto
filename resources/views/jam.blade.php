@@ -1,5 +1,6 @@
 @include('admin.head')
 @include('admin.sidebar')
+@include('admin.modal_scripts')
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -56,114 +57,13 @@
             <br />
         </div>
 
-        {{-- Modal input  --}}
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form method="POST" action="/jam/add">
-
-                            {{ csrf_field() }}
-
-                            <div class="form-group">
-                                <label>jam_mulai</label>
-                                <input type="time" name="jam_mulai" class="form-control border border-secondary"
-                                    placeholder="jam_mulai">
-
-                                @if($errors->has('jam_mulai'))
-                                <div class="text-danger">
-                                    {{ $errors->first('jam_mulai')}}
-                                </div>
-                                @endif
-
-                            </div>
-
-                            <div class="form-group">
-                                <label>jam_selesai</label>
-                                <input type="time" name="jam_selesai" class="form-control border border-secondary"
-                                    placeholder="jam_selesai">
-
-                                @if($errors->has('jam_selesai'))
-                                <div class="text-danger">
-                                    {{ $errors->first('jam_selesai')}}
-                                </div>
-                                @endif
-
-                            </div>
-                    </div>
-                    <div class="modal-footer">
-                        <center>
-                            <div class="form-group">
-                                <input type="submit" class="btn btn-success" value="Simpan">
-                            </div>
-                        </center>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {{-- modal input --}}
+        @yield('MIJAM')
 
         {{-- modal edit --}}
+        @yield('MUJAM')
 
-        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form method="POST" action="/jam/add">
 
-                            {{ csrf_field() }}
-
-                            <div class="form-group">
-                                <label>jam_mulai</label>
-                                <input type="time" name="jam_mulai" class="form-control border border-secondary"
-                                    placeholder="jam_mulai">
-
-                                @if($errors->has('jam_mulai'))
-                                <div class="text-danger">
-                                    {{ $errors->first('jam_mulai')}}
-                                </div>
-                                @endif
-
-                            </div>
-
-                            <div class="form-group">
-                                <label>jam_selesai</label>
-                                <input type="time" name="jam_selesai" class="form-control border border-secondary"
-                                    placeholder="jam_selesai">
-
-                                @if($errors->has('jam_selesai'))
-                                <div class="text-danger">
-                                    {{ $errors->first('jam_selesai')}}
-                                </div>
-                                @endif
-
-                            </div>
-                    </div>
-                    <div class="modal-footer">
-                        <center>
-                            <div class="form-group">
-                                <input type="submit" class="btn btn-success" value="Edit">
-                            </div>
-                        </center>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
