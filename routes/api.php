@@ -20,3 +20,12 @@ Route::post('/matkul', 'MatakuliahController@store');
 Route::get('/matkul', 'MatakuliahController@index');
 Route::put('/matkul', 'MatakuliahController@update');
 Route::delete('/matkul', 'MatakuliahController@destroy');
+
+// buat insert
+Route::post('/program_studi', 'ProgramStudiController@store');
+// buat ngambil semua data nya
+Route::get('/program_studi', 'ProgramStudiController@index');
+// buat ngedit satu matkul
+Route::put('/program_studi', 'ProgramStudiController@update');
+// buat ngapus satu matkul
+Route::delete('/program_studi', 'ProgramStudiController@destroy');

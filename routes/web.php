@@ -18,3 +18,6 @@ Route::get('/', function () {
 
 Route::get('/matkul', 'MatkulViewController@index');
 Route::post('/matkul/add', 'MatkulViewController@tambah');
+
+Route::get('/program_studi', 'ProgramStudiViewController@index');
+Route::post('/program_studi/add', 'ProgramStudiViewController@tambah');
