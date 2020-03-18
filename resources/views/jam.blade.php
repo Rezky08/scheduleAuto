@@ -16,13 +16,15 @@
 
         <div id="content" class="p-4 p-md-5 pt-5">
             <br />
-            <form action="/pegawai/cari" method="GET" class="form-inline">Cari Data Sesi :
-                <input class="form-control border border-secondary" type="text" name="cari"
-                    placeholder="Cari Pegawai .." value="">
-                <input class="btn btn-primary ml-3" type="submit" value="CARI">
-            </form>
+
             <!-- Button trigger modal -->
             <div class="card">
+                <div class="card-header">
+                    <form action="/pegawai/cari" method="GET" class="form-inline">Cari Data Sesi : &nbsp;
+                        <input class="form-control border border-secondary" type="text" name="cari" value="">
+                        <input class="btn btn-primary ml-3" type="submit" value="CARI">
+                    </form>
+                </div>
                 <div class="card-body">
 
                     <blockquote class="blockquote mb-0">Data Sesi
