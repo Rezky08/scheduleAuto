@@ -1,7 +1,7 @@
 @include('admin.head')
 @include('admin.sidebar')
-@include('admin.footer_scripts')
 @include('admin.modal_scripts')
+@include('admin.validasi')
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -18,26 +18,8 @@
         <div id="content" class="p-4 p-md-5 pt-5">
             <br />
 
-            @if ($errors->any())
-            @foreach ($errors->all() as $error)
-            <div class="alert alert-danger alert-dissmisable fade show" role="alert">
-                <strong>{{$error}}</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            @endforeach
-            @endif
-            @if (session('success'))
-            @foreach (session('success') as $success)
-            <div class="alert alert-success alert-dissmisable fade show" role="alert">
-                <strong>{{$success}}</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            @endforeach
-            @endif
+            <!-- validasi -->
+            @yield('validasi')
 
             <!-- Button trigger modal -->
             <div class="card">
