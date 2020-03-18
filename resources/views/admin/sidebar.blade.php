@@ -16,7 +16,7 @@
                 <a href="/ruang"> Ruang</a>
             </li>
             <li>
-                <a href="/matkul"> Sesi</a>
+                <a href="/jam"> Sesi</a>
             </li>
             <li>
                 <a href="/hari"> Hari</a>
