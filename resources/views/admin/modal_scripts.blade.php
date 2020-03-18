@@ -105,7 +105,7 @@
 
                     <div class="form-group">
                         <label>jam_mulai</label>
-                        <input type="time" name="jam_mulai" class="form-control border border-secondary"
+                        <input type="text" name="jam_mulai" class="form-control border border-secondary"
                             placeholder="jam_mulai" value="{{old('jam_mulai')}}">
 
                         @if($errors->has('jam_mulai'))
@@ -118,7 +118,7 @@
 
                     <div class="form-group">
                         <label>jam_selesai</label>
-                        <input type="time" name="jam_selesai" class="form-control border border-secondary"
+                        <input type="text" name="jam_selesai" class="form-control border border-secondary"
                             placeholder="jam_selesai" value="{{old('jam_selesai')}}">
 
                         @if($errors->has('jam_selesai'))
