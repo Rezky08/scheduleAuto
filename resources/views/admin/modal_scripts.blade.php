@@ -677,7 +677,7 @@
 @endsection
 
 
-@section('MATKULMODALJS')
+@section('MODALJSMATKUL')
 <script>
     $('button[data-target="#modalumatkul"]').on('click', function () {
         kode_matkul = $(this).attr('data-kode_matkul');
@@ -698,10 +698,9 @@
 </script>
 @endsection
 
-@section('MODALMATKUL')
-    @yield('MIMATKUL')
-    @yield('MUMATKUL')
-    @yield('MDMATKUL')
-    @yield('MATKULMODALJS')
-
+@section('MODAL')
+    @yield('MI'.$modal_name)
+    @yield('MU'.$modal_name)
+    @yield('MD'.$modal_name)
+    @yield('MODALJS'.$modal_name)
 @endsection

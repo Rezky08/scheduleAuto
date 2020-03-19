@@ -68,7 +68,7 @@
             </table>
             <br />
         </div>
-        @yield('MODALMATKUL')
+        @yield('MODAL')
     </div>
 
     @yield('footer_scripts')

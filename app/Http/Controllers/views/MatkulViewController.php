@@ -34,6 +34,9 @@ class MatkulViewController extends Controller
             $data['mata_kuliah'] = $matakuliah;
         }
 
+        // call modal name
+        $data['modal_name'] = "MATKUL";
+
         return view('matkul', $data);
     }
 
