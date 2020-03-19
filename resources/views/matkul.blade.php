@@ -49,17 +49,17 @@
                     <th>Opsi</th>
                 </tr>
                 @foreach ($mata_kuliah as $matkul)
-                <tr>
-                    <td> {{$matkul['kode_matkul'] }}</td>
-                    <td> {{$matkul['nama_matkul'] }}</td>
-                    <td> {{$matkul['sks_matkul'] }}</td>
-                    <td> {{$matkul['status_matkul'] }}</td>
-                    <td> {{$matkul['kode_prodi'] }}</td>
+                <tr id="{{$matkul['kode_matkul']}}">
+                    <td id="kode_matkul"> {{$matkul['kode_matkul'] }}</td>
+                    <td id="nama_matkul"> {{$matkul['nama_matkul'] }}</td>
+                    <td id="sks_matkul"> {{$matkul['sks_matkul'] }}</td>
+                    <td id="status_matkul"> {{$matkul['status_matkul'] }}</td>
+                    <td id="kode_prodi"> {{$matkul['kode_prodi'] }}</td>
                     <td>
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalumatkul">
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalumatkul" data-kode_matkul="{{$matkul['kode_matkul']}}">
                             Edit
                         </button>
-                        <button type="button" class="btn btn-danger" data-toggle="modal">
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modaldmatkul" data-kode_matkul="{{$matkul['kode_matkul']}}">
                             Hapus
                         </button>
                     </td>
@@ -68,13 +68,7 @@
             </table>
             <br />
         </div>
-
-        {{-- modal input --}}
-        @yield('MIMATKUL')
-
-        {{-- modal edit --}}
-        @yield('MUMATKUL')
-
+        @yield('MODALMATKUL')
     </div>
 
     @yield('footer_scripts')
