@@ -601,6 +601,51 @@
 </div>
 @endsection
 
+@section('MDRUANG')
+
+<div id="modaldruang" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h5 class="text-white">Hapus Ruang</h5>
+            </div>
+            <div class="modal-body">
+                <strong id="modal-message">Apakah anda ingin menghapus ruang ini ?</strong>
+                <form action="ruang/delete/" method="post" class="text-right">
+                    @csrf
+                    <button type="submit" class="btn btn-success">Ya</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">
+                        Tidak
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endsection
+
+@section('MODALJSRUANG')
+<script>
+    $('button[data-target="#modaluruang"]').on('click', function () {
+        id = $(this).attr('data-id');
+        act = $("#formmodaluruang").attr('action');
+        act = act+kode_matkul;
+        $("#formmodaluruang").attr('action',act);
+    });
+    $("tr").on('click', function () {
+        id = $(this).find('button[data-target="#modaldruang"]').attr('data-id');
+        nama_matkul = $(this).find("#nama_ruang").text()
+        message = "Apakah anda ingin menghapus ruang "+nama_ruang+" ("+id+") ?";
+        $("#modaldruang").find('#modal-message').text(message);
+        act = $("#modaldruang").find("form").attr('action');
+        act = act+id;
+        $("#modaldruang").find("form").attr('action',act);
+        console.log(act);
+    });
+</script>
+@endsection
+
 @section('MIPRODI')
 {{-- Modal input  --}}
 <div class="modal fade" id="modaliprodi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

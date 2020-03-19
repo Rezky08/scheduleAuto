@@ -11,19 +11,36 @@ use Illuminate\Support\Facades\Validator;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\URL;
+use App\Helpers\Request_api;
 
 class ruangViewController extends Controller
 {
     public function index()
     {
-        $ruang = Ruang::all();
-        $data = [
-            'ruang' => $ruang->toArray()
-        ];
+        // untuk ambil data ruang dari API
+        $host = new Host();
+        $url = $host->host('api') . 'ruang';
+        $reqApi = new Request_api();
+        $response = $reqApi->request('GET', $url);
+
+        $data = [];
+        $data['ruang'] = [];
+        if ($response['status'] == 200) {
+            $ruang = $response['data'];
+            $ruang = collect($ruang);
+            $ruang = $ruang->map(function ($item, $index) {
+                $item = collect($item)->toArray();
+                return $item;
+            });
+            $data['ruang'] = $ruang;
+        }
+
+        // call modal name
+        $data['modal_name'] = "RUANG";
         return view('ruang', $data);
     }
 
-    public function tambah(Request $request)
+    public function add(Request $request)
     {
         $rules = [
             'nama_ruang' => ['required'],
@@ -35,31 +52,87 @@ class ruangViewController extends Controller
             return redirect()->back()->withErrors($validator->errors())->withInput();
         }
 
+        $host = new Host();
+        $url = $host->host('api') . 'ruang';
+        $reqApi = new Request_api();
+        $response = $reqApi->request('POST', $url, ['form_params' => $request->all()]);
+        $message = collect($response['message']);
+        if ($response['status'] == 200) {
+            $success = [
+                'success' => $message->toArray()
+            ];
+            return redirect()->back()->with($success);
+        }
+
+        $errors = $message->toArray();
+        return redirect()->back()->withErrors($errors)->withInput();
+    }
+
+    public function update(Request $request, $id)
+    {
+        $rules = [
+            'nama_prodi' => ['required'],
+            'keterangan' => ['required'],
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+        }
+        if ($id != $request->id) {
+            $form_params = [
+                'id' => $id,
+                'id_new' => $request->id,
+                'nama_ruang' => $request->nama_ruang,
+                'keterangan' => $request->keterangan,
+            ];
+        } else {
+            $form_params = $request->all();
+        }
 
         $host = new Host();
         $url = $host->host('api') . 'ruang';
-        $client = new Client();
-        try {
-            $client = $client->post($url, ['form_params' => $request->all()]);
-            if ($client->getStatusCode() == 200) {
-                $contents = $client->getBody()->getContents();
-                $contents = json_decode($contents);
-                $contents = collect($contents->message);
-                $success = $contents->map(function ($item, $index) {
-                    return $item;
-                });
-                $success = $success->toArray();
-                $message = [
-                    'success' => $success
-                ];
-                return redirect()->back()->with($message);
-            }
-        } catch (GuzzleException $e) {
-            $contents = $e->getResponse()->getBody()->getContents();
-            $contents = json_decode($contents);
-            $contents = collect($contents->message);
-            $message = $contents->toArray();
-            return redirect()->back()->withErrors($message)->withInput();
+        $reqApi = new Request_api();
+        $response = $reqApi->request('PUT', $url, ['form_params' => $form_params]);
+        $message = collect($response['message']);
+        if ($response['status'] == 200) {
+            $success = [
+                'success' => $message->toArray()
+            ];
+            return redirect()->back()->with($success);
         }
+
+        $errors = $message->toArray();
+        return redirect()->back()->withErrors($errors)->withInput();
+    }
+
+
+    public function delete($id)
+    {
+        $rules = [
+            'id' => ['required']
+        ];
+        $form_params = [
+            'id' => $id
+        ];
+        $validator = Validator::make($form_params, $rules);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+        }
+
+        $host = new Host();
+        $url = $host->host('api') . 'ruang';
+        $reqApi = new Request_api();
+        $response = $reqApi->request('DELETE', $url, ['form_params' => $form_params]);
+        $message = collect($response['message']);
+        if ($response['status'] == 200) {
+            $success = [
+                'success' => $message->toArray()
+            ];
+            return redirect()->back()->with($success);
+        }
+
+        $errors = $message->toArray();
+        return redirect()->back()->withErrors($errors)->withInput();
     }
 }
