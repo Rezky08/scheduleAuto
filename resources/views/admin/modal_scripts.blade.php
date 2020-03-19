@@ -1,3 +1,4 @@
+
 @section('MIHARI')
 {{-- Modal input  --}}
 <div class="modal fade" id="modalihari" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -249,9 +250,9 @@
                         <input type="number" name="sks_matkul" class="form-control border border-secondary"
                             placeholder="Sks" value="{{old('sks_matkul')}}">
 
-                        @if($errors->has('sks'))
+                        @if($errors->has('sks_matkul'))
                         <div class="text-danger">
-                            {{ $errors->first('sks')}}
+                            {{ $errors->first('sks_matkul')}}
                         </div>
                         @endif
 
@@ -310,7 +311,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="/ruang/add">
+                <form id="formmodalumatkul" method="POST" action="/matkul/update/">
 
                     {{ csrf_field() }}
 
@@ -344,12 +345,12 @@
 
                     <div class="form-group">
                         <label>Sks</label>
-                        <input type="number" name="sks" class="form-control border border-secondary" placeholder="Sks"
+                        <input type="number" name="sks_matkul" class="form-control border border-secondary" placeholder="Sks"
                             value="{{old('sks_matkul')}}">
 
-                        @if($errors->has('sks'))
+                        @if($errors->has('sks_matkul'))
                         <div class="text-danger">
-                            {{ $errors->first('sks')}}
+                            {{ $errors->first('sks_matkul')}}
                         </div>
                         @endif
 
@@ -393,6 +394,30 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('MDMATKUL')
+
+<div id="modaldmatkul" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h5 class="text-white">Hapus Mata Kuliah</h5>
+            </div>
+            <div class="modal-body">
+                <strong id="modal-message">Apakah anda ingin menghapus mata kuliah ini ?</strong>
+                <form action="matkul/delete/" method="post" class="text-right">
+                    @csrf
+                    <button type="submit" class="btn btn-success">Ya</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">
+                        Tidak
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 @section('MIRUANG')
@@ -649,4 +674,34 @@
         </div>
     </div>
 </div>
+@endsection
+
+
+@section('MATKULMODALJS')
+<script>
+    $('button[data-target="#modalumatkul"]').on('click', function () {
+        kode_matkul = $(this).attr('data-kode_matkul');
+        act = $("#formmodalumatkul").attr('action');
+        act = act+kode_matkul;
+        $("#formmodalumatkul").attr('action',act);
+    });
+    $("tr").on('click', function () {
+        kode_matkul = $(this).find('button[data-target="#modaldmatkul"]').attr('data-kode_matkul');
+        nama_matkul = $(this).find("#nama_matkul").text()
+        message = "Apakah anda ingin menghapus mata kuliah "+nama_matkul+" ("+kode_matkul+") ?";
+        $("#modaldmatkul").find('#modal-message').text(message);
+        act = $("#modaldmatkul").find("form").attr('action');
+        act = act+kode_matkul;
+        $("#modaldmatkul").find("form").attr('action',act);
+        console.log(act);
+    });
+</script>
+@endsection
+
+@section('MODALMATKUL')
+    @yield('MIMATKUL')
+    @yield('MUMATKUL')
+    @yield('MDMATKUL')
+    @yield('MATKULMODALJS')
+
 @endsection
