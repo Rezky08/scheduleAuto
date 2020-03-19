@@ -1,4 +1,3 @@
-
 @section('MIHARI')
 {{-- Modal input  --}}
 <div class="modal fade" id="modalihari" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -345,8 +344,8 @@
 
                     <div class="form-group">
                         <label>Sks</label>
-                        <input type="number" name="sks_matkul" class="form-control border border-secondary" placeholder="Sks"
-                            value="{{old('sks_matkul')}}">
+                        <input type="number" name="sks_matkul" class="form-control border border-secondary"
+                            placeholder="Sks" value="{{old('sks_matkul')}}">
 
                         @if($errors->has('sks_matkul'))
                         <div class="text-danger">
@@ -418,6 +417,27 @@
     </div>
 </div>
 
+@endsection
+
+@section('MODALJSMATKUL')
+<script>
+    $('button[data-target="#modalumatkul"]').on('click', function () {
+        kode_matkul = $(this).attr('data-kode_matkul');
+        act = $("#formmodalumatkul").attr('action');
+        act = act+kode_matkul;
+        $("#formmodalumatkul").attr('action',act);
+    });
+    $("tr").on('click', function () {
+        kode_matkul = $(this).find('button[data-target="#modaldmatkul"]').attr('data-kode_matkul');
+        nama_matkul = $(this).find("#nama_matkul").text()
+        message = "Apakah anda ingin menghapus mata kuliah "+nama_matkul+" ("+kode_matkul+") ?";
+        $("#modaldmatkul").find('#modal-message').text(message);
+        act = $("#modaldmatkul").find("form").attr('action');
+        act = act+kode_matkul;
+        $("#modaldmatkul").find("form").attr('action',act);
+        console.log(act);
+    });
+</script>
 @endsection
 
 @section('MIRUANG')
@@ -579,18 +599,6 @@
 
                     </div>
 
-                    <div class="form-group">
-                        <label>Keterangan</label>
-                        <input type="text" name="keterangan_prodi" class="form-control border border-secondary"
-                            placeholder="keterangan" value="{{old('keterangan_prodi')}}">
-
-                        @if($errors->has('keterangan_prodi'))
-                        <div class="text-danger">
-                            {{ $errors->first('keterangan_prodi')}}
-                        </div>
-                        @endif
-
-                    </div>
             </div>
             <div class="modal-footer">
                 <center>
@@ -650,18 +658,6 @@
 
                     </div>
 
-                    <div class="form-group">
-                        <label>Keterangan</label>
-                        <input type="text" name="keterangan_prodi" class="form-control border border-secondary"
-                            placeholder="keterangan" value="{{old('keterangan_prodi')}}">
-
-                        @if($errors->has('keterangan_prodi'))
-                        <div class="text-danger">
-                            {{ $errors->first('keterangan_prodi')}}
-                        </div>
-                        @endif
-
-                    </div>
             </div>
             <div class="modal-footer">
                 <center>
@@ -675,32 +671,54 @@
     </div>
 </div>
 @endsection
+@section('MDPRODI')
 
+<div id="modaldprodi" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h5 class="text-white">Hapus Prodi</h5>
+            </div>
+            <div class="modal-body">
+                <strong id="modal-message">Apakah anda ingin menghapus prodi ini ?</strong>
+                <form action="program_studi/delete/" method="post" class="text-right">
+                    @csrf
+                    <button type="submit" class="btn btn-success">Ya</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">
+                        Tidak
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-@section('MODALJSMATKUL')
+@endsection
+
+@section('MODALJSPRODI')
 <script>
-    $('button[data-target="#modalumatkul"]').on('click', function () {
-        kode_matkul = $(this).attr('data-kode_matkul');
-        act = $("#formmodalumatkul").attr('action');
-        act = act+kode_matkul;
-        $("#formmodalumatkul").attr('action',act);
+    $('button[data-target="#modaluprodi"]').on('click', function () {
+        kode_prodi = $(this).attr('data-kode_prodi');
+        act = $("#formmodaluprodi").attr('action');
+        act = act+kode_prodi;
+        $("#formmodaluprodi").attr('action',act);
     });
     $("tr").on('click', function () {
-        kode_matkul = $(this).find('button[data-target="#modaldmatkul"]').attr('data-kode_matkul');
-        nama_matkul = $(this).find("#nama_matkul").text()
-        message = "Apakah anda ingin menghapus mata kuliah "+nama_matkul+" ("+kode_matkul+") ?";
-        $("#modaldmatkul").find('#modal-message').text(message);
-        act = $("#modaldmatkul").find("form").attr('action');
+        kode_prodi = $(this).find('button[data-target="#modaldprodi"]').attr('data-kode_prodi');
+        nama_prodi = $(this).find("#nama_prodi").text()
+        message = "Apakah anda ingin menghapus prodi "+nama_prodi+" ("+kode_prodi+") ?";
+        $("#modaldprodi").find('#modal-message').text(message);
+        act = $("#modaldprodi").find("form").attr('action');
         act = act+kode_matkul;
-        $("#modaldmatkul").find("form").attr('action',act);
+        $("#modaldprodi").find("form").attr('action',act);
         console.log(act);
     });
 </script>
 @endsection
 
 @section('MODAL')
-    @yield('MI'.$modal_name)
-    @yield('MU'.$modal_name)
-    @yield('MD'.$modal_name)
-    @yield('MODALJS'.$modal_name)
+@yield('MI'.$modal_name)
+@yield('MU'.$modal_name)
+@yield('MD'.$modal_name)
+@yield('MODALJS'.$modal_name)
 @endsection

@@ -42,19 +42,19 @@
                 <tr>
                     <th>Kode Prodi</th>
                     <th>Nama Prodi</th>
-                    <th>Keteranan</th>
                     <th>Opsi</th>
                 </tr>
                 @foreach ($program_studi as $j)
-                <tr>
-                    <td> {{$j['kode_prodi'] }}</td>
-                    <td> {{$j['nama_prodi'] }}</td>
-                    <td> {{$j['keterangan_prodi'] }}</td>
+                <tr id="{{$j['kode_prodi']}}">
+                    <td id="kode_prodi"> {{$j['kode_prodi'] }}</td>
+                    <td id="kode_prodi"> {{$j['nama_prodi'] }}</td>
                     <td>
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modaluprodi">
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modaluprodi"
+                            data-kode_prodi="{{$j['kode_prodi']}}">
                             Edit
                         </button>
-                        <button type="button" class="btn btn-danger" data-toggle="modal">
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modaldprodi"
+                            data-kode_prodi="{{$j['kode_prodi']}}">
                             Hapus
                         </button>
                     </td>
@@ -64,17 +64,9 @@
             <br />
         </div>
 
-        {{-- modal input --}}
-        @yield('MIPRODI')
-
-        {{-- modal edit --}}
-        @yield('MUPRODI')
+        @yield('MODAL')
     </div>
-
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/popper.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
+    @yield('footer_scripts')
 </body>
 
 </html>
