@@ -47,7 +47,7 @@
                 @foreach ($program_studi as $j)
                 <tr id="{{$j['kode_prodi']}}">
                     <td id="kode_prodi"> {{$j['kode_prodi'] }}</td>
-                    <td id="kode_prodi"> {{$j['nama_prodi'] }}</td>
+                    <td id="nama_prodi"> {{$j['nama_prodi'] }}</td>
                     <td>
                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modaluprodi"
                             data-kode_prodi="{{$j['kode_prodi']}}">
