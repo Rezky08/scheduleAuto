@@ -23,7 +23,7 @@ class ProgramStudiViewController extends Controller
         $response = $reqApi->request('GET', $url);
 
         $data = [];
-        $data['mata_kuliah'] = [];
+        $data['program_studi'] = [];
         if ($response['status'] == 200) {
             $program_studi = $response['data'];
             $program_studi = collect($program_studi);

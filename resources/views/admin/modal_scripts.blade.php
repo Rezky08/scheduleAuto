@@ -86,6 +86,51 @@
 </div>
 @endsection
 
+@section('MDHARI')
+
+<div id="modaldhari" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h5 class="text-white">Hapus Hari</h5>
+            </div>
+            <div class="modal-body">
+                <strong id="modal-message">Apakah anda ingin menghapus hari ini ?</strong>
+                <form action="hari/delete/" method="post" class="text-right">
+                    @csrf
+                    <button type="submit" class="btn btn-success">Ya</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">
+                        Tidak
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endsection
+
+@section('MODALJSHARI')
+<script>
+    $('button[data-target="#modaluhari"]').on('click', function () {
+        id = $(this).attr('data-id');
+        act = $("#formmodaluhari").attr('action');
+        act = act+id;
+        $("#formmodaluhari").attr('action',act);
+    });
+    $("tr").on('click', function () {
+        id = $(this).find('button[data-target="#modaldhari"]').attr('data-id');
+        nama_hari = $(this).find("#nama_hari").text()
+        message = "Apakah anda ingin menghapus hari "+nama_hari+" ("+id+") ?";
+        $("#modaldhari").find('#modal-message').text(message);
+        act = $("#modaldhari").find("form").attr('action');
+        act = act+kode_matkul;
+        $("#modaldhari").find("form").attr('action',act);
+        console.log(act);
+    });
+</script>
+@endsection
+
 @section('MIJAM')
 {{-- Modal input  --}}
 <div class="modal fade" id="modalijam" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

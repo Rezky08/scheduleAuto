@@ -2,6 +2,7 @@
 @include('admin.modal_scripts')
 @include('admin.sidebar')
 @include('admin.validasi')
+@include('admin.footer_scripts')
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -45,14 +46,16 @@
                     <th>Hari</th>
                     <th>Opsi</th>
                 </tr>
-                @foreach ($hari ?? '' as $j)
-                <tr>
-                    <td> {{$j['nama_hari'] }}</td>
+                @foreach ($hari as $j)
+                <tr id="{{$j['id']}}">
+                    <td id="nama_hari"> {{$j['nama_hari'] }}</td>
                     <td>
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modaluhari">
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modaluhari"
+                            data-id="{{$j['id']}}">
                             Edit
                         </button>
-                        <button type="button" class="btn btn-danger" data-toggle="modal">
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modaldhari"
+                            data-id="{{$j['id']}}">
                             Hapus
                         </button>
                     </td>
