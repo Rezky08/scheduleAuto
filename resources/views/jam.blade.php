@@ -2,6 +2,7 @@
 @include('admin.sidebar')
 @include('admin.modal_scripts')
 @include('admin.validasi')
+@include('admin.footer_scripts')
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
