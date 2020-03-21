@@ -41,30 +41,31 @@
                 </div>
             </div>
             <br />
-            <table class="table table-bordered">
-                <tr>
-                    <th>Nama Ruang</th>
-                    <th>Keterangan</th>
-                    <th>Opsi</th>
-                </tr>
-                @foreach ($ruang as $j)
-                <tr id="{{$j['id']}}">
-                    <td id="nama_ruang"> {{$j['nama_ruang'] }}</td>
-                    <td id="keterangan"> {{$j['keterangan'] }}</td>
-                    <td>
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modaluruang"
-                            data-id="{{$j['id']}}">
-                            Edit
-                        </button>
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modaldruang"
-                            data-id="{{$j['id']}}">
-                            Hapus
-                        </button>
-                    </td>
-                </tr>
-                @endforeach
-            </table>
-            <br />
+            <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Nama Ruang</th>
+                        <th>Keterangan</th>
+                        <th>Opsi</th>
+                    </tr>
+                    @foreach ($ruang as $j)
+                    <tr id="{{$j['id']}}">
+                        <td id="nama_ruang"> {{$j['nama_ruang'] }}</td>
+                        <td id="keterangan"> {{$j['keterangan'] }}</td>
+                        <td>
+                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modaluruang"
+                                data-id="{{$j['id']}}">
+                                Edit
+                            </button>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modaldruang"
+                                data-id="{{$j['id']}}">
+                                Hapus
+                            </button>
+                        </td>
+                    </tr>
+                    @endforeach
+                </table>
+            </div>
         </div>
         @yield('MODAL')
     </div>

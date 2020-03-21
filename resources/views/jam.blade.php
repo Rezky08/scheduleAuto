@@ -40,30 +40,31 @@
                 </div>
             </div>
             <br />
-            <table class="table table-bordered">
-                <tr>
-                    <th>Sesi Mulai</th>
-                    <th>Sesi Selesai</th>
-                    <th>Opsi</th>
-                </tr>
-                @foreach ($jam as $j)
-                <tr id="{{$j['id']}}">
-                    <td id="jam_mulai"> {{$j['jam_mulai'] }}</td>
-                    <td id="jam_selesai"> {{$j['jam_selesai'] }}</td>
-                    <td>
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalujam"
-                            data-id="{{$j['id']}}">
-                            Edit
-                        </button>
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modaldjam"
-                            data-id="{{$j['id']}}">
-                            Hapus
-                        </button>
-                    </td>
-                </tr>
-                @endforeach
-            </table>
-            <br />
+            <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Sesi Mulai</th>
+                        <th>Sesi Selesai</th>
+                        <th>Opsi</th>
+                    </tr>
+                    @foreach ($jam as $j)
+                    <tr id="{{$j['id']}}">
+                        <td id="jam_mulai"> {{$j['jam_mulai'] }}</td>
+                        <td id="jam_selesai"> {{$j['jam_selesai'] }}</td>
+                        <td>
+                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalujam"
+                                data-id="{{$j['id']}}">
+                                Edit
+                            </button>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modaldjam"
+                                data-id="{{$j['id']}}">
+                                Hapus
+                            </button>
+                        </td>
+                    </tr>
+                    @endforeach
+                </table>
+            </div>
         </div>
         @yield('MODAL')
     </div>

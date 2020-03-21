@@ -39,32 +39,32 @@
                 </div>
             </div>
             <br />
-            <table class="table table-bordered">
-                <tr>
-                    <th>Kode Prodi</th>
-                    <th>Nama Prodi</th>
-                    <th>Opsi</th>
-                </tr>
-                @foreach ($program_studi as $j)
-                <tr id="{{$j['kode_prodi']}}">
-                    <td id="kode_prodi"> {{$j['kode_prodi'] }}</td>
-                    <td id="nama_prodi"> {{$j['nama_prodi'] }}</td>
-                    <td>
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modaluprodi"
-                            data-kode_prodi="{{$j['kode_prodi']}}">
-                            Edit
-                        </button>
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modaldprodi"
-                            data-kode_prodi="{{$j['kode_prodi']}}">
-                            Hapus
-                        </button>
-                    </td>
-                </tr>
-                @endforeach
-            </table>
-            <br />
+            <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Kode Prodi</th>
+                        <th>Nama Prodi</th>
+                        <th>Opsi</th>
+                    </tr>
+                    @foreach ($program_studi as $j)
+                    <tr id="{{$j['kode_prodi']}}">
+                        <td id="kode_prodi"> {{$j['kode_prodi'] }}</td>
+                        <td id="nama_prodi"> {{$j['nama_prodi'] }}</td>
+                        <td>
+                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modaluprodi"
+                                data-kode_prodi="{{$j['kode_prodi']}}">
+                                Edit
+                            </button>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modaldprodi"
+                                data-kode_prodi="{{$j['kode_prodi']}}">
+                                Hapus
+                            </button>
+                        </td>
+                    </tr>
+                    @endforeach
+                </table>
+            </div>
         </div>
-
         @yield('MODAL')
     </div>
     @yield('footer_scripts')
