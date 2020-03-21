@@ -56,7 +56,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="/hari/add">
+                <form id="formmodaluhari" method="POST" action="/hari/update/">
 
                     {{ csrf_field() }}
 
@@ -124,7 +124,7 @@
         message = "Apakah anda ingin menghapus hari "+nama_hari+" ("+id+") ?";
         $("#modaldhari").find('#modal-message').text(message);
         act = $("#modaldhari").find("form").attr('action');
-        act = act+kode_matkul;
+        act = act+id;
         $("#modaldhari").find("form").attr('action',act);
         console.log(act);
     });

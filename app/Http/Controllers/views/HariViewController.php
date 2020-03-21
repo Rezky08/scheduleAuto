@@ -76,8 +76,9 @@ class HariViewController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput();
         }
-        if ($id != $request->id) {
+        if ($id == $request->id) {
             $form_params = [
+                'id' => $id,
                 'nama_hari' => $request->nama_hari,
             ];
         } else {
