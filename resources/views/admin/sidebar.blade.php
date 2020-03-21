@@ -50,19 +50,20 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Portfolio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+
+
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <i class="material-icons">notifications</i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="">
+                        <a class="dropdown-item" href="#">Disini</a>
+                    </div>
                 </li>
             </ul>
+
         </div>
     </div>
 </nav>
