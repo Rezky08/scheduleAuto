@@ -46,14 +46,16 @@
                     <th>Opsi</th>
                 </tr>
                 @foreach ($jam as $j)
-                <tr>
-                    <td> {{$j['jam_mulai'] }}</td>
-                    <td> {{$j['jam_selesai'] }}</td>
+                <tr id="{{$j['id']}}">
+                    <td id="jam_mulai"> {{$j['jam_mulai'] }}</td>
+                    <td id="jam_selesai"> {{$j['jam_selesai'] }}</td>
                     <td>
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalujam">
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalujam"
+                            data-id="{{$j['id']}}">
                             Edit
                         </button>
-                        <button type="button" class="btn btn-danger" data-toggle="modal">
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modaldjam"
+                            data-id="{{$j['id']}}">
                             Hapus
                         </button>
                     </td>

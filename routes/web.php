@@ -39,5 +39,5 @@ Route::post('/hari/delete/{id}', 'views\hariViewController@delete');
 
 Route::get('/jam', 'views\JamViewController@index');
 Route::post('/jam/add', 'views\JamViewController@add');
-Route::post('/jam/update/{kode_matkul}', 'views\JamViewController@update');
-Route::post('/jam/delete/{kode_matkul}', 'views\JamViewController@delete');
+Route::post('/jam/update/{id}', 'views\JamViewController@update');
+Route::post('/jam/delete/{id}', 'views\JamViewController@delete');
