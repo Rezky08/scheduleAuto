@@ -718,7 +718,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="/program_studi/add">
+                <form id="formmodaluprodi" method="POST" action="/program_studi/update/">
 
                     {{ csrf_field() }}
 
@@ -799,7 +799,7 @@
         message = "Apakah anda ingin menghapus prodi "+nama_prodi+" ("+kode_prodi+") ?";
         $("#modaldprodi").find('#modal-message').text(message);
         act = $("#modaldprodi").find("form").attr('action');
-        act = act+kode_matkul;
+        act = act+kode_prodi;
         $("#modaldprodi").find("form").attr('action',act);
         console.log(act);
     });
