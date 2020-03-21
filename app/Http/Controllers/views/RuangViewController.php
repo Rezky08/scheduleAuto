@@ -71,7 +71,7 @@ class RuangViewController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            'nama_prodi' => ['required'],
+            'nama_ruang' => ['required'],
             'keterangan' => ['required'],
         ];
 
@@ -79,10 +79,9 @@ class RuangViewController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput();
         }
-        if ($id != $request->id) {
+        if ($id == $request->id) {
             $form_params = [
                 'id' => $id,
-                'id_new' => $request->id,
                 'nama_ruang' => $request->nama_ruang,
                 'keterangan' => $request->keterangan,
             ];

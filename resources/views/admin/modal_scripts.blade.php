@@ -558,7 +558,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="/ruang/add">
+                <form id="formmodaluruang" method="POST" action="/ruang/update/">
 
                     {{ csrf_field() }}
 
@@ -630,12 +630,12 @@
     $('button[data-target="#modaluruang"]').on('click', function () {
         id = $(this).attr('data-id');
         act = $("#formmodaluruang").attr('action');
-        act = act+kode_matkul;
+        act = act+id;
         $("#formmodaluruang").attr('action',act);
     });
     $("tr").on('click', function () {
         id = $(this).find('button[data-target="#modaldruang"]').attr('data-id');
-        nama_matkul = $(this).find("#nama_ruang").text()
+        nama_ruang = $(this).find("#nama_ruang").text()
         message = "Apakah anda ingin menghapus ruang "+nama_ruang+" ("+id+") ?";
         $("#modaldruang").find('#modal-message').text(message);
         act = $("#modaldruang").find("form").attr('action');

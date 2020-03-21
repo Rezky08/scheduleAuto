@@ -50,7 +50,7 @@
                 @foreach ($ruang as $j)
                 <tr id="{{$j['id']}}">
                     <td id="nama_ruang"> {{$j['nama_ruang'] }}</td>
-                    <td id="keterangan"> {{$j['nama_keterangan'] }}</td>
+                    <td id="keterangan"> {{$j['keterangan'] }}</td>
                     <td>
                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modaluruang"
                             data-id="{{$j['id']}}">
