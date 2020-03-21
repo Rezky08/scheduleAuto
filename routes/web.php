@@ -41,3 +41,7 @@ Route::get('/jam', 'views\JamViewController@index');
 Route::post('/jam/add', 'views\JamViewController@add');
 Route::post('/jam/update/{id}', 'views\JamViewController@update');
 Route::post('/jam/delete/{id}', 'views\JamViewController@delete');
+
+Route::get('/jadwal', function () {
+    return view('jadwal');
+});

@@ -22,6 +22,9 @@
         <li>
             <a href="/program_studi"> Program Studi</a>
         </li>
+        <li>
+            <a href="/jadwal"> Ada yang baru nih</a>
+        </li>
     </ul>
 
     {{-- <div class="footer">

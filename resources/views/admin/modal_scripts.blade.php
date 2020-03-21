@@ -853,8 +853,8 @@
 @endsection
 
 @section('MODAL')
-@yield('MI'.$modal_name)
-@yield('MU'.$modal_name)
-@yield('MD'.$modal_name)
-@yield('MODALJS'.$modal_name)
+@yield('MI'.$modal_name ?? '')
+@yield('MU'.$modal_name ?? '')
+@yield('MD'.$modal_name ?? '')
+@yield('MODALJS'.$modal_name ?? '')
 @endsection
