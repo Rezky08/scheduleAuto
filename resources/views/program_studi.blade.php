@@ -16,9 +16,8 @@
         @yield('sidebar')
         <!-- Page Content  -->
 
-        <div id="content" class="p-4 p-md-5 pt-5">
-            <br />
-
+        <div id="content" class="p-4 p-md-5">
+            @yield('navbar')
             <!-- validasi -->
             @yield('validasi')
             <!-- Button trigger modal -->
