@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
@@ -19,11 +20,11 @@ class Request_api
                 $response = $contents->toArray();
                 return $response;
             }
-        } catch (GuzzleException $e) {
-            $contents = $e->getResponse()->getBody()->getContents();
-            $contents = json_decode($contents);
-            $contents = collect($contents);
-            $response = $contents->toArray();
+        } catch (Exception $e) {
+            $response = [
+                'status' => $e->getCode(),
+                'messgae' => $e->getMessage()
+            ];
             return $response;
         }
     }
