@@ -354,7 +354,6 @@
                             <option value="1">Aktif</option>
                             <option value="0">Tidak Aktif</option>
                         </select>
-                        {{-- <input type="text" name="status_matkul" class="form-control border border-secondary" placeholder="Status" value="{{old('status_matkul')}}"> --}}
 
                         @if($errors->has('status_matkul'))
                         <div class="text-danger">
@@ -368,12 +367,11 @@
                     <div class="form-group">
                         <label>Kode Prodi</label>
                         <select name="kode_prodi" class="form-control border">
-                            <option value="" disabled>Pilih Program Studi</option>
+                            <option value="" disabled selected>Pilih Program Studi</option>
                             @foreach ($program_studi as $item)
-                                <option value="{{$item['kode_prodi']}}">{{$item['nama_prodi']}}</option>
+                                <option value="{{$item['kode_prodi']}}" {!! $item['kode_prodi']==old('kode_prodi')?'selected':'' !!}>{{$item['nama_prodi']}}</option>
                             @endforeach
                         </select>
-                        {{-- <input type="text" name="kode_prodi" class="form-control border border-secondary" placeholder="Kode Prodi" value="{{old('kode_prodi')}}"> --}}
 
                         @if($errors->has('kode_prodi'))
                         <div class="text-danger">
@@ -456,8 +454,10 @@
 
                     <div class="form-group">
                         <label>Status</label>
-                        <input type="text" name="status_matkul" class="form-control border border-secondary"
-                            placeholder="Status" value="{{old('status_matkul')}}">
+                        <select name="status_matkul" class="form-control border">
+                            <option value="1">Aktif</option>
+                            <option value="0">Tidak Aktif</option>
+                        </select>
 
                         @if($errors->has('status_matkul'))
                         <div class="text-danger">
@@ -470,8 +470,12 @@
 
                     <div class="form-group">
                         <label>Kode Prodi</label>
-                        <input type="text" name="kode_prodi" class="form-control border border-secondary"
-                            placeholder="Kode Prodi" value="{{old('kode_prodi')}}">
+                        <select name="kode_prodi" class="form-control border">
+                            <option value="" disabled selected>Pilih Program Studi</option>
+                            @foreach ($program_studi as $item)
+                                <option value="{{$item['kode_prodi']}}" {!! $item['kode_prodi']==old('kode_prodi')?'selected':'' !!}>{{$item['nama_prodi']}}</option>
+                            @endforeach
+                        </select>
 
                         @if($errors->has('kode_prodi'))
                         <div class="text-danger">
@@ -521,18 +525,38 @@
 @section('MODALJSMATKUL')
 <script>
     $('button[data-target="#modalumatkul"]').on('click', function () {
-        kode_matkul = $(this).attr('data-kode_matkul');
-        act = $("#formmodalumatkul").attr('action');
-        act = act+kode_matkul;
+        id_matkul = $(this).attr('data-kode-matkul');
+        child = $(this).parents('tr').children();
+        $.map(child, function (item, index) {
+            field = $(item).attr('id');
+            value = $(item).text().trim();
+            if (field!=undefined) {
+                el = $("#formmodalumatkul").find("[name='"+field+"']");
+                tagname = $(el).prop('tagName').toLowerCase();
+                if (tagname=="select") {
+                    $(el).children('option:selected').removeAttr('selected');
+                    $(el).children("option[value='"+value+"']").attr('selected','selected');
+                }else{
+                    $(el).val(value);
+                }
+            }
+        });
+
+        // act = $("#formmodalumatkul").attr('action');
+        act = '/matkul/update/';
+        act = act+id_matkul;
         $("#formmodalumatkul").attr('action',act);
     });
-    $("tr").on('click', function () {
-        kode_matkul = $(this).find('button[data-target="#modaldmatkul"]').attr('data-kode_matkul');
-        nama_matkul = $(this).find("#nama_matkul").text()
+    $("button[data-target='#modaldmatkul']").on('click', function () {
+        kode_matkul = $(this).attr('data-kode-matkul');
+        row_parent = $(this).parents('tr');
+        id_matkul = $(row_parent).attr('id');
+        nama_matkul = $(row_parent).find("#nama_matkul").text()
         message = "Apakah anda ingin menghapus mata kuliah "+nama_matkul+" ("+kode_matkul+") ?";
         $("#modaldmatkul").find('#modal-message').text(message);
-        act = $("#modaldmatkul").find("form").attr('action');
-        act = act+kode_matkul;
+        // act = $("#modaldmatkul").find("form").attr('action');
+        act = '/matkul/delete/';
+        act = act+id_matkul;
         $("#modaldmatkul").find("form").attr('action',act);
         console.log(act);
     });

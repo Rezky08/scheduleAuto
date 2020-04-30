@@ -50,7 +50,7 @@
                         <th>Opsi</th>
                     </tr>
                     @foreach ($mata_kuliah as $matkul)
-                    <tr id="{{$matkul['kode_matkul']}}">
+                    <tr id="{{$matkul['id']}}">
                         <td id="kode_matkul"> {{$matkul['kode_matkul'] }}</td>
                         <td id="nama_matkul"> {{$matkul['nama_matkul'] }}</td>
                         <td id="sks_matkul"> {{$matkul['sks_matkul'] }}</td>
@@ -58,11 +58,11 @@
                         <td id="kode_prodi"> {{$matkul['kode_prodi'] }}</td>
                         <td>
                             <button type="button" class="btn btn-warning" data-toggle="modal"
-                                data-target="#modalumatkul" data-kode_matkul="{{$matkul['kode_matkul']}}">
+                                data-target="#modalumatkul" data-kode-matkul="{{$matkul['kode_matkul']}}">
                                 Edit
                             </button>
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modaldmatkul"
-                                data-kode_matkul="{{$matkul['kode_matkul']}}">
+                                data-kode-matkul="{{$matkul['kode_matkul']}}">
                                 Hapus
                             </button>
                         </td>

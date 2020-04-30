@@ -128,13 +128,13 @@ class MatkulViewController extends Controller
         return redirect()->back()->withErrors($errors)->withInput();
     }
 
-    public function delete($kode_matkul)
+    public function delete($id)
     {
         $rules = [
-            'kode_matkul' => ['required', 'max:10']
+            'id' => ['required']
         ];
         $form_params = [
-            'kode_matkul' => $kode_matkul
+            'id' => $id
         ];
         $validator = Validator::make($form_params, $rules);
         if ($validator->fails()) {
@@ -145,14 +145,16 @@ class MatkulViewController extends Controller
         $url = $host->host('api') . 'matkul';
         $reqApi = new Request_api();
         $response = $reqApi->request('DELETE', $url, ['form_params' => $form_params]);
-        $message = collect($response['message']);
+
         if ($response['status'] == 200) {
+            $message = collect($response['message']);
             $success = [
                 'success' => $message->toArray()
             ];
             return redirect()->back()->with($success);
         }
-
+        dd($response);
+        $message = collect($response['message']);
         $errors = $message->toArray();
         return redirect()->back()->withErrors($errors)->withInput();
     }
