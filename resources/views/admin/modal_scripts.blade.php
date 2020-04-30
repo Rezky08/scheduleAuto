@@ -350,8 +350,11 @@
 
                     <div class="form-group">
                         <label>Status</label>
-                        <input type="text" name="status_matkul" class="form-control border border-secondary"
-                            placeholder="Status" value="{{old('status_matkul')}}">
+                        <select name="status_matkul" class="form-control border">
+                            <option value="1">Aktif</option>
+                            <option value="0">Tidak Aktif</option>
+                        </select>
+                        {{-- <input type="text" name="status_matkul" class="form-control border border-secondary" placeholder="Status" value="{{old('status_matkul')}}"> --}}
 
                         @if($errors->has('status_matkul'))
                         <div class="text-danger">
@@ -364,8 +367,13 @@
 
                     <div class="form-group">
                         <label>Kode Prodi</label>
-                        <input type="text" name="kode_prodi" class="form-control border border-secondary"
-                            placeholder="Kode Prodi" value="{{old('kode_prodi')}}">
+                        <select name="kode_prodi" class="form-control border">
+                            <option value="" disabled>Pilih Program Studi</option>
+                            @foreach ($program_studi as $item)
+                                <option value="{{$item['kode_prodi']}}">{{$item['nama_prodi']}}</option>
+                            @endforeach
+                        </select>
+                        {{-- <input type="text" name="kode_prodi" class="form-control border border-secondary" placeholder="Kode Prodi" value="{{old('kode_prodi')}}"> --}}
 
                         @if($errors->has('kode_prodi'))
                         <div class="text-danger">

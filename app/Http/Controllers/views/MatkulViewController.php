@@ -23,6 +23,7 @@ class MatkulViewController extends Controller
         $response = $reqApi->request('GET', $url);
 
         $data = [];
+        // get data mata kuliah
         $data['mata_kuliah'] = [];
         if ($response['status'] == 200) {
             $matakuliah = $response['data'];
@@ -33,6 +34,20 @@ class MatkulViewController extends Controller
             });
             $data['mata_kuliah'] = $matakuliah;
         }
+        // get data prodi
+        $url = $host->host('api') . 'program_studi';
+        $response = $reqApi->request('GET', $url);
+        $data['program_studi'] = [];
+        if ($response['status'] == 200) {
+            $program_studi = $response['data'];
+            $program_studi = collect($program_studi);
+            $program_studi = $program_studi->map(function ($item, $index) {
+                $item = collect($item)->toArray();
+                return $item;
+            });
+            $data['program_studi'] = $program_studi;
+        }
+
 
         // call modal name
         $data['modal_name'] = "MATKUL";
