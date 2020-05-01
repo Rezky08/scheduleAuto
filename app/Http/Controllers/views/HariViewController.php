@@ -16,14 +16,13 @@ class HariViewController extends Controller
 {
     public function index()
     {
-        // untuk ambil data mata kuliah dari API
         $host = new Host();
         $url = $host->host('api') . 'hari';
         $reqApi = new Request_api();
         $response = $reqApi->request('GET', $url);
 
         $data = [];
-        $data['mata_kuliah'] = [];
+        $data['hari'] = [];
         if ($response['status'] == 200) {
             $hari = $response['data'];
             $hari = collect($hari);
@@ -76,14 +75,8 @@ class HariViewController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput();
         }
-        if ($id == $request->id) {
-            $form_params = [
-                'id' => $id,
-                'nama_hari' => $request->nama_hari,
-            ];
-        } else {
-            $form_params = $request->all();
-        }
+        $form_params = $request->all();
+        $form_params['id'] = $id;
 
         $host = new Host();
         $url = $host->host('api') . 'hari';

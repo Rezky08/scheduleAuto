@@ -1,6 +1,6 @@
 @include('admin.head')
-@include('admin.modal_scripts')
 @include('admin.sidebar')
+@include('admin.modal_scripts')
 @include('admin.validasi')
 @include('admin.footer_scripts')
 <!DOCTYPE html>

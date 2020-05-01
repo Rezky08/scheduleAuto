@@ -113,18 +113,38 @@
 @section('MODALJSHARI')
 <script>
     $('button[data-target="#modaluhari"]').on('click', function () {
-        id = $(this).attr('data-id');
-        act = $("#formmodaluhari").attr('action');
-        act = act+id;
+        row_parent = $(this).parents('tr');
+        id_hari = $(row_parent).attr('id');
+        child = $(row_parent).children();
+        $.map(child, function (item, index) {
+            field = $(item).attr('id');
+            value = $(item).text().trim();
+            if (field!=undefined) {
+                el = $("#formmodaluhari").find("[name='"+field+"']");
+                tagname = $(el).prop('tagName').toLowerCase();
+                if (tagname=="select") {
+                    $(el).children('option:selected').removeAttr('selected');
+                    $(el).children("option[value='"+value+"']").attr('selected','selected');
+                }else{
+                    $(el).val(value);
+                }
+            }
+        });
+
+        // act = $("#formmodaluhari").attr('action');
+        act = '/hari/update/';
+        act = act+id_hari;
         $("#formmodaluhari").attr('action',act);
     });
-    $("tr").on('click', function () {
-        id = $(this).find('button[data-target="#modaldhari"]').attr('data-id');
-        nama_hari = $(this).find("#nama_hari").text()
-        message = "Apakah anda ingin menghapus hari "+nama_hari+" ("+id+") ?";
+    $("button[data-target='#modaldhari']").on('click', function () {
+        row_parent = $(this).parents('tr');
+        id_hari = $(row_parent).attr('id');
+        nama_hari = $(row_parent).find("#nama_hari").text()
+        message = "Apakah anda ingin menghapus hari "+nama_hari+" ("+id_hari+") ?";
         $("#modaldhari").find('#modal-message').text(message);
-        act = $("#modaldhari").find("form").attr('action');
-        act = act+id;
+        // act = $("#modaldhari").find("form").attr('action');
+        act = '/hari/delete/';
+        act = act+id_hari;
         $("#modaldhari").find("form").attr('action',act);
         console.log(act);
     });
@@ -376,7 +396,6 @@
                         @endif
 
                     </div>
-
 
                     <div class="form-group">
                         <label>Kode Prodi</label>
