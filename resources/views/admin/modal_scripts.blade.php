@@ -94,26 +94,16 @@
                         @endif
 
                     </div>
-                    {{--
+
                     <div class="form-group">
                         <label>Kode Prodi</label>
                         <select name="kode_prodi" class="form-control border">
                             <option value="" disabled selected>Pilih Program Studi</option>
-<<<<<<< HEAD
                             @foreach ($program_studi as $item)
                             <option value="{{$item['kode_prodi']}}" {!!
-                    $item['kode_prodi']==old('kode_prodi')?'selected':'' !!}>{{$item['nama_prodi']}}
-                    </option>
-                    @endforeach
-                    </select>
-=======
-                            @if ($program_studi)
-                                @foreach ($program_studi as $item)
-                                <option value="{{$item['kode_prodi']}}" {!!
-                                    $item['kode_prodi']==old('kode_prodi')?'selected':'' !!}>{{$item['nama_prodi']}}
-                                </option>
-                                @endforeach
-                            @endif
+                                $item['kode_prodi']==old('kode_prodi')?'selected':'' !!}>{{$item['nama_prodi']}}
+                            </option>
+                            @endforeach
                         </select>
 
                         @if($errors->has('kode_prodi'))
@@ -121,26 +111,19 @@
                             {{ $errors->first('kode_prodi')}}
                         </div>
                         @endif
->>>>>>> 33a51ff98d13077a259599e2d16ef9a63f4d928c
 
-                    @if($errors->has('kode_prodi'))
-                    <div class="text-danger">
-                        {{ $errors->first('kode_prodi')}}
                     </div>
-                    @endif
-
-            </div> --}}
-        </div>
-        <div class="modal-footer">
-            <center>
-                <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Simpan">
-                </div>
-            </center>
-            </form>
+            </div>
+            <div class="modal-footer">
+                <center>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary" value="Simpan">
+                    </div>
+                </center>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 </div>
 @endsection
 
@@ -232,35 +215,35 @@
                         @endif
 
                     </div>
-                    {{-- <div class="form-group">
+                    <div class="form-group">
                         <label>Kode Prodi</label>
                         <select name="kode_prodi" class="form-control border">
                             <option value="" disabled selected>Pilih Program Studi</option>
                             @foreach ($program_studi as $item)
                             <option value="{{$item['kode_prodi']}}" {!!
-                    $item['kode_prodi']==old('kode_prodi')?'selected':'' !!}>{{$item['nama_prodi']}}
-                    </option>
-                    @endforeach
-                    </select>
+                                $item['kode_prodi']==old('kode_prodi')?'selected':'' !!}>{{$item['nama_prodi']}}
+                            </option>
+                            @endforeach
+                        </select>
 
-                    @if($errors->has('kode_prodi'))
-                    <div class="text-danger">
-                        {{ $errors->first('kode_prodi')}}
+                        @if($errors->has('kode_prodi'))
+                        <div class="text-danger">
+                            {{ $errors->first('kode_prodi')}}
+                        </div>
+                        @endif
+
                     </div>
-                    @endif
-
-            </div> --}}
-        </div>
-        <div class="modal-footer">
-            <center>
-                <div class="form-group">
-                    <input type="submit" class="btn btn-warning" value="Edit">
-                </div>
-            </center>
-            </form>
+            </div>
+            <div class="modal-footer">
+                <center>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-warning" value="Edit">
+                    </div>
+                </center>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 </div>
 @endsection
 
@@ -290,7 +273,7 @@
 
 @section('MODALJSMATKUL')
 <script>
-    $('button[data-target="#modalmatkul"]').on('click', function () {
+    $('button[data-target="#modalumatkul"]').on('click', function () {
         row_parent = $(this).parents('tr');
         id_matkul = $(row_parent).attr('id');
         child = $(row_parent).children();
@@ -298,7 +281,7 @@
             field = $(item).attr('id');
             value = $(item).text().trim();
             if (field!=undefined) {
-                el = $("#formmodalmatkul").find("[name='"+field+"']");
+                el = $("#formmodalumatkul").find("[name='"+field+"']");
                 tagname = $(el).prop('tagName').toLowerCase();
                 if (tagname=="select") {
                     $(el).children('option:selected').removeAttr('selected');
@@ -309,10 +292,10 @@
             }
         });
 
-        // act = $("#formmodalmatkul").attr('action');
+        // act = $("#formmodalumatkul").attr('action');
         act = '/matkul/update/';
         act = act+id_matkul;
-        $("#formmodalmatkul").attr('action',act);
+        $("#formmodalumatkul").attr('action',act);
     });
     $("button[data-target='#modaldmatkul']").on('click', function () {
 
