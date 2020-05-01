@@ -61,6 +61,7 @@ class MatkulViewController extends Controller
             'sks_matkul' => ['required', 'numeric'],
             'nama_matkul' => ['required'],
             'status_matkul' => ['boolean'],
+            'lab_matkul' => ['boolean'],
             'kode_prodi' => ['required'],
         ];
 
@@ -92,6 +93,7 @@ class MatkulViewController extends Controller
             'sks_matkul' => ['required', 'numeric'],
             'nama_matkul' => ['required'],
             'status_matkul' => ['boolean'],
+            'lab_matkul' => ['boolean'],
             'kode_prodi' => ['required'],
         ];
 

@@ -31,7 +31,7 @@
             <div class="modal-footer">
                 <center>
                     <div class="form-group">
-                        <input type="submit" class="btn btn-success" value="Simpan">
+                        <input type="submit" class="btn btn-warning" value="Simpan">
                     </div>
                 </center>
                 </form>
@@ -76,7 +76,7 @@
             <div class="modal-footer">
                 <center>
                     <div class="form-group">
-                        <input type="submit" class="btn btn-success" value="Edit">
+                        <input type="submit" class="btn btn-warning" value="Edit">
                     </div>
                 </center>
                 </form>
@@ -98,7 +98,7 @@
                 <strong id="modal-message">Apakah anda ingin menghapus hari ini ?</strong>
                 <form action="hari/delete/" method="post" class="text-right">
                     @csrf
-                    <button type="submit" class="btn btn-success">Ya</button>
+                    <button type="submit" class="btn btn-warning">Ya</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">
                         Tidak
                     </button>
@@ -177,7 +177,7 @@
             <div class="modal-footer">
                 <center>
                     <div class="form-group">
-                        <input type="submit" class="btn btn-success" value="Simpan">
+                        <input type="submit" class="btn btn-warning" value="Simpan">
                     </div>
                 </center>
                 </form>
@@ -235,7 +235,7 @@
             <div class="modal-footer">
                 <center>
                     <div class="form-group">
-                        <input type="submit" class="btn btn-success" value="Edit">
+                        <input type="submit" class="btn btn-warning" value="Edit">
                     </div>
                 </center>
                 </form>
@@ -257,7 +257,7 @@
                 <strong id="modal-message">Apakah anda ingin menghapus sesi ini ?</strong>
                 <form action="jam/delete/" method="post" class="text-right">
                     @csrf
-                    <button type="submit" class="btn btn-success">Ya</button>
+                    <button type="submit" class="btn btn-warning">Ya</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">
                         Tidak
                     </button>
@@ -362,6 +362,20 @@
                         @endif
 
                     </div>
+                    <div class="form-group">
+                        <label>Lab</label>
+                        <select name="lab_matkul" class="form-control border">
+                            <option value="1">Lab</option>
+                            <option value="0">Tidak Lab</option>
+                        </select>
+
+                        @if($errors->has('lab_matkul'))
+                        <div class="text-danger">
+                            {{ $errors->first('lab_matkul')}}
+                        </div>
+                        @endif
+
+                    </div>
 
 
                     <div class="form-group">
@@ -369,7 +383,9 @@
                         <select name="kode_prodi" class="form-control border">
                             <option value="" disabled selected>Pilih Program Studi</option>
                             @foreach ($program_studi as $item)
-                                <option value="{{$item['kode_prodi']}}" {!! $item['kode_prodi']==old('kode_prodi')?'selected':'' !!}>{{$item['nama_prodi']}}</option>
+                            <option value="{{$item['kode_prodi']}}" {!!
+                                $item['kode_prodi']==old('kode_prodi')?'selected':'' !!}>{{$item['nama_prodi']}}
+                            </option>
                             @endforeach
                         </select>
 
@@ -384,7 +400,7 @@
             <div class="modal-footer">
                 <center>
                     <div class="form-group">
-                        <input type="submit" class="btn btn-success" value="Simpan">
+                        <input type="submit" class="btn btn-warning" value="Simpan">
                     </div>
                 </center>
                 </form>
@@ -467,13 +483,28 @@
 
                     </div>
 
+                    <div class="form-group">
+                        <label>Lab</label>
+                        <select name="lab_matkul" class="form-control border">
+                            <option value="1">Lab</option>
+                            <option value="0">Tidak Lab</option>
+                        </select>
 
+                        @if($errors->has('lab_matkul'))
+                        <div class="text-danger">
+                            {{ $errors->first('lab_matkul')}}
+                        </div>
+                        @endif
+
+                    </div>
                     <div class="form-group">
                         <label>Kode Prodi</label>
                         <select name="kode_prodi" class="form-control border">
                             <option value="" disabled selected>Pilih Program Studi</option>
                             @foreach ($program_studi as $item)
-                                <option value="{{$item['kode_prodi']}}" {!! $item['kode_prodi']==old('kode_prodi')?'selected':'' !!}>{{$item['nama_prodi']}}</option>
+                            <option value="{{$item['kode_prodi']}}" {!!
+                                $item['kode_prodi']==old('kode_prodi')?'selected':'' !!}>{{$item['nama_prodi']}}
+                            </option>
                             @endforeach
                         </select>
 
@@ -488,7 +519,7 @@
             <div class="modal-footer">
                 <center>
                     <div class="form-group">
-                        <input type="submit" class="btn btn-success" value="Edit">
+                        <input type="submit" class="btn btn-warning" value="Edit">
                     </div>
                 </center>
                 </form>
@@ -510,7 +541,7 @@
                 <strong id="modal-message">Apakah anda ingin menghapus mata kuliah ini ?</strong>
                 <form action="matkul/delete/" method="post" class="text-right">
                     @csrf
-                    <button type="submit" class="btn btn-success">Ya</button>
+                    <button type="submit" class="btn btn-warning">Ya</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">
                         Tidak
                     </button>
@@ -610,7 +641,7 @@
             <div class="modal-footer">
                 <center>
                     <div class="form-group">
-                        <input type="submit" class="btn btn-success" value="Simpan">
+                        <input type="submit" class="btn btn-warning" value="Simpan">
                     </div>
                 </center>
                 </form>
@@ -670,7 +701,7 @@
             <div class="modal-footer">
                 <center>
                     <div class="form-group">
-                        <input type="submit" class="btn btn-success" value="Edit">
+                        <input type="submit" class="btn btn-warning" value="Edit">
                     </div>
                 </center>
                 </form>
@@ -692,7 +723,7 @@
                 <strong id="modal-message">Apakah anda ingin menghapus ruang ini ?</strong>
                 <form action="ruang/delete/" method="post" class="text-right">
                     @csrf
-                    <button type="submit" class="btn btn-success">Ya</button>
+                    <button type="submit" class="btn btn-warning">Ya</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">
                         Tidak
                     </button>
@@ -772,7 +803,7 @@
             <div class="modal-footer">
                 <center>
                     <div class="form-group">
-                        <input type="submit" class="btn btn-success" value="Simpan">
+                        <input type="submit" class="btn btn-warning" value="Simpan">
                     </div>
                 </center>
                 </form>
@@ -831,7 +862,7 @@
             <div class="modal-footer">
                 <center>
                     <div class="form-group">
-                        <input type="submit" class="btn btn-success" value="Edit">
+                        <input type="submit" class="btn btn-warning" value="Edit">
                     </div>
                 </center>
                 </form>
@@ -852,7 +883,7 @@
                 <strong id="modal-message">Apakah anda ingin menghapus prodi ini ?</strong>
                 <form action="program_studi/delete/" method="post" class="text-right">
                     @csrf
-                    <button type="submit" class="btn btn-success">Ya</button>
+                    <button type="submit" class="btn btn-warning">Ya</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">
                         Tidak
                     </button>
