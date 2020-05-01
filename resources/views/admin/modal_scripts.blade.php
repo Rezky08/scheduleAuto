@@ -1,3 +1,14 @@
+{{-- MATKUL --}}
+
+{{-- @section('MIMATKUL')
+    @include('admin.modal.matkul_modal_form',['action'=>"/matkul/add","modal_title"=>"Tambah Mata Kuliah","modal_id"=>"modalimatkul"])
+    @yield('FMATKUL')
+@endsection
+
+@section('MUMATKUL')
+    @include('admin.modal.matkul_modal_form',['action'=>"/matkul/update/","modal_title"=>"Ubah Mata Kuliah","modal_id"=>"modalumatkul"])
+    @yield('FMATKUL')
+@endsection --}}
 @section('MIMATKUL')
 {{-- Modal input  --}}
 <div class="modal fade" id="modalimatkul" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -73,7 +84,7 @@
                         <label>Lab</label>
                         <select name="lab_matkul" class="form-control border">
                             <option value="1">Lab</option>
-                            <option value="0">Tidak Lab</option>
+                            <option value="0">Kelas</option>
                         </select>
 
                         @if($errors->has('lab_matkul'))
@@ -88,12 +99,29 @@
                         <label>Kode Prodi</label>
                         <select name="kode_prodi" class="form-control border">
                             <option value="" disabled selected>Pilih Program Studi</option>
+<<<<<<< HEAD
                             @foreach ($program_studi as $item)
                             <option value="{{$item['kode_prodi']}}" {!!
                     $item['kode_prodi']==old('kode_prodi')?'selected':'' !!}>{{$item['nama_prodi']}}
                     </option>
                     @endforeach
                     </select>
+=======
+                            @if ($program_studi)
+                                @foreach ($program_studi as $item)
+                                <option value="{{$item['kode_prodi']}}" {!!
+                                    $item['kode_prodi']==old('kode_prodi')?'selected':'' !!}>{{$item['nama_prodi']}}
+                                </option>
+                                @endforeach
+                            @endif
+                        </select>
+
+                        @if($errors->has('kode_prodi'))
+                        <div class="text-danger">
+                            {{ $errors->first('kode_prodi')}}
+                        </div>
+                        @endif
+>>>>>>> 33a51ff98d13077a259599e2d16ef9a63f4d928c
 
                     @if($errors->has('kode_prodi'))
                     <div class="text-danger">
@@ -115,6 +143,8 @@
 </div>
 </div>
 @endsection
+
+
 
 
 @section('MUMATKUL')
@@ -260,7 +290,7 @@
 
 @section('MODALJSMATKUL')
 <script>
-    $('button[data-target="#modalumatkul"]').on('click', function () {
+    $('button[data-target="#modalmatkul"]').on('click', function () {
         row_parent = $(this).parents('tr');
         id_matkul = $(row_parent).attr('id');
         child = $(row_parent).children();
@@ -268,7 +298,7 @@
             field = $(item).attr('id');
             value = $(item).text().trim();
             if (field!=undefined) {
-                el = $("#formmodalumatkul").find("[name='"+field+"']");
+                el = $("#formmodalmatkul").find("[name='"+field+"']");
                 tagname = $(el).prop('tagName').toLowerCase();
                 if (tagname=="select") {
                     $(el).children('option:selected').removeAttr('selected');
@@ -279,12 +309,13 @@
             }
         });
 
-        // act = $("#formmodalumatkul").attr('action');
+        // act = $("#formmodalmatkul").attr('action');
         act = '/matkul/update/';
         act = act+id_matkul;
-        $("#formmodalumatkul").attr('action',act);
+        $("#formmodalmatkul").attr('action',act);
     });
     $("button[data-target='#modaldmatkul']").on('click', function () {
+
         kode_matkul = $(this).attr('data-kode-matkul');
         row_parent = $(this).parents('tr');
         id_matkul = $(row_parent).attr('id');
