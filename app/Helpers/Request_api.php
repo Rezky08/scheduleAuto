@@ -21,10 +21,10 @@ class Request_api
                 return $response;
             }
         } catch (Exception $e) {
-            $response = [
-                'status' => $e->getCode(),
-                'messgae' => $e->getMessage()
-            ];
+            $contents = $e->getResponse()->getBody()->getContents();
+            $contents = json_decode($contents);
+            $contents = collect($contents);
+            $response = $contents->toArray();
             return $response;
         }
     }

@@ -525,8 +525,9 @@
 @section('MODALJSMATKUL')
 <script>
     $('button[data-target="#modalumatkul"]').on('click', function () {
-        id_matkul = $(this).attr('data-kode-matkul');
-        child = $(this).parents('tr').children();
+        row_parent = $(this).parents('tr');
+        id_matkul = $(row_parent).attr('id');
+        child = $(row_parent).children();
         $.map(child, function (item, index) {
             field = $(item).attr('id');
             value = $(item).text().trim();

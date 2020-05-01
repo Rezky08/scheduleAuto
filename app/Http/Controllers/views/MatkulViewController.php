@@ -85,7 +85,7 @@ class MatkulViewController extends Controller
         return redirect()->back()->withErrors($errors)->withInput();
     }
 
-    public function update(Request $request, $kode_matkul)
+    public function update(Request $request, $id)
     {
         $rules = [
             'kode_matkul' => ['required', 'max:10'],
@@ -99,18 +99,8 @@ class MatkulViewController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput();
         }
-        if ($kode_matkul != $request->kode_matkul) {
-            $form_params = [
-                'kode_matkul' => $kode_matkul,
-                'kode_matkul_new' => $request->kode_matkul,
-                'nama_matkul' => $request->nama_matkul,
-                'sks_matkul' => $request->sks_matkul,
-                'status_matkul' => $request->status_matkul,
-                'kode_prodi' => $request->kode_prodi
-            ];
-        } else {
-            $form_params = $request->all();
-        }
+        $form_params = $request->all();
+        $form_params['id'] = $id;
 
         $host = new Host();
         $url = $host->host('api') . 'matkul';
@@ -153,7 +143,6 @@ class MatkulViewController extends Controller
             ];
             return redirect()->back()->with($success);
         }
-        dd($response);
         $message = collect($response['message']);
         $errors = $message->toArray();
         return redirect()->back()->withErrors($errors)->withInput();
