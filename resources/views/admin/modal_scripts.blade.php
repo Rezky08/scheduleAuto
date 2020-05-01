@@ -83,36 +83,36 @@
                         @endif
 
                     </div>
-
+                    {{--
                     <div class="form-group">
                         <label>Kode Prodi</label>
                         <select name="kode_prodi" class="form-control border">
                             <option value="" disabled selected>Pilih Program Studi</option>
                             @foreach ($program_studi as $item)
                             <option value="{{$item['kode_prodi']}}" {!!
-                                $item['kode_prodi']==old('kode_prodi')?'selected':'' !!}>{{$item['nama_prodi']}}
-                            </option>
-                            @endforeach
-                        </select>
+                    $item['kode_prodi']==old('kode_prodi')?'selected':'' !!}>{{$item['nama_prodi']}}
+                    </option>
+                    @endforeach
+                    </select>
 
-                        @if($errors->has('kode_prodi'))
-                        <div class="text-danger">
-                            {{ $errors->first('kode_prodi')}}
-                        </div>
-                        @endif
+                    @if($errors->has('kode_prodi'))
+                    <div class="text-danger">
+                        {{ $errors->first('kode_prodi')}}
+                    </div>
+                    @endif
 
-                    </div>
-            </div>
-            <div class="modal-footer">
-                <center>
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-primary" value="Simpan">
-                    </div>
-                </center>
-                </form>
-            </div>
+            </div> --}}
+        </div>
+        <div class="modal-footer">
+            <center>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Simpan">
+                </div>
+            </center>
+            </form>
         </div>
     </div>
+</div>
 </div>
 @endsection
 
@@ -202,35 +202,35 @@
                         @endif
 
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label>Kode Prodi</label>
                         <select name="kode_prodi" class="form-control border">
                             <option value="" disabled selected>Pilih Program Studi</option>
                             @foreach ($program_studi as $item)
                             <option value="{{$item['kode_prodi']}}" {!!
-                                $item['kode_prodi']==old('kode_prodi')?'selected':'' !!}>{{$item['nama_prodi']}}
-                            </option>
-                            @endforeach
-                        </select>
+                    $item['kode_prodi']==old('kode_prodi')?'selected':'' !!}>{{$item['nama_prodi']}}
+                    </option>
+                    @endforeach
+                    </select>
 
-                        @if($errors->has('kode_prodi'))
-                        <div class="text-danger">
-                            {{ $errors->first('kode_prodi')}}
-                        </div>
-                        @endif
+                    @if($errors->has('kode_prodi'))
+                    <div class="text-danger">
+                        {{ $errors->first('kode_prodi')}}
+                    </div>
+                    @endif
 
-                    </div>
-            </div>
-            <div class="modal-footer">
-                <center>
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-warning" value="Edit">
-                    </div>
-                </center>
-                </form>
-            </div>
+            </div> --}}
+        </div>
+        <div class="modal-footer">
+            <center>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-warning" value="Edit">
+                </div>
+            </center>
+            </form>
         </div>
     </div>
+</div>
 </div>
 @endsection
 
@@ -443,18 +443,39 @@
 @section('MODALJSRUANG')
 <script>
     $('button[data-target="#modaluruang"]').on('click', function () {
-        id = $(this).attr('data-id');
-        act = $("#formmodaluruang").attr('action');
-        act = act+id;
+        row_parent = $(this).parents('tr');
+        id_ruang = $(row_parent).attr('id');
+        child = $(row_parent).children();
+        $.map(child, function (item, index) {
+            field = $(item).attr('id');
+            value = $(item).text().trim();
+            if (field!=undefined) {
+                el = $("#formmodaluruang").find("[name='"+field+"']");
+                tagname = $(el).prop('tagName').toLowerCase();
+                if (tagname=="select") {
+                    $(el).children('option:selected').removeAttr('selected');
+                    $(el).children("option[value='"+value+"']").attr('selected','selected');
+                }else{
+                    $(el).val(value);
+                }
+            }
+        });
+
+        // act = $("#formmodaluruang").attr('action');
+        act = '/ruang/update/';
+        act = act+id_ruang;
         $("#formmodaluruang").attr('action',act);
     });
-    $("tr").on('click', function () {
-        id = $(this).find('button[data-target="#modaldruang"]').attr('data-id');
-        nama_ruang = $(this).find("#nama_ruang").text()
-        message = "Apakah anda ingin menghapus ruang "+nama_ruang+" ("+id+") ?";
+    $("button[data-target='#modaldruang']").on('click', function () {
+        id = $(this).attr('data-id');
+        row_parent = $(this).parents('tr');
+        id_ruang= $(row_parent).attr('id');
+        nama_ruang = $(row_parent).find("#nama_ruang").text()
+        message = "Apakah anda ingin menghapus Ruang "+nama_ruang+" ("+id_ruang+") ?";
         $("#modaldruang").find('#modal-message').text(message);
-        act = $("#modaldruang").find("form").attr('action');
-        act = act+id;
+        // act = $("#modaldruang").find("form").attr('action');
+        act = '/ruang/delete/';
+        act = act+id_ruang;
         $("#modaldruang").find("form").attr('action',act);
         console.log(act);
     });

@@ -27,7 +27,7 @@
                 <div class="card-header">
                     <form action="/pegawai/cari" method="GET" class="form-inline">Cari Data Ruang : &nbsp;
                         <input class="form-control border border-secondary" type="text" name="cari"
-                            placeholder="Cari Pegawai .." value="">
+                            placeholder="Cari Ruang .." value="">
                         <input class="btn btn-primary ml-3" type="submit" value="CARI">
                     </form>
                 </div>
