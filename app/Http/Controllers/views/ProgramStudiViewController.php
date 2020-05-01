@@ -42,7 +42,7 @@ class ProgramStudiViewController extends Controller
     public function add(Request $request)
     {
         $rules = [
-            'kode_prodi' => ['required'],
+            'kode_prodi' => ['required', 'max:10'],
             'nama_prodi' => ['required'],
         ];
 
@@ -67,10 +67,10 @@ class ProgramStudiViewController extends Controller
         return redirect()->back()->withErrors($errors)->withInput();
     }
 
-    public function update(Request $request, $kode_prodi)
+    public function update(Request $request, $id)
     {
         $rules = [
-            'kode_prodi' => ['required'],
+            'kode_prodi' => ['required', 'max:10'],
             'nama_prodi' => ['required'],
         ];
 
@@ -78,15 +78,9 @@ class ProgramStudiViewController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput();
         }
-        if ($kode_prodi != $request->kode_prodi) {
-            $form_params = [
-                'kode_prodi' => $kode_prodi,
-                'kode_prodi_new' => $request->kode_prodi,
-                'nama_prodi' => $request->nama_prodi,
-            ];
-        } else {
-            $form_params = $request->all();
-        }
+
+        $form_params = $request->all();
+        $form_params['id'] = $id;
 
         $host = new Host();
         $url = $host->host('api') . 'program_studi';
@@ -105,13 +99,13 @@ class ProgramStudiViewController extends Controller
     }
 
 
-    public function delete($kode_prodi)
+    public function delete($id)
     {
         $rules = [
-            'kode_prodi' => ['required']
+            'id' => ['required']
         ];
         $form_params = [
-            'kode_prodi' => $kode_prodi
+            'id' => $id
         ];
         $validator = Validator::make($form_params, $rules);
         if ($validator->fails()) {

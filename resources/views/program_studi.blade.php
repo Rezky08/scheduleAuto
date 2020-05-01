@@ -23,14 +23,14 @@
             <!-- Button trigger modal -->
             <div class="card">
                 <div class="card-header">
-                    <form action="/pegawai/cari" method="GET" class="form-inline">Cari Data Prodi : &nbsp;
+                    <form action="/pegawai/cari" method="GET" class="form-inline">Cari Data Program Studi : &nbsp;
                         <input class="form-control border border-secondary" type="text" name="cari" value="">
                         <input class="btn btn-primary ml-3" type="submit" value="CARI">
                     </form>
                 </div>
                 <div class="card-body">
 
-                    <blockquote class="blockquote mb-0">Data Prodi
+                    <blockquote class="blockquote mb-0">Data Program Studi
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modaliprodi">
                             Tambah+
                         </button>
@@ -45,17 +45,17 @@
                         <th>Nama Prodi</th>
                         <th>Opsi</th>
                     </tr>
-                    @foreach ($program_studi as $j)
-                    <tr id="{{$j['kode_prodi']}}">
-                        <td id="kode_prodi"> {{$j['kode_prodi'] }}</td>
-                        <td id="nama_prodi"> {{$j['nama_prodi'] }}</td>
+                    @foreach ($program_studi as $prodi)
+                    <tr id="{{$prodi['id']}}">
+                        <td id="kode_prodi"> {{$prodi['kode_prodi'] }}</td>
+                        <td id="nama_prodi"> {{$prodi['nama_prodi'] }}</td>
                         <td>
                             <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modaluprodi"
-                                data-kode_prodi="{{$j['kode_prodi']}}">
+                                data-kode-prodi="{{$prodi['kode_prodi']}}">
                                 Edit
                             </button>
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modaldprodi"
-                                data-kode_prodi="{{$j['kode_prodi']}}">
+                                data-kode-prodi="{{$prodi['kode_prodi']}}">
                                 Hapus
                             </button>
                         </td>

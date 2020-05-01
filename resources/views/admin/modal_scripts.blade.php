@@ -31,7 +31,7 @@
             <div class="modal-footer">
                 <center>
                     <div class="form-group">
-                        <input type="submit" class="btn btn-warning" value="Simpan">
+                        <input type="submit" class="btn btn-primary" value="Simpan">
                     </div>
                 </center>
                 </form>
@@ -177,7 +177,7 @@
             <div class="modal-footer">
                 <center>
                     <div class="form-group">
-                        <input type="submit" class="btn btn-warning" value="Simpan">
+                        <input type="submit" class="btn btn-primary" value="Simpan">
                     </div>
                 </center>
                 </form>
@@ -312,7 +312,7 @@
                     <div class="form-group">
                         <label>Kode Matkul</label>
                         <input type="text" name="kode_matkul" class="form-control border border-secondary"
-                            placeholder="kode_matkul" value="{{old('kode_matkul')}}">
+                            placeholder="kode_matkul">
 
                         @if($errors->has('kode_matkul'))
                         <div class="text-danger">
@@ -325,7 +325,7 @@
                     <div class="form-group">
                         <label>Nama Matkul</label>
                         <input type="text" name="nama_matkul" class="form-control border border-secondary"
-                            placeholder="Nama Matkul" value="{{old('nama_matkul')}}">
+                            placeholder="Nama Matkul">
 
                         @if($errors->has('nama_matkul'))
                         <div class="text-danger">
@@ -338,7 +338,7 @@
                     <div class="form-group">
                         <label>Sks</label>
                         <input type="number" name="sks_matkul" class="form-control border border-secondary"
-                            placeholder="Sks" value="{{old('sks_matkul')}}">
+                            placeholder="Sks">
 
                         @if($errors->has('sks_matkul'))
                         <div class="text-danger">
@@ -400,7 +400,7 @@
             <div class="modal-footer">
                 <center>
                     <div class="form-group">
-                        <input type="submit" class="btn btn-warning" value="Simpan">
+                        <input type="submit" class="btn btn-primary" value="Simpan">
                     </div>
                 </center>
                 </form>
@@ -426,7 +426,6 @@
                 <form id="formmodalumatkul" method="POST" action="/matkul/update/">
 
                     {{ csrf_field() }}
-
 
 
                     <div class="form-group">
@@ -641,7 +640,7 @@
             <div class="modal-footer">
                 <center>
                     <div class="form-group">
-                        <input type="submit" class="btn btn-warning" value="Simpan">
+                        <input type="submit" class="btn btn-primary" value="Simpan">
                     </div>
                 </center>
                 </form>
@@ -776,7 +775,7 @@
                     <div class="form-group">
                         <label>Kode prodi</label>
                         <input type="text" name="kode_prodi" class="form-control border border-secondary"
-                            placeholder="kode_prodi" value="{{old('kode_prodi')}}">
+                            placeholder="kode_prodi">
 
                         @if($errors->has('kode_prodi'))
                         <div class="text-danger">
@@ -789,7 +788,7 @@
                     <div class="form-group">
                         <label>Nama prodi</label>
                         <input type="text" name="nama_prodi" class="form-control border border-secondary"
-                            placeholder="nama_prodi" value="{{old('nama_prodi')}}">
+                            placeholder="nama_prodi">
 
                         @if($errors->has('nama_prodi'))
                         <div class="text-danger">
@@ -803,7 +802,7 @@
             <div class="modal-footer">
                 <center>
                     <div class="form-group">
-                        <input type="submit" class="btn btn-warning" value="Simpan">
+                        <input type="submit" class="btn btn-primary" value="Simpan">
                     </div>
                 </center>
                 </form>
@@ -836,7 +835,6 @@
                         <label>Kode prodi</label>
                         <input type="text" name="kode_prodi" class="form-control border border-secondary"
                             placeholder="kode_prodi" value="{{old('kode_prodi')}}">
-
                         @if($errors->has('kode_prodi'))
                         <div class="text-danger">
                             {{ $errors->first('kode_prodi')}}
@@ -877,7 +875,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header bg-danger">
-                <h5 class="text-white">Hapus Prodi</h5>
+                <h5 class="text-white">Hapus Program Studi</h5>
             </div>
             <div class="modal-body">
                 <strong id="modal-message">Apakah anda ingin menghapus prodi ini ?</strong>
@@ -898,18 +896,39 @@
 @section('MODALJSPRODI')
 <script>
     $('button[data-target="#modaluprodi"]').on('click', function () {
-        kode_prodi = $(this).attr('data-kode_prodi');
-        act = $("#formmodaluprodi").attr('action');
-        act = act+kode_prodi;
+        row_parent = $(this).parents('tr');
+        id_prodi = $(row_parent).attr('id');
+        child = $(row_parent).children();
+        $.map(child, function (item, index) {
+            field = $(item).attr('id');
+            value = $(item).text().trim();
+            if (field!=undefined) {
+                el = $("#formmodaluprodi").find("[name='"+field+"']");
+                tagname = $(el).prop('tagName').toLowerCase();
+                if (tagname=="select") {
+                    $(el).children('option:selected').removeAttr('selected');
+                    $(el).children("option[value='"+value+"']").attr('selected','selected');
+                }else{
+                    $(el).val(value);
+                }
+            }
+        });
+
+        // act = $("#formmodaluprodi").attr('action');
+        act = '/program_studi/update/';
+        act = act+id_prodi;
         $("#formmodaluprodi").attr('action',act);
     });
-    $("tr").on('click', function () {
-        kode_prodi = $(this).find('button[data-target="#modaldprodi"]').attr('data-kode_prodi');
-        nama_prodi = $(this).find("#nama_prodi").text()
-        message = "Apakah anda ingin menghapus prodi "+nama_prodi+" ("+kode_prodi+") ?";
+    $("button[data-target='#modaldprodi']").on('click', function () {
+        kode_prodi = $(this).attr('data-kode-prodi');
+        row_parent = $(this).parents('tr');
+        id_prodi= $(row_parent).attr('id');
+        nama_prodi = $(row_parent).find("#nama_prodi").text()
+        message = "Apakah anda ingin menghapus Program Studi "+nama_prodi+" ("+kode_prodi+") ?";
         $("#modaldprodi").find('#modal-message').text(message);
-        act = $("#modaldprodi").find("form").attr('action');
-        act = act+kode_prodi;
+        // act = $("#modaldprodi").find("form").attr('action');
+        act = '/program_studi/delete/';
+        act = act+id_prodi;
         $("#modaldprodi").find("form").attr('action',act);
         console.log(act);
     });
