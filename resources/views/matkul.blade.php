@@ -55,8 +55,8 @@
                         <td id="kode_matkul"> {{$matkul['kode_matkul'] }}</td>
                         <td id="nama_matkul"> {{$matkul['nama_matkul'] }}</td>
                         <td id="sks_matkul"> {{$matkul['sks_matkul'] }}</td>
-                        <td id="status_matkul"> {{$matkul['status_matkul'] }}</td>
-                        <td id="lab_matkul"> {{$matkul['lab_matkul'] }}</td>
+                        <td id="status_matkul"> {{$matkul['status_matkul']?"Aktif":"Tidak Aktif" }}</td>
+                        <td id="lab_matkul"> {{$matkul['lab_matkul']?"Lab":"Kelas" }}</td>
                         <td id="kode_prodi"> {{$matkul['kode_prodi'] }}</td>
                         <td>
                             <button type="button" class="btn btn-warning" data-toggle="modal"
