@@ -1,37 +1,36 @@
+{{-- @section('MIMATKUL')
+@component('admin.component.matkul_modal_form')
+@slot('modal_id')
+modalimatkul
+@endslot
 
-@section('MIMATKUL')
-    @component('admin.component.matkul_modal_form')
-        @slot('modal_id')
-            modalimatkul
-        @endslot
+@slot('modal_title')
+Tambah Mata Kuliah
+@endslot
 
-        @slot('modal_title')
-            Tambah Mata Kuliah
-        @endslot
-
-        @slot('action')
-            /matkul/add
-        @endslot
-    @endcomponent
+@slot('action')
+/matkul/add
+@endslot
+@endcomponent
 @endsection
 
 @section('MUMATKUL')
-    @component('admin.component.matkul_modal_form')
-        @slot('modal_id')
-            modalumatkul
-        @endslot
+@component('admin.component.matkul_modal_form')
+@slot('modal_id')
+modalumatkul
+@endslot
 
-        @slot('modal_title')
-            Ubah Mata Kuliah
-        @endslot
+@slot('modal_title')
+Ubah Mata Kuliah
+@endslot
 
-        @slot('action')
-            /matkul/update/
-        @endslot
-    @endcomponent
-@endsection
+@slot('action')
+/matkul/update/
+@endslot
+@endcomponent
+@endsection --}}
 
-@section('MDMATKUL')
+{{-- @section('MDMATKUL')
 
 <div id="modaldmatkul" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -96,7 +95,7 @@
         console.log(act);
     });
 </script>
-@endsection
+@endsection --}}
 
 @section('MIRUANG')
 {{-- Modal input  --}}
@@ -259,121 +258,39 @@
 </script>
 @endsection
 
-@section('MIPRODI')
-{{-- Modal input  --}}
-<div class="modal fade" id="modaliprodi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form method="POST" action="/program_studi/add">
+{{-- @section('MIPRODI')
+@component('admin.component.program_studi_modal_form')
+@slot('modal_id')
+modaliprodi
+@endslot
 
-                    {{ csrf_field() }}
+@slot('modal_title')
+Tambah Program Studi
+@endslot
 
-                    <div class="form-group">
-                        <label>Kode prodi</label>
-                        <input type="text" name="kode_prodi" class="form-control border border-secondary"
-                            placeholder="kode_prodi">
+@slot('action')
+/program_studi/add
+@endslot
+@endcomponent
+@endsection --}}
 
-                        @if($errors->has('kode_prodi'))
-                        <div class="text-danger">
-                            {{ $errors->first('kode_prodi')}}
-                        </div>
-                        @endif
+{{-- @section('MUPRODI')
+@component('admin.component.program_studi_modal_form')
+@slot('modal_id')
+modaluprodi
+@endslot
 
-                    </div>
+@slot('modal_title')
+Ubah Program Studi
+@endslot
 
-                    <div class="form-group">
-                        <label>Nama prodi</label>
-                        <input type="text" name="nama_prodi" class="form-control border border-secondary"
-                            placeholder="nama_prodi">
+@slot('action')
+/program_studi/update/
+@endslot
+@endcomponent
+@endsection --}}
 
-                        @if($errors->has('nama_prodi'))
-                        <div class="text-danger">
-                            {{ $errors->first('nama_prodi')}}
-                        </div>
-                        @endif
-
-                    </div>
-
-            </div>
-            <div class="modal-footer">
-                <center>
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-primary" value="Simpan">
-                    </div>
-                </center>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
-
-
-@section('MUPRODI')
-{{-- modal edit --}}
-
-<div class="modal fade" id="modaluprodi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="formmodaluprodi" method="POST" action="/program_studi/update/">
-
-                    {{ csrf_field() }}
-
-                    <div class="form-group">
-                        <label>Kode prodi</label>
-                        <input type="text" name="kode_prodi" class="form-control border border-secondary"
-                            placeholder="kode_prodi" value="{{old('kode_prodi')}}">
-                        @if($errors->has('kode_prodi'))
-                        <div class="text-danger">
-                            {{ $errors->first('kode_prodi')}}
-                        </div>
-                        @endif
-
-                    </div>
-
-                    <div class="form-group">
-                        <label>Nama prodi</label>
-                        <input type="text" name="nama_prodi" class="form-control border border-secondary"
-                            placeholder="nama_prodi" value="{{old('nama_prodi')}}">
-
-                        @if($errors->has('nama_prodi'))
-                        <div class="text-danger">
-                            {{ $errors->first('nama_prodi')}}
-                        </div>
-                        @endif
-
-                    </div>
-
-            </div>
-            <div class="modal-footer">
-                <center>
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-warning" value="Edit">
-                    </div>
-                </center>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
-@section('MDPRODI')
+{{-- @section('MDPRODI')
 
 <div id="modaldprodi" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -382,7 +299,7 @@
                 <h5 class="text-white">Hapus Program Studi</h5>
             </div>
             <div class="modal-body">
-                <strong id="modal-message">Apakah anda ingin menghapus prodi ini ?</strong>
+                <strong id="modal-message">Apakah anda ingin menghapus Program Studi ini ?</strong>
                 <form action="program_studi/delete/" method="post" class="text-right">
                     @csrf
                     <button type="submit" class="btn btn-warning">Ya</button>
@@ -437,7 +354,7 @@
         console.log(act);
     });
 </script>
-@endsection
+@endsection --}}
 
 @section('MIHARI')
 {{-- Modal input  --}}
