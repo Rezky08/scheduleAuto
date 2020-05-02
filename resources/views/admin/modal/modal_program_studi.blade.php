@@ -76,7 +76,7 @@ $('button[data-target="#modaluprodi"]').on('click', function () {
         }
      });
 
-    form = $("#modaluprodi #formmodalprodi");
+    form = $("#modaluprodi #formmodal");
     $(form).find("[name='kode_prodi']").val(program_studi_item.kode_prodi);
     $(form).find("[name='nama_prodi']").val(program_studi_item.nama_prodi);
 
