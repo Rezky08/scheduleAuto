@@ -22,7 +22,7 @@
 
 @slot('form_fields')
 <div class="form-group">
-    <label>nama_ruang</label>
+    <label>Nama Ruang</label>
     <input type="text" name="nama_ruang" class="form-control border border-secondary" placeholder="Nama Ruang">
 
     @if($errors->has('nama_ruang'))

@@ -22,7 +22,7 @@
 
 @slot('form_fields')
 <div class="form-group">
-    <label>sesi_mulai</label>
+    <label>Sesi Mulai</label>
     <input type="text" name="sesi_mulai" class="form-control border border-secondary" placeholder="Sesi Mulai">
 
     @if($errors->has('sesi_mulai'))
@@ -34,7 +34,7 @@
 </div>
 
 <div class="form-group">
-    <label>sesi_selesai</label>
+    <label>Sesi Selesai</label>
     <input type="text" name="sesi_selesai" class="form-control border border-secondary" placeholder="Sesi Selesai">
 
     @if($errors->has('sesi_selesai'))

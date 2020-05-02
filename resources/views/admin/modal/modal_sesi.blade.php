@@ -90,7 +90,7 @@ $("button[data-target='#modaldsesi']").on('click', function () {
     id_sesi = $(row_parent).attr('id');
     sesi_mulai = $(row_parent).find("#sesi_mulai").text()
     sesi_selesai = $(row_parent).find("#sesi_selesai").text()
-    message = "Apakah anda ingin menghapus sesi  "+sesi_mulai+"-"+sesi_selesai+" ?";
+    message = "Apakah anda ingin menghapus sesi "+sesi_mulai+"-"+sesi_selesai+" ?";
     $("#modaldsesi").find('#modal-message').text(message);
     // act = $("#modaldsesi").find("form").attr('action');
     act = '/sesi/delete/';
