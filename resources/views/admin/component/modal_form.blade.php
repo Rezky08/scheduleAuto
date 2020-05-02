@@ -1,8 +1,5 @@
-<div class="modal fade"
-@isset($modal_id)
-{!! "id='".$modal_id."'"!!}
-@endisset
-tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" @isset($modal_id) {!! "id='" .$modal_id."'"!!} @endisset tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header @isset ($modal_header_class)
@@ -12,9 +9,9 @@ tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="tru
                     {{$modal_title_class}}
                 @endisset" id="exampleModalLabel">
                     @isset ($modal_title)
-                        {{$modal_title}}
+                    {{$modal_title}}
                     @else
-                        {{"Modal Title"}}
+                    {{"Modal Title"}}
                     @endisset
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -30,14 +27,14 @@ tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="tru
                 @endisset
                 >
                     {{ csrf_field() }}
-                @isset($form_fields)
+                    @isset($form_fields)
                     {{$form_fields}}
-                @endisset
+                    @endisset
             </div>
 
             <div class="modal-footer">
                 @isset($modal_footer)
-                    {{$modal_footer}}
+                {{$modal_footer}}
                 @endisset
                 </form>
             </div>
