@@ -57,7 +57,7 @@
 
 @section('MODALJSMATKUL')
 <script>
-    $('button[data-target="#modalmatkul"]').on('click', function () {
+    $('button[data-target="#modalumatkul"]').on('click', function () {
         row_parent = $(this).parents('tr');
         id_matkul = $(row_parent).attr('id');
         child = $(row_parent).children();
@@ -65,7 +65,7 @@
             field = $(item).attr('id');
             value = $(item).text().trim();
             if (field!=undefined) {
-                el = $("#formmodalmatkul").find("[name='"+field+"']");
+                el = $("#formmodalumatkul").find("[name='"+field+"']");
                 tagname = $(el).prop('tagName').toLowerCase();
                 if (tagname=="select") {
                     $(el).children('option:selected').removeAttr('selected');
@@ -76,10 +76,10 @@
             }
         });
 
-        // act = $("#formmodalmatkul").attr('action');
+        // act = $("#formmodalumatkul").attr('action');
         act = '/matkul/update/';
         act = act+id_matkul;
-        $("#formmodalmatkul").attr('action',act);
+        $("#formmodalumatkul").attr('action',act);
     });
     $("button[data-target='#modaldmatkul']").on('click', function () {
 
@@ -241,18 +241,39 @@
 @section('MODALJSRUANG')
 <script>
     $('button[data-target="#modaluruang"]').on('click', function () {
-        id = $(this).attr('data-id');
-        act = $("#formmodaluruang").attr('action');
-        act = act+id;
+        row_parent = $(this).parents('tr');
+        id_ruang = $(row_parent).attr('id');
+        child = $(row_parent).children();
+        $.map(child, function (item, index) {
+            field = $(item).attr('id');
+            value = $(item).text().trim();
+            if (field!=undefined) {
+                el = $("#formmodaluruang").find("[name='"+field+"']");
+                tagname = $(el).prop('tagName').toLowerCase();
+                if (tagname=="select") {
+                    $(el).children('option:selected').removeAttr('selected');
+                    $(el).children("option[value='"+value+"']").attr('selected','selected');
+                }else{
+                    $(el).val(value);
+                }
+            }
+        });
+
+        // act = $("#formmodaluruang").attr('action');
+        act = '/ruang/update/';
+        act = act+id_ruang;
         $("#formmodaluruang").attr('action',act);
     });
-    $("tr").on('click', function () {
-        id = $(this).find('button[data-target="#modaldruang"]').attr('data-id');
-        nama_ruang = $(this).find("#nama_ruang").text()
-        message = "Apakah anda ingin menghapus ruang "+nama_ruang+" ("+id+") ?";
+    $("button[data-target='#modaldruang']").on('click', function () {
+        id = $(this).attr('data-id');
+        row_parent = $(this).parents('tr');
+        id_ruang= $(row_parent).attr('id');
+        nama_ruang = $(row_parent).find("#nama_ruang").text()
+        message = "Apakah anda ingin menghapus Ruang "+nama_ruang+" ("+id_ruang+") ?";
         $("#modaldruang").find('#modal-message').text(message);
-        act = $("#modaldruang").find("form").attr('action');
-        act = act+id;
+        // act = $("#modaldruang").find("form").attr('action');
+        act = '/ruang/delete/';
+        act = act+id_ruang;
         $("#modaldruang").find("form").attr('action',act);
         console.log(act);
     });
