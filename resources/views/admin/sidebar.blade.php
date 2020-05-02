@@ -4,28 +4,29 @@
     <h1><a href="index.html" class="logo">KKP</a></h1>
     <ul class="list-unstyled components mb-5">
         <li class="active">
-            <a href=""> Home</a>
+            <a href=""> <i class="fa fa-home"></i> Home</a>
         </li>
         <li>
-            <a href="/ruang"> Ruang</a>
+            <a href="/ruang"> <i class="fa fa-chevron-right"></i> Ruang</a>
         </li>
         <li>
-            <a href="/sesi"> Sesi</a>
+            <a href="/sesi"> <i class="fa fa-chevron-right"></i> Sesi</a>
         </li>
         <li>
-            <a href="/hari"> Hari</a>
+            <a href="/hari"> <i class="fa fa-chevron-right"></i> Hari</a>
         </li>
 
         <li>
-            <a href="/matkul"> Mata kuliah</a>
+            <a href="/matkul"> <i class="fa fa-chevron-right"></i> Mata kuliah</a>
         </li>
         <li>
-            <a href="/program_studi"> Program Studi</a>
+            <a href="/program_studi"> <i class="fa fa-chevron-right"></i> Program Studi</a>
         </li>
         <li>
-            <a href="/jadwal"> Ada yang baru nih</a>
+            <a href="/jadwal"> <i class="fa fa-chevron-right"></i> Ada yang baru nih</a>
         </li>
     </ul>
+
 
     {{-- <div class="footer">
         <p>
