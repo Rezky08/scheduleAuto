@@ -1,6 +1,6 @@
 @include('admin.head')
 @include('admin.sidebar')
-@include('admin.modal_scripts')
+@include('admin.modal.modal_hari')
 @include('admin.validasi')
 @include('admin.footer_scripts')
 <!DOCTYPE html>
@@ -47,21 +47,23 @@
                         <th>Hari</th>
                         <th>Opsi</th>
                     </tr>
-                    @foreach ($hari as $j)
-                    <tr id="{{$j['id']}}">
-                        <td id="nama_hari"> {{$j['nama_hari'] }}</td>
-                        <td>
-                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modaluhari"
-                                data-id="{{$j['id']}}">
-                                Edit
-                            </button>
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modaldhari"
-                                data-id="{{$j['id']}}">
-                                Hapus
-                            </button>
-                        </td>
-                    </tr>
-                    @endforeach
+                    @isset($hari)
+                        @foreach ($hari as $item)
+                        <tr id="{{$item['id']}}">
+                            <td id="nama_hari"> {{$item['nama_hari'] }}</td>
+                            <td>
+                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modaluhari"
+                                    data-id="{{$item['id']}}">
+                                    Edit
+                                </button>
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modaldhari"
+                                    data-id="{{$item['id']}}">
+                                    Hapus
+                                </button>
+                            </td>
+                        </tr>
+                        @endforeach
+                    @endisset
                 </table>
             </div>
         </div>

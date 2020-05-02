@@ -84,7 +84,7 @@ $('button[data-target="#modalumatkul"]').on('click', function () {
         }
      });
 
-    form = $("#modalumatkul #formmodalmatkul");
+    form = $("#modalumatkul #formmodal");
     $(form).find("[name='kode_matkul']").val(mata_kuliah_item.kode_matkul);
     $(form).find("[name='nama_matkul']").val(mata_kuliah_item.nama_matkul);
     $(form).find("[name='sks_matkul']").val(mata_kuliah_item.sks_matkul);
@@ -114,7 +114,6 @@ $("button[data-target='#modaldmatkul']").on('click', function () {
     act = '/matkul/delete/';
     act = act+id_matkul;
     $("#modaldmatkul").find("form").attr('action',act);
-    console.log(act);
 });
 </script>
 @endsection

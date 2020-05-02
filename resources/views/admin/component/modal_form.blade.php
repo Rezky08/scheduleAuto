@@ -8,7 +8,9 @@ tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="tru
             <div class="modal-header @isset ($modal_header_class)
             {{$modal_header_class}}
             @endisset">
-                <h5 class="modal-title" id="exampleModalLabel">
+                <h5 class="modal-title @isset($modal_title_class)
+                    {{$modal_title_class}}
+                @endisset" id="exampleModalLabel">
                     @isset ($modal_title)
                         {{$modal_title}}
                     @else
@@ -20,7 +22,7 @@ tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="tru
                 </button>
             </div>
             <div class="modal-body">
-                <form id="formmodalmatkul" method="POST"
+                <form id="formmodal" method="POST"
                 @isset($action)
                     {!! "action='".$action."'" !!}
                 @else
