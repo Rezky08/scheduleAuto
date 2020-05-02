@@ -1,6 +1,6 @@
 @include('admin.head')
 @include('admin.sidebar')
-@include('admin.modal_scripts')
+@include('admin.modal.modal_sesi')
 @include('admin.validasi')
 @include('admin.footer_scripts')
 <!DOCTYPE html>
@@ -32,7 +32,7 @@
                 <div class="card-body">
 
                     <blockquote class="blockquote mb-0">Data Sesi
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalijam">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalisesi">
                             Tambah+
                         </button>
                     </blockquote>
@@ -46,16 +46,16 @@
                         <th>Sesi Selesai</th>
                         <th>Opsi</th>
                     </tr>
-                    @foreach ($jam as $j)
+                    @foreach ($sesi as $j)
                     <tr id="{{$j['id']}}">
-                        <td id="jam_mulai"> {{$j['jam_mulai'] }}</td>
-                        <td id="jam_selesai"> {{$j['jam_selesai'] }}</td>
+                        <td id="sesi_mulai"> {{$j['sesi_mulai'] }}</td>
+                        <td id="sesi_selesai"> {{$j['sesi_selesai'] }}</td>
                         <td>
-                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalujam"
+                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalusesi"
                                 data-id="{{$j['id']}}">
                                 Edit
                             </button>
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modaldjam"
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modaldsesi"
                                 data-id="{{$j['id']}}">
                                 Hapus
                             </button>

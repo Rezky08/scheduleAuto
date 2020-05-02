@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\views;
 
 use App\Http\Controllers\Controller;
-use App\Jam;
+use App\sesi;
 use App\Helpers\Host;
 use App\Helpers\Request_api;
 use Illuminate\Http\Request;
@@ -12,38 +12,37 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\URL;
 
-class JamViewController extends Controller
+class SesiViewController extends Controller
 {
     public function index()
     {
-        // untuk ambil data jam dari API
         $host = new Host();
-        $url = $host->host('api') . 'jam';
+        $url = $host->host('api') . 'sesi';
         $reqApi = new Request_api();
         $response = $reqApi->request('GET', $url);
 
         $data = [];
-        $data['jam'] = [];
+        $data['sesi'] = [];
         if ($response['status'] == 200) {
-            $jam = $response['data'];
-            $jam = collect($jam);
-            $jam = $jam->map(function ($item, $index) {
+            $sesi = $response['data'];
+            $sesi = collect($sesi);
+            $sesi = $sesi->map(function ($item, $index) {
                 $item = collect($item)->toArray();
                 return $item;
             });
-            $data['jam'] = $jam;
+            $data['sesi'] = $sesi;
         }
 
         // call modal name
-        $data['modal_name'] = "JAM";
-        return view('jam', $data);
+        $data['modal_name'] = "SESI";
+        return view('sesi', $data);
     }
 
     public function add(Request $request)
     {
         $rules = [
-            'jam_mulai' => ['required'],
-            'jam_selesai' => ['required'],
+            'sesi_mulai' => ['required'],
+            'sesi_selesai' => ['required'],
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -52,7 +51,7 @@ class JamViewController extends Controller
         }
 
         $host = new Host();
-        $url = $host->host('api') . 'jam';
+        $url = $host->host('api') . 'sesi';
         $reqApi = new Request_api();
         $response = $reqApi->request('POST', $url, ['form_params' => $request->all()]);
         $message = collect($response['message']);
@@ -70,26 +69,19 @@ class JamViewController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            'jam_mulai' => ['required'],
-            'jam_selesai' => ['required'],
+            'sesi_mulai' => ['required'],
+            'sesi_selesai' => ['required'],
         ];
 
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput();
         }
-        if ($id == $request->id) {
-            $form_params = [
-                'id' => $id,
-                'jam_mulai' => $request->jam_mulai,
-                'jam_selesai' => $request->jam_selesai,
-            ];
-        } else {
-            $form_params = $request->all();
-        }
+        $form_params = $request->all();
+        $form_params['id'] = $id;
 
         $host = new Host();
-        $url = $host->host('api') . 'jam';
+        $url = $host->host('api') . 'sesi';
         $reqApi = new Request_api();
         $response = $reqApi->request('PUT', $url, ['form_params' => $form_params]);
         $message = collect($response['message']);
@@ -119,7 +111,7 @@ class JamViewController extends Controller
         }
 
         $host = new Host();
-        $url = $host->host('api') . 'jam';
+        $url = $host->host('api') . 'sesi';
         $reqApi = new Request_api();
         $response = $reqApi->request('DELETE', $url, ['form_params' => $form_params]);
         $message = collect($response['message']);

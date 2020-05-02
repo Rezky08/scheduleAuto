@@ -37,10 +37,10 @@ Route::post('/hari/add', 'views\HariViewController@add');
 Route::post('/hari/update/{id}', 'views\HariViewController@update');
 Route::post('/hari/delete/{id}', 'views\HariViewController@delete');
 
-Route::get('/jam', 'views\JamViewController@index');
-Route::post('/jam/add', 'views\JamViewController@add');
-Route::post('/jam/update/{id}', 'views\JamViewController@update');
-Route::post('/jam/delete/{id}', 'views\JamViewController@delete');
+Route::get('/sesi', 'views\SesiViewController@index');
+Route::post('/sesi/add', 'views\SesiViewController@add');
+Route::post('/sesi/update/{id}', 'views\SesiViewController@update');
+Route::post('/sesi/delete/{id}', 'views\SesiViewController@delete');
 
 Route::get('/jadwal', function () {
     return view('jadwal');

@@ -10,7 +10,7 @@
             <a href="/ruang"> Ruang</a>
         </li>
         <li>
-            <a href="/jam"> Sesi</a>
+            <a href="/sesi"> Sesi</a>
         </li>
         <li>
             <a href="/hari"> Hari</a>

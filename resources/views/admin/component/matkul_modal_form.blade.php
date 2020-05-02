@@ -20,7 +20,7 @@
 @slot('form_fields')
 <div class="form-group">
     <label>Kode Matkul</label>
-    <input type="text" name="kode_matkul" class="form-control border border-secondary" placeholder="kode_matkul">
+    <input type="text" name="kode_matkul" class="form-control border border-secondary" placeholder="Kode Matkul">
 
     @if($errors->has('kode_matkul'))
     <div class="text-danger">

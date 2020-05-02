@@ -22,24 +22,24 @@
 
 @slot('form_fields')
 <div class="form-group">
-    <label>nama_ruang</label>
-    <input type="text" name="nama_ruang" class="form-control border border-secondary" placeholder="Nama Ruang">
+    <label>sesi_mulai</label>
+    <input type="text" name="sesi_mulai" class="form-control border border-secondary" placeholder="Sesi Mulai">
 
-    @if($errors->has('nama_ruang'))
+    @if($errors->has('sesi_mulai'))
     <div class="text-danger">
-        {{ $errors->first('nama_ruang')}}
+        {{ $errors->first('sesi_mulai')}}
     </div>
     @endif
 
 </div>
 
 <div class="form-group">
-    <label>keterangan</label>
-    <input type="text" name="keterangan" class="form-control border border-secondary" placeholder="Keterangan">
+    <label>sesi_selesai</label>
+    <input type="text" name="sesi_selesai" class="form-control border border-secondary" placeholder="Sesi Selesai">
 
-    @if($errors->has('keterangan'))
+    @if($errors->has('sesi_selesai'))
     <div class="text-danger">
-        {{ $errors->first('keterangan')}}
+        {{ $errors->first('sesi_selesai')}}
     </div>
     @endif
 
