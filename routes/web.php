@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/matkul');
 });
 // Route::post('/matkul', 'views\MatakuliahController@store');
 

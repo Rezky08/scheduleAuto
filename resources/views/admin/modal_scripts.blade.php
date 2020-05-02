@@ -1,252 +1,34 @@
-{{-- MATKUL --}}
 
-{{-- @section('MIMATKUL')
-    @include('admin.modal.matkul_modal_form',['action'=>"/matkul/add","modal_title"=>"Tambah Mata Kuliah","modal_id"=>"modalimatkul"])
-    @yield('FMATKUL')
-@endsection
-
-@section('MUMATKUL')
-    @include('admin.modal.matkul_modal_form',['action'=>"/matkul/update/","modal_title"=>"Ubah Mata Kuliah","modal_id"=>"modalumatkul"])
-    @yield('FMATKUL')
-@endsection --}}
 @section('MIMATKUL')
-{{-- Modal input  --}}
-<div class="modal fade" id="modalimatkul" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form method="POST" action="/matkul/add">
+    @component('admin.component.matkul_modal_form')
+        @slot('modal_id')
+            modalimatkul
+        @endslot
 
-                    {{ csrf_field() }}
+        @slot('modal_title')
+            Tambah Mata Kuliah
+        @endslot
 
-
-                    <div class="form-group">
-                        <label>Kode Matkul</label>
-                        <input type="text" name="kode_matkul" class="form-control border border-secondary"
-                            placeholder="kode_matkul">
-
-                        @if($errors->has('kode_matkul'))
-                        <div class="text-danger">
-                            {{ $errors->first('kode_matkul')}}
-                        </div>
-                        @endif
-
-                    </div>
-
-                    <div class="form-group">
-                        <label>Nama Matkul</label>
-                        <input type="text" name="nama_matkul" class="form-control border border-secondary"
-                            placeholder="Nama Matkul">
-
-                        @if($errors->has('nama_matkul'))
-                        <div class="text-danger">
-                            {{ $errors->first('nama_matkul')}}
-                        </div>
-                        @endif
-
-                    </div>
-
-                    <div class="form-group">
-                        <label>Sks</label>
-                        <input type="number" name="sks_matkul" class="form-control border border-secondary"
-                            placeholder="Sks">
-
-                        @if($errors->has('sks_matkul'))
-                        <div class="text-danger">
-                            {{ $errors->first('sks_matkul')}}
-                        </div>
-                        @endif
-
-                    </div>
-
-                    <div class="form-group">
-                        <label>Status</label>
-                        <select name="status_matkul" class="form-control border">
-                            <option value="1">Aktif</option>
-                            <option value="0">Tidak Aktif</option>
-                        </select>
-
-                        @if($errors->has('status_matkul'))
-                        <div class="text-danger">
-                            {{ $errors->first('status_matkul')}}
-                        </div>
-                        @endif
-
-                    </div>
-                    <div class="form-group">
-                        <label>Lab</label>
-                        <select name="lab_matkul" class="form-control border">
-                            <option value="1">Lab</option>
-                            <option value="0">Kelas</option>
-                        </select>
-
-                        @if($errors->has('lab_matkul'))
-                        <div class="text-danger">
-                            {{ $errors->first('lab_matkul')}}
-                        </div>
-                        @endif
-
-                    </div>
-
-                    <div class="form-group">
-                        <label>Kode Prodi</label>
-                        <select name="kode_prodi" class="form-control border">
-                            <option value="" disabled selected>Pilih Program Studi</option>
-                            @if ($program_studi)
-                                @foreach ($program_studi as $item)
-                                <option value="{{$item['kode_prodi']}}" {!!
-                                    $item['kode_prodi']==old('kode_prodi')?'selected':'' !!}>{{$item['nama_prodi']}}
-                                </option>
-                                @endforeach
-                            @endif
-                        </select>
-
-                        @if($errors->has('kode_prodi'))
-                        <div class="text-danger">
-                            {{ $errors->first('kode_prodi')}}
-                        </div>
-                        @endif
-
-                    </div>
-            </div>
-            <div class="modal-footer">
-                <center>
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-primary" value="Simpan">
-                    </div>
-                </center>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+        @slot('action')
+            /matkul/add
+        @endslot
+    @endcomponent
 @endsection
 
-
-
-
 @section('MUMATKUL')
-<div class="modal fade" id="modalumatkul" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="formmodalumatkul" method="POST" action="/matkul/update/">
+    @component('admin.component.matkul_modal_form')
+        @slot('modal_id')
+            modalumatkul
+        @endslot
 
-                    {{ csrf_field() }}
+        @slot('modal_title')
+            Ubah Mata Kuliah
+        @endslot
 
-
-                    <div class="form-group">
-                        <label>Kode Matkul</label>
-                        <input type="text" name="kode_matkul" class="form-control border border-secondary"
-                            placeholder="kode_matkul" value="{{old('kode_matkul')}}">
-
-                        @if($errors->has('kode_matkul'))
-                        <div class="text-danger">
-                            {{ $errors->first('kode_matkul')}}
-                        </div>
-                        @endif
-
-                    </div>
-
-                    <div class="form-group">
-                        <label>Nama Matkul</label>
-                        <input type="text" name="nama_matkul" class="form-control border border-secondary"
-                            placeholder="Kama Matkul" value="{{old('nama_matkul')}}">
-
-                        @if($errors->has('nama_matkul'))
-                        <div class="text-danger">
-                            {{ $errors->first('nama_matkul')}}
-                        </div>
-                        @endif
-
-                    </div>
-
-                    <div class="form-group">
-                        <label>Sks</label>
-                        <input type="number" name="sks_matkul" class="form-control border border-secondary"
-                            placeholder="Sks" value="{{old('sks_matkul')}}">
-
-                        @if($errors->has('sks_matkul'))
-                        <div class="text-danger">
-                            {{ $errors->first('sks_matkul')}}
-                        </div>
-                        @endif
-
-                    </div>
-
-                    <div class="form-group">
-                        <label>Status</label>
-                        <select name="status_matkul" class="form-control border">
-                            <option value="1">Aktif</option>
-                            <option value="0">Tidak Aktif</option>
-                        </select>
-
-                        @if($errors->has('status_matkul'))
-                        <div class="text-danger">
-                            {{ $errors->first('status_matkul')}}
-                        </div>
-                        @endif
-
-                    </div>
-
-                    <div class="form-group">
-                        <label>Lab</label>
-                        <select name="lab_matkul" class="form-control border">
-                            <option value="1">Lab</option>
-                            <option value="0">Tidak Lab</option>
-                        </select>
-
-                        @if($errors->has('lab_matkul'))
-                        <div class="text-danger">
-                            {{ $errors->first('lab_matkul')}}
-                        </div>
-                        @endif
-
-                    </div>
-                    <div class="form-group">
-                        <label>Kode Prodi</label>
-                        <select name="kode_prodi" class="form-control border">
-                            <option value="" disabled selected>Pilih Program Studi</option>
-                            @foreach ($program_studi as $item)
-                            <option value="{{$item['kode_prodi']}}" {!!
-                                $item['kode_prodi']==old('kode_prodi')?'selected':'' !!}>{{$item['nama_prodi']}}
-                            </option>
-                            @endforeach
-                        </select>
-
-                        @if($errors->has('kode_prodi'))
-                        <div class="text-danger">
-                            {{ $errors->first('kode_prodi')}}
-                        </div>
-                        @endif
-
-                    </div>
-            </div>
-            <div class="modal-footer">
-                <center>
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-warning" value="Edit">
-                    </div>
-                </center>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+        @slot('action')
+            /matkul/update/
+        @endslot
+    @endcomponent
 @endsection
 
 @section('MDMATKUL')

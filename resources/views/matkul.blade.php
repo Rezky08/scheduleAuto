@@ -1,6 +1,6 @@
 @include('admin.head')
 @include('admin.sidebar')
-@include('admin.modal_scripts')
+@include('admin.modal.modal_matkul')
 @include('admin.validasi')
 @include('admin.footer_scripts')
 <!DOCTYPE html>
@@ -16,6 +16,7 @@
         @yield('sidebar')
         <!-- Page Content  -->
         <div id="content" class="p-4 p-md-5">
+            <!-- Navbar -->
             @yield('navbar')
 
             <!-- validasi -->
