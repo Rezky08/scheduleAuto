@@ -74,8 +74,6 @@
                 </table>
             </div>
 
-
-
         </div>
         @yield('MODAL')
     </div>

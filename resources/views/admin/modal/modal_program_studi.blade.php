@@ -65,7 +65,6 @@ bg-danger
 @section('MODALJSPRODI')
 <script>
     let program_studi = @json($program_studi);
-    // add program_studi option
 
 // Button update prodi
 $('button[data-target="#modaluprodi"]').on('click', function () {
