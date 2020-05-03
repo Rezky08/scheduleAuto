@@ -1,5 +1,5 @@
 @section('MISESI')
-@component('admin.component.sesi_modal_form')
+@component('components.sesi_modal_form')
 @slot('modal_id')
 modalisesi
 @endslot
@@ -15,7 +15,7 @@ Tambah Sesi
 @endsection
 
 @section('MUSESI')
-@component('admin.component.sesi_modal_form')
+@component('components.sesi_modal_form')
 @slot('modal_id')
 modalusesi
 @endslot
@@ -31,7 +31,7 @@ Ubah Sesi
 @endsection
 
 @section('MDSESI')
-@component('admin.component.modal_form')
+@component('components.modal_form')
 @slot('modal_id')
 modaldsesi
 @endslot

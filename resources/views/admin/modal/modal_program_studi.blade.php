@@ -1,5 +1,5 @@
 @section('MIPRODI')
-@component('admin.component.program_studi_modal_form')
+@component('components.program_studi_modal_form')
 @slot('modal_id')
 modaliprodi
 @endslot
@@ -15,7 +15,7 @@ Tambah Program Studi
 @endsection
 
 @section('MUPRODI')
-@component('admin.component.program_studi_modal_form')
+@component('components.program_studi_modal_form')
 @slot('modal_id')
 modaluprodi
 @endslot
@@ -31,7 +31,7 @@ Ubah Program Studi
 @endsection
 
 @section('MDPRODI')
-@component('admin.component.modal_form')
+@component('components.modal_form')
 @slot('modal_id')
 modaldprodi
 @endslot

@@ -1,5 +1,5 @@
 @section('MIRUANG')
-@component('admin.component.ruang_modal_form')
+@component('components.ruang_modal_form')
 @slot('modal_id')
 modaliruang
 @endslot
@@ -15,7 +15,7 @@ Tambah ruang
 @endsection
 
 @section('MURUANG')
-@component('admin.component.ruang_modal_form')
+@component('components.ruang_modal_form')
 @slot('modal_id')
 modaluruang
 @endslot
@@ -31,7 +31,7 @@ Ubah Mata Kuliah
 @endsection
 
 @section('MDRUANG')
-@component('admin.component.modal_form')
+@component('components.modal_form')
 @slot('modal_id')
 modaldruang
 @endslot

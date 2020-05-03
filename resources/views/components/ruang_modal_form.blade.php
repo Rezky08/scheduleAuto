@@ -1,4 +1,4 @@
-@component('admin.component.modal_form')
+@component('components.modal_form')
 
 @slot('modal_id')
 {{$modal_id}}
@@ -22,24 +22,24 @@
 
 @slot('form_fields')
 <div class="form-group">
-    <label>Sesi Mulai</label>
-    <input type="text" name="sesi_mulai" class="form-control border border-secondary" placeholder="Sesi Mulai">
+    <label>Nama Ruang</label>
+    <input type="text" name="nama_ruang" class="form-control border border-secondary" placeholder="Nama Ruang">
 
-    @if($errors->has('sesi_mulai'))
+    @if($errors->has('nama_ruang'))
     <div class="text-danger">
-        {{ $errors->first('sesi_mulai')}}
+        {{ $errors->first('nama_ruang')}}
     </div>
     @endif
 
 </div>
 
 <div class="form-group">
-    <label>Sesi Selesai</label>
-    <input type="text" name="sesi_selesai" class="form-control border border-secondary" placeholder="Sesi Selesai">
+    <label>keterangan</label>
+    <input type="text" name="keterangan" class="form-control border border-secondary" placeholder="Keterangan">
 
-    @if($errors->has('sesi_selesai'))
+    @if($errors->has('keterangan'))
     <div class="text-danger">
-        {{ $errors->first('sesi_selesai')}}
+        {{ $errors->first('keterangan')}}
     </div>
     @endif
 

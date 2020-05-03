@@ -1,5 +1,5 @@
 @section('MIHARI')
-@component('admin.component.hari_modal_form')
+@component('components.hari_modal_form')
 @slot('modal_id')
 modalihari
 @endslot
@@ -15,7 +15,7 @@ Tambah Hari
 @endsection
 
 @section('MUHARI')
-@component('admin.component.hari_modal_form')
+@component('components.hari_modal_form')
 @slot('modal_id')
 modaluhari
 @endslot
@@ -31,7 +31,7 @@ Ubah Mata Kuliah
 @endsection
 
 @section('MDHARI')
-@component('admin.component.modal_form')
+@component('components.modal_form')
 @slot('modal_id')
 modaldhari
 @endslot

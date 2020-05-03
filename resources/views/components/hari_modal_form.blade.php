@@ -1,4 +1,4 @@
-@component('admin.component.modal_form')
+@component('components.modal_form')
 
 @slot('modal_id')
 {{$modal_id}}

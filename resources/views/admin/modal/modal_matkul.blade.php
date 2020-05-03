@@ -1,5 +1,5 @@
 @section('MIMATKUL')
-@component('admin.component.matkul_modal_form')
+@component('components.matkul_modal_form')
 @slot('modal_id')
 modalimatkul
 @endslot
@@ -15,7 +15,7 @@ Tambah Mata Kuliah
 @endsection
 
 @section('MUMATKUL')
-@component('admin.component.matkul_modal_form')
+@component('components.matkul_modal_form')
 @slot('modal_id')
 modalumatkul
 @endslot
@@ -31,7 +31,7 @@ Ubah Mata Kuliah
 @endsection
 
 @section('MDMATKUL')
-@component('admin.component.modal_form')
+@component('components.modal_form')
 @slot('modal_id')
 modaldmatkul
 @endslot
@@ -64,56 +64,58 @@ bg-danger
 
 @section('MODALJSMATKUL')
 <script>
-    let mata_kuliah = @json($mata_kuliah);
-    let program_studi = @json($program_studi);
+
+    // load mata kuliah table
+    loadMatkul(mata_kuliah);
+
     // add program_studi option
     let program_studi_option = "";
     program_studi.forEach(item => {
         program_studi_option+="<option value='"+item.kode_prodi+"'>"+item.nama_prodi+"</option>\n"
     });
     $(program_studi_option).appendTo("select[name='kode_prodi']");
+    // Button update matkul
+    $('button[data-target="#modalumatkul"]').on('click', function () {
+        row_parent = $(this).parents('tr');
+        id_matkul = $(row_parent).attr('id');
+        mata_kuliah_item = mata_kuliah.find(function (item,index) {
+            if(item.id==id_matkul){
+                return item;
+            }
+        });
 
-// Button update matkul
-$('button[data-target="#modalumatkul"]').on('click', function () {
-    row_parent = $(this).parents('tr');
-    id_matkul = $(row_parent).attr('id');
-    mata_kuliah_item = mata_kuliah.find(function (item,index) {
-        if(item.id==id_matkul){
-            return item;
-        }
-     });
+        form = $("#modalumatkul #formmodal");
+        $(form).find("[name='kode_matkul']").val(mata_kuliah_item.kode_matkul);
+        $(form).find("[name='nama_matkul']").val(mata_kuliah_item.nama_matkul);
+        $(form).find("[name='sks_matkul']").val(mata_kuliah_item.sks_matkul);
+        $(form).find("[name='status_matkul'] option:selected").removeAttr('selected');
+        $(form).find("[name='status_matkul'] option[value='"+mata_kuliah_item.status_matkul+"']").attr('selected','selected');
 
-    form = $("#modalumatkul #formmodal");
-    $(form).find("[name='kode_matkul']").val(mata_kuliah_item.kode_matkul);
-    $(form).find("[name='nama_matkul']").val(mata_kuliah_item.nama_matkul);
-    $(form).find("[name='sks_matkul']").val(mata_kuliah_item.sks_matkul);
-    $(form).find("[name='status_matkul'] option:selected").removeAttr('selected');
-    $(form).find("[name='status_matkul'] option[value='"+mata_kuliah_item.status_matkul+"']").attr('selected','selected');
+        $(form).find("[name='lab_matkul'] option:selected").removeAttr('selected');
+        $(form).find("[name='lab_matkul'] option[value='"+mata_kuliah_item.lab_matkul+"']").attr('selected','selected');
+        $(form).find("[name='kode_prodi'] option:selected").removeAttr('selected');
+        $(form).find("[name='kode_prodi'] option[value='"+mata_kuliah_item.kode_prodi+"']").attr('selected','selected');
 
-    $(form).find("[name='lab_matkul'] option:selected").removeAttr('selected');
-    $(form).find("[name='lab_matkul'] option[value='"+mata_kuliah_item.lab_matkul+"']").removeAttr('selected');
-
-    $(form).find("[name='kode_prodi'] option:selected").removeAttr('selected');
-    $(form).find("[name='kode_prodi'] option[value='"+mata_kuliah_item.kode_prodi+"']").removeAttr('selected');
-
-    act = '/matkul/update/';
-    act = act+id_matkul;
-    $(form).attr('action',act);
-});
-// Button delete matkul
-$("button[data-target='#modaldmatkul']").on('click', function () {
-
-    kode_matkul = $(this).attr('data-kode-matkul');
-    row_parent = $(this).parents('tr');
-    id_matkul = $(row_parent).attr('id');
-    nama_matkul = $(row_parent).find("#nama_matkul").text()
-    message = "Apakah anda ingin menghapus mata kuliah "+nama_matkul+" ("+kode_matkul+") ?";
-    $("#modaldmatkul").find('#modal-message').text(message);
-    // act = $("#modaldmatkul").find("form").attr('action');
-    act = '/matkul/delete/';
-    act = act+id_matkul;
-    $("#modaldmatkul").find("form").attr('action',act);
-});
+        act = '/matkul/update/';
+        act = act+id_matkul;
+        $(form).attr('action',act);
+    });
+    // Button delete matkul
+    $("button[data-target='#modaldmatkul']").on('click', function () {
+        row_parent = $(this).parents('tr');
+        id_matkul = $(row_parent).attr('id');
+        matkul_item = mata_kuliah.filter(function (item) {
+            if (item.id == id_matkul) {
+                return item;
+            }
+         })[0];
+        message = "Apakah anda ingin menghapus mata kuliah "+matkul_item.nama_matkul+" ("+matkul_item.kode_matkul+") ?";
+        $("#modaldmatkul").find('#modal-message').text(message);
+        // act = $("#modaldmatkul").find("form").attr('action');
+        act = '/matkul/delete/';
+        act = act+id_matkul;
+        $("#modaldmatkul").find("form").attr('action',act);
+    });
 </script>
 @endsection
 
