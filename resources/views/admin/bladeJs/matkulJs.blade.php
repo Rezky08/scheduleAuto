@@ -1,3 +1,11 @@
+
+@section('matkulJsHeader')
+<script>
+    let mata_kuliah = @json($mata_kuliah);
+    let program_studi = @json($program_studi);
+</script>
+@endsection
+
 @section('matkulJsFooter')
 <script>
     function loadMatkul(mata_kuliah) {
@@ -44,23 +52,18 @@
     $(row_html).appendTo(table);
     }
 
+    // ini buat handle search button dan reset
     $("#search-box").find('form').submit(function (e) {
         e.preventDefault();
+
         $(this).find("#btn-cari-reset").removeClass('d-none');
     });
     $("#btn-cari-reset").click(function (e) {
         e.preventDefault();
-        // add reset button
         loadMatkul(mata_kuliah);
+        $(this).parents('form').find("input[name='cari']").val("");
         $(this).addClass('d-none');
     });
 
-</script>
-@endsection
-
-@section('matkulJsHeader')
-<script>
-    let mata_kuliah = @json($mata_kuliah);
-    let program_studi = @json($program_studi);
 </script>
 @endsection
