@@ -23,7 +23,7 @@
             <a href="/program_studi"> <i class="fa fa-chevron-right"></i> Program Studi</a>
         </li>
         <li>
-            <a href="/jadwal"> <i class="fa fa-chevron-right"></i> Ada yang baru nih</a>
+            <a href="/kelompokdosen"> <i class="fa fa-chevron-right"></i> Kelompok Dosen</a>
         </li>
     </ul>
 
