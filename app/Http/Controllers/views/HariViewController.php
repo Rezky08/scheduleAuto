@@ -16,12 +16,16 @@ class HariViewController extends Controller
 {
     public function index()
     {
+        // untuk ambil dataHari dari API
         $host = new Host();
         $url = $host->host('api') . 'hari';
         $reqApi = new Request_api();
         $response = $reqApi->request('GET', $url);
 
         $data = [];
+        // get data prodi
+        $url = $host->host('api') . 'hari';
+        $response = $reqApi->request('GET', $url);
         $data['hari'] = [];
         if ($response['status'] == 200) {
             $hari = $response['data'];
@@ -34,7 +38,6 @@ class HariViewController extends Controller
         }
 
         // call modal name
-        $data['modal_name'] = "HARI";
         return view('hari', $data);
     }
 

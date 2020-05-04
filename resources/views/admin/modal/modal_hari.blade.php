@@ -64,37 +64,41 @@ bg-danger
 
 @section('MODALJSHARI')
 <script>
-    let hari = @json($hari);
+    // load Hari table
+    loadHari(hari);
 
-// Button update hari
-$('button[data-target="#modaluhari"]').on('click', function () {
-    row_parent = $(this).parents('tr');
-    id_hari = $(row_parent).attr('id');
-    hari_item = hari.find(function (item,index) {
-        if(item.id==id_hari){
-            return item;
-        }
-     });
+    // Button update hari
+    $('button[data-target="#modaluhari"]').on('click', function () {
+        row_parent = $(this).parents('tr');
+        id_hari = $(row_parent).attr('id');
+        hari_item = hari.find(function (item,index) {
+            if(item.id==id_hari){
+                return item;
+            }
+        });
 
-    form = $("#modaluhari #formmodal");
-    $(form).find("[name='nama_hari']").val(hari_item.nama_hari);
-
-    act = '/hari/update/';
-    act = act+id_hari;
-    $(form).attr('action',act);
-});
-// Button delete hari
-$("button[data-target='#modaldhari']").on('click', function () {
-    row_parent = $(this).parents('tr');
-    id_hari = $(row_parent).attr('id');
-    nama_hari = $(row_parent).find("#nama_hari").text()
-    message = "Apakah anda ingin menghapus Hari  "+nama_hari+" ("+id_hari+") ?";
-    $("#modaldhari").find('#modal-message').text(message);
-    // act = $("#modaldhari").find("form").attr('action');
-    act = '/hari/delete/';
-    act = act+id_hari;
-    $("#modaldhari").find("form").attr('action',act);
-});
+        form = $("#modaluhari #formmodal");
+        $(form).find("[name='nama_hari']").val(hari_item.nama_hari);
+        act = '/hari/update/';
+        act = act+id_hari;
+        $(form).attr('action',act);
+    });
+    // Button delete hari
+    $("button[data-target='#modaldhari']").on('click', function () {
+        row_parent = $(this).parents('tr');
+        id_hari = $(row_parent).attr('id');
+        hari_item = hari.filter(function (item) {
+            if (item.id == id_hari) {
+                return item;
+            }
+         })[0];
+        message = "Apakah anda ingin menghapus Hari"+hari_item.nama_hari+" ("+hari_item.id+") ?";
+        $("#modaldhari").find('#modal-message').text(message);
+        // act = $("#modaldhari").find("form").attr('action');
+        act = '/hari/delete/';
+        act = act+id_hari;
+        $("#modaldhari").find("form").attr('action',act);
+    });
 </script>
 @endsection
 

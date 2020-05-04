@@ -64,38 +64,42 @@ bg-danger
 
 @section('MODALJSRUANG')
 <script>
-    let ruang = @json($ruang);
+    // load ruang table
+    loadRuang(ruang);
 
-// Button update ruang
-$('button[data-target="#modaluruang"]').on('click', function () {
-    row_parent = $(this).parents('tr');
-    id_ruang = $(row_parent).attr('id');
-    ruang_item = ruang.find(function (item,index) {
-        if(item.id==id_ruang){
-            return item;
-        }
-     });
+    // Button update ruang
+    $('button[data-target="#modaluruang"]').on('click', function () {
+        row_parent = $(this).parents('tr');
+        id_ruang = $(row_parent).attr('id');
+        ruang_item = ruang.find(function (item,index) {
+            if(item.id==id_ruang){
+                return item;
+            }
+        });
 
-    form = $("#modaluruang #formmodal");
-    $(form).find("[name='nama_ruang']").val(ruang_item.nama_ruang);
-    $(form).find("[name='keterangan']").val(ruang_item.keterangan);
-
-    act = '/ruang/update/';
-    act = act+id_ruang;
-    $(form).attr('action',act);
-});
-// Button delete ruang
-$("button[data-target='#modaldruang']").on('click', function () {
-    row_parent = $(this).parents('tr');
-    id_ruang = $(row_parent).attr('id');
-    nama_ruang = $(row_parent).find("#nama_ruang").text()
-    message = "Apakah anda ingin menghapus ruang  "+nama_ruang+" ("+id_ruang+") ?";
-    $("#modaldruang").find('#modal-message').text(message);
-    // act = $("#modaldruang").find("form").attr('action');
-    act = '/ruang/delete/';
-    act = act+id_ruang;
-    $("#modaldruang").find("form").attr('action',act);
-});
+        form = $("#modaluruang #formmodal");
+        $(form).find("[name='nama_ruang']").val(ruang_item.nama_ruang);
+        $(form).find("[name='keterangan']").val(ruang_item.keterangan);
+        act = '/ruang/update/';
+        act = act+id_ruang;
+        $(form).attr('action',act);
+    });
+    // Button delete ruang
+    $("button[data-target='#modaldruang']").on('click', function () {
+        row_parent = $(this).parents('tr');
+        id_ruang = $(row_parent).attr('id');
+        ruang_item = ruang.filter(function (item) {
+            if (item.id == id_ruang) {
+                return item;
+            }
+         })[0];
+        message = "Apakah anda ingin menghapus Ruang"+ruang_item.nama_ruang+" ("+ruang_item.id+") ?";
+        $("#modaldruang").find('#modal-message').text(message);
+        // act = $("#modaldruang").find("form").attr('action');
+        act = '/ruang/delete/';
+        act = act+id_ruang;
+        $("#modaldruang").find("form").attr('action',act);
+    });
 </script>
 @endsection
 

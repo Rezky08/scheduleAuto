@@ -17,13 +17,16 @@ class RuangViewController extends Controller
 {
     public function index()
     {
-        // untuk ambil data ruang dari API
+        // untuk ambil data Raung dari API
         $host = new Host();
         $url = $host->host('api') . 'ruang';
         $reqApi = new Request_api();
         $response = $reqApi->request('GET', $url);
 
         $data = [];
+        // get data prodi
+        $url = $host->host('api') . 'ruang';
+        $response = $reqApi->request('GET', $url);
         $data['ruang'] = [];
         if ($response['status'] == 200) {
             $ruang = $response['data'];
@@ -36,7 +39,6 @@ class RuangViewController extends Controller
         }
 
         // call modal name
-        $data['modal_name'] = "RUANG";
         return view('ruang', $data);
     }
 

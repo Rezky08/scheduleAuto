@@ -3,11 +3,13 @@
 @include('admin.modal.modal_sesi')
 @include('admin.validasi')
 @include('admin.footer_scripts')
+@include('admin.bladeJs.sesiJs')
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     @yield('header')
+    @yield('sesiJsHeader')
 </head>
 
 <body>
@@ -15,19 +17,33 @@
         <!-- Sidebar -->
         @yield('sidebar')
         <!-- Page Content  -->
-
         <div id="content" class="p-4 p-md-5">
+            <!-- Navbar -->
             @yield('navbar')
+
             <!-- validasi -->
             @yield('validasi')
 
             <!-- Button trigger modal -->
             <div class="card">
                 <div class="card-header">
-                    <form action="/pegawai/cari" method="GET" class="form-inline">Cari Data Sesi : &nbsp;
-                        <input class="form-control border border-secondary" type="text" name="cari" value="">
-                        <input class="btn btn-primary ml-3" type="submit" value="CARI">
-                    </form>
+                    @component('components.searchbox')
+                    @slot('action')
+                    #
+                    @endslot
+                    @slot('label')
+                    Cari Data Sesi :
+                    @endslot
+                    @slot('placeholder')
+                    Sesi
+                    @endslot
+                    @slot('endpoint_target')
+                    sesi/search
+                    @endslot
+                    @slot('callback')
+                    loadSesi
+                    @endslot
+                    @endcomponent
                 </div>
                 <div class="card-body">
 
@@ -39,35 +55,21 @@
                 </div>
             </div>
             <br />
-            <div class="table-wrapper-scroll-y my-custom-scrollbar">
-                <table class="table table-bordered">
-                    <tr>
-                        <th>Sesi Mulai</th>
-                        <th>Sesi Selesai</th>
-                        <th>Opsi</th>
-                    </tr>
-                    @foreach ($sesi as $j)
-                    <tr id="{{$j['id']}}">
-                        <td id="sesi_mulai"> {{$j['sesi_mulai'] }}</td>
-                        <td id="sesi_selesai"> {{$j['sesi_selesai'] }}</td>
-                        <td>
-                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalusesi"
-                                data-id="{{$j['id']}}">
-                                Edit
-                            </button>
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modaldsesi"
-                                data-id="{{$j['id']}}">
-                                Hapus
-                            </button>
-                        </td>
-                    </tr>
-                    @endforeach
-                </table>
-            </div>
+            @component('components.scrollable_table',
+            [
+            'table_header'=>['No','Sesi Mulai','Sesi Selesai'],
+            'modal_target'=>[
+            'update'=>'#modalusesi',
+            'delete'=>'modaldsesi'
+            ]
+            ])
+            @endcomponent
         </div>
-        @yield('MODAL')
     </div>
+    @yield('sesiJsFooter')
+    @yield('MODAL')
     @yield('footer_scripts')
+    @yield('search_box_script')
 </body>
 
 </html>

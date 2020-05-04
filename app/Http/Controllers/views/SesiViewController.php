@@ -16,12 +16,16 @@ class SesiViewController extends Controller
 {
     public function index()
     {
+        // untuk ambil data Sesi dari API
         $host = new Host();
         $url = $host->host('api') . 'sesi';
         $reqApi = new Request_api();
         $response = $reqApi->request('GET', $url);
 
         $data = [];
+        // get data prodi
+        $url = $host->host('api') . 'sesi';
+        $response = $reqApi->request('GET', $url);
         $data['sesi'] = [];
         if ($response['status'] == 200) {
             $sesi = $response['data'];
@@ -34,7 +38,6 @@ class SesiViewController extends Controller
         }
 
         // call modal name
-        $data['modal_name'] = "SESI";
         return view('sesi', $data);
     }
 
