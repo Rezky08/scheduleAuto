@@ -1,13 +1,15 @@
 @include('admin.head')
-
 @include('admin.sidebar')
+@include('admin.modal.modal_kelompok_dosen')
 @include('admin.validasi')
 @include('admin.footer_scripts')
+@include('admin.bladeJs.keldosJs')
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     @yield('header')
+    @yield('keldosJsHeader')
 </head>
 
 <body>
@@ -16,62 +18,72 @@
         @yield('sidebar')
         <!-- Page Content  -->
         <div id="content" class="p-4 p-md-5">
+            <!-- Navbar -->
             @yield('navbar')
 
             <!-- validasi -->
-            {{-- @yield('validasi') --}}
+            @yield('validasi')
 
             <!-- Button trigger modal -->
             <div class="card">
                 <div class="card-header">
-                    <form action="/pegawai/cari" method="GET" class="form-inline">Cari Data Hari : &nbsp;
-                        <input class="form-control border border-secondary" type="text" name="cari" value="">
-                        <input class="btn btn-primary ml-3" type="submit" value="CARI">
-                    </form>
+                    @component('components.searchcombo')
+                    @slot('action')
+                    #
+                    @endslot
+                    @slot('label')
+                    Cari Data Kelompok Dosen :
+                    @endslot
+                    {{-- @slot('placeholder')
+                    Kelompok Dosen
+                    @endslot --}}
+                    @slot('endpoint_target')
+                    kelompok_dosen/search
+                    @endslot
+                    @slot('callback')
+                    loadKeldos
+                    @endslot
+                    @endcomponent
                 </div>
-
                 <div class="card-body">
-                    <blockquote class="blockquote mb-0">Data Proses
-                        <button type="button" class="btn btn-primary" data-toggle="modal">
+
+                    <blockquote class="blockquote mb-0">Data Kelompok Dosen
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalikeldos">
                             Tambah+
                         </button>
+                        <div class="form-group">
+                            <label>Peminat Id</label>
+                            <select name="peminat_id" class="form-control border">
+                                <option value="" disabled selected>Pilih Peminat Id</option>
+                            </select>
+
+                            @if($errors->has('peminat_id'))
+                            <div class="text-danger">
+                                {{ $errors->first('peminat_id')}}
+                            </div>
+                            @endif
+
+                        </div>
+
                     </blockquote>
                 </div>
             </div>
-            <!-- Button trigger modal -->
-
             <br />
-            <div class="table-wrapper-scroll-y my-custom-scrollbar">
-                <table class="table table-bordered">
-                    <tr>
-                        <th>Nama Proses</th>
-                        <th>Kode Proses</th>
-                        <th>Jam Mulai Proses</th>
-                        <th>Status Proses</th>
-                        <th>Opsi</th>
-                    </tr>
-                    {{-- @foreach ($hari as $j) --}}
-                    <tr>
-                        <td>Kode Uhu</td>
-                        <td>Nama WOi</td>
-                        <td>25:00</td>
-                        <td>Gagal Terus</td>
-                        <td>
-                            <button type="button" class="btn btn-warning" data-toggle="modal">
-                                Edit
-                            </button>
-                            <button type="button" class="btn btn-danger" data-toggle="modal">
-                                Hapus
-                            </button>
-                        </td>
-                    </tr>
-                    {{-- @endforeach --}}
-                </table>
-            </div>
+            @component('components.scrollable_table',
+            [
+            'table_header'=>['No','Kelompok dosen id','Kode Matkul','Kelompok','Kapasitas','Kode Dosen'],
+            'modal_target'=>[
+            'update'=>'#modalukeldos',
+            'delete'=>'modaldkeldos'
+            ]
+            ])
+            @endcomponent
         </div>
-        {{-- @yield('MODAL') --}}
     </div>
+    @yield('keldosJsFooter')
+    @yield('MODAL')
     @yield('footer_scripts')
+    @yield('search_box_script')
 </body>
 
 </html>

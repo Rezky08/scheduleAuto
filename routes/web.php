@@ -41,6 +41,7 @@ Route::post('/sesi/add', 'views\SesiViewController@add');
 Route::post('/sesi/update/{id}', 'views\SesiViewController@update');
 Route::post('/sesi/delete/{id}', 'views\SesiViewController@delete');
 
-Route::get('/kelompokdosen', function () {
-    return view('kelompok_dosen');
-});
+Route::get('/kelompok_dosen/detail', 'views\KelompokDosenViewController@index');
+Route::post('/kelompok_dosen/detail/add', 'views\KelompokDosenViewController@add');
+Route::put('/kelompok_dosen/detail/update/{id}', 'views\KelompokDosenViewController@update');
+Route::delete('/kelompok_dosen/detail/delete/{id}', 'views\KelompokDosenViewController@delete');

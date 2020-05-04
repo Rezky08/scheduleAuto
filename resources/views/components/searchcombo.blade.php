@@ -11,11 +11,9 @@
         <label for="">@isset($label)
             {{$label}}
             @endisset &nbsp;</label>
-        <input type="text" class="form-control" name="cari" placeholder="@isset($placeholder)
-                {{$placeholder}}
+        <select name="cari" class="form-control border">
 
-
-            @endisset">
+        </select>
 </div>
 <input id="btn-cari" class="btn btn-primary ml-3" type="submit" value="CARI">
 <button id="btn-cari-reset" type="button" class="d-none btn btn-success mx-2">Reset</button>
