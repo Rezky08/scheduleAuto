@@ -64,41 +64,42 @@ bg-danger
 
 @section('MODALJSPRODI')
 <script>
-    let program_studi = @json($program_studi);
+    // load mata kuliah table
+    loadProdi(program_studi);
 
-// Button update prodi
-$('button[data-target="#modaluprodi"]').on('click', function () {
-    row_parent = $(this).parents('tr');
-    id_prodi = $(row_parent).attr('id');
-    program_studi_item = program_studi.find(function (item,index) {
-        if(item.id==id_prodi){
-            return item;
-        }
-     });
+    // Button update prodi
+    $('button[data-target="#modaluprodi"]').on('click', function () {
+        row_parent = $(this).parents('tr');
+        id_prodi = $(row_parent).attr('id');
+        program_studi_item = program_studi.find(function (item,index) {
+            if(item.id==id_prodi){
+                return item;
+            }
+        });
 
-    form = $("#modaluprodi #formmodal");
-    $(form).find("[name='kode_prodi']").val(program_studi_item.kode_prodi);
-    $(form).find("[name='nama_prodi']").val(program_studi_item.nama_prodi);
-
-    act = '/program_studi/update/';
-    act = act+id_prodi;
-    $(form).attr('action',act);
-});
-// Button delete prodi
-$("button[data-target='#modaldprodi']").on('click', function () {
-
-    kode_prodi = $(this).attr('data-kode-prodi');
-    row_parent = $(this).parents('tr');
-    id_prodi = $(row_parent).attr('id');
-    nama_prodi = $(row_parent).find("#nama_prodi").text()
-    message = "Apakah anda ingin menghapus Program Studi "+nama_prodi+" ("+kode_prodi+") ?";
-    $("#modaldprodi").find('#modal-message').text(message);
-    // act = $("#modaldprodi").find("form").attr('action');
-    act = '/program_studi/delete/';
-    act = act+id_prodi;
-    $("#modaldprodi").find("form").attr('action',act);
-    console.log(act);
-});
+        form = $("#modaluprodi #formmodal");
+        $(form).find("[name='kode_prodi']").val(program_studi_item.kode_prodi);
+        $(form).find("[name='nama_prodi']").val(program_studi_item.nama_prodi);
+        act = '/prodi/update/';
+        act = act+id_prodi;
+        $(form).attr('action',act);
+    });
+    // Button delete prodi
+    $("button[data-target='#modaldprodi']").on('click', function () {
+        row_parent = $(this).parents('tr');
+        id_prodi = $(row_parent).attr('id');
+        prodi_item = program_studi.filter(function (item) {
+            if (item.id == id_prodi) {
+                return item;
+            }
+         })[0];
+        message = "Apakah anda ingin menghapus Program Studi "+prodi_item.nama_prodi+" ("+prodi_item.kode_prodi+") ?";
+        $("#modaldprodi").find('#modal-message').text(message);
+        // act = $("#modaldprodi").find("form").attr('action');
+        act = '/prodi/delete/';
+        act = act+id_prodi;
+        $("#modaldprodi").find("form").attr('action',act);
+    });
 </script>
 
 @endsection

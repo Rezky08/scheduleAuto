@@ -16,13 +16,16 @@ class ProgramStudiViewController extends Controller
 {
     public function index()
     {
-        // untuk ambil data mata kuliah dari API
+        // untuk ambil data Program Studi dari API
         $host = new Host();
         $url = $host->host('api') . 'program_studi';
         $reqApi = new Request_api();
         $response = $reqApi->request('GET', $url);
 
         $data = [];
+        // get data prodi
+        $url = $host->host('api') . 'program_studi';
+        $response = $reqApi->request('GET', $url);
         $data['program_studi'] = [];
         if ($response['status'] == 200) {
             $program_studi = $response['data'];
@@ -35,7 +38,6 @@ class ProgramStudiViewController extends Controller
         }
 
         // call modal name
-        $data['modal_name'] = "PRODI";
         return view('program_studi', $data);
     }
 

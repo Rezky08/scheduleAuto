@@ -3,11 +3,13 @@
 @include('admin.modal.modal_program_studi')
 @include('admin.validasi')
 @include('admin.footer_scripts')
+@include('admin.bladeJs.prodiJs')
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     @yield('header')
+    @yield('prodiJsHeader')
 </head>
 
 <body>
@@ -15,18 +17,33 @@
         <!-- Sidebar -->
         @yield('sidebar')
         <!-- Page Content  -->
-
         <div id="content" class="p-4 p-md-5">
+            <!-- Navbar -->
             @yield('navbar')
+
             <!-- validasi -->
             @yield('validasi')
+
             <!-- Button trigger modal -->
             <div class="card">
                 <div class="card-header">
-                    <form action="/pegawai/cari" method="GET" class="form-inline">Cari Data Program Studi : &nbsp;
-                        <input class="form-control border border-secondary" type="text" name="cari" value="">
-                        <input class="btn btn-primary ml-3" type="submit" value="CARI">
-                    </form>
+                    @component('components.searchbox')
+                    @slot('action')
+                    #
+                    @endslot
+                    @slot('label')
+                    Cari Data Program Studi :
+                    @endslot
+                    @slot('placeholder')
+                    Program Studi
+                    @endslot
+                    @slot('endpoint_target')
+                    program_studi/search
+                    @endslot
+                    @slot('callback')
+                    loadProdi
+                    @endslot
+                    @endcomponent
                 </div>
                 <div class="card-body">
 
@@ -38,35 +55,21 @@
                 </div>
             </div>
             <br />
-            <div class="table-wrapper-scroll-y my-custom-scrollbar">
-                <table class="table table-bordered">
-                    <tr>
-                        <th>Kode Prodi</th>
-                        <th>Nama Prodi</th>
-                        <th>Opsi</th>
-                    </tr>
-                    @foreach ($program_studi as $prodi)
-                    <tr id="{{$prodi['id']}}">
-                        <td id="kode_prodi"> {{$prodi['kode_prodi'] }}</td>
-                        <td id="nama_prodi"> {{$prodi['nama_prodi'] }}</td>
-                        <td>
-                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modaluprodi"
-                                data-kode-prodi="{{$prodi['kode_prodi']}}">
-                                Edit
-                            </button>
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modaldprodi"
-                                data-kode-prodi="{{$prodi['kode_prodi']}}">
-                                Hapus
-                            </button>
-                        </td>
-                    </tr>
-                    @endforeach
-                </table>
-            </div>
+            @component('components.scrollable_table',
+            [
+            'table_header'=>['No','Kode','Nama'],
+            'modal_target'=>[
+            'update'=>'#modaluprodi',
+            'delete'=>'modaldprodi'
+            ]
+            ])
+            @endcomponent
         </div>
-        @yield('MODAL')
     </div>
+    @yield('prodiJsFooter')
+    @yield('MODAL')
     @yield('footer_scripts')
+    @yield('search_box_script')
 </body>
 
 </html>

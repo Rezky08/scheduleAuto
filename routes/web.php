@@ -14,7 +14,6 @@
 Route::get('/', function () {
     return redirect('/matkul');
 });
-// Route::post('/matkul', 'views\MatakuliahController@store');
 
 Route::get('/matkul', 'views\MatkulViewController@index');
 Route::post('/matkul/add', 'views\MatkulViewController@add');

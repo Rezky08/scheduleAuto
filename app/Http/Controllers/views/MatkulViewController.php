@@ -48,7 +48,6 @@ class MatkulViewController extends Controller
             $data['program_studi'] = $program_studi;
         }
 
-
         // call modal name
         return view('matkul', $data);
     }
